@@ -14,6 +14,63 @@
          MERCADO STYLES - LAYOUT FIX ONLY
     =========================== */
 
+    /* Construction Stripes Animation */
+    .construction-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10000;
+      pointer-events: none;
+      opacity: 0;
+      background: rgba(0, 0, 0, 0.92);
+      transition: opacity 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .construction-overlay.active {
+      opacity: 1;
+    }
+
+    .construction-content {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .construction-stripe {
+      width: 100%;
+      max-width: 600px;
+      height: 8px;
+      background: repeating-linear-gradient(
+        90deg,
+        #fff 0px,
+        #fff 20px,
+        #000 20px,
+        #000 40px
+      );
+      margin: 0 auto 2rem;
+      opacity: 0.8;
+    }
+
+    .construction-text {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 600;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+
+    .construction-subtext {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+
     /* Fixed: Contenedor principal de las categorías - now ensures single row */
     .mercado-categorias {
       display: flex;
@@ -71,6 +128,10 @@
         min-height: 200px;
         max-width: none;
       }
+
+      .construction-text {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+      }
     }
 
     /* Popup responsiveness fixes */
@@ -105,6 +166,15 @@
 <body class="bg-mercado">
 
   <div id="header-container" role="banner"></div>
+
+  <!-- Construction Overlay -->
+  <div id="constructionOverlay" class="construction-overlay">
+    <div class="construction-content">
+      <div class="construction-stripe"></div>
+      <div class="construction-text">Under Construction</div>
+      <div class="construction-subtext">Coming Soon</div>
+    </div>
+  </div>
 
   <main>
     <section class="mercado-categorias" aria-label="Categorias do Mercado">
@@ -187,8 +257,36 @@
   <script>
     const overlay1 = document.getElementById('popup1Overlay');
     const overlay2 = document.getElementById('popup2Overlay');
+    const constructionOverlay = document.getElementById('constructionOverlay');
 
     let activePopup1 = null;
+
+    // Construction sounds array
+    const constructionSounds = [
+      'sounds/construction1.mp3',
+      'sounds/construction2.mp3',
+      'sounds/construction3.mp3',
+      'sounds/construction4.mp3',
+      'sounds/construction5.mp3'
+    ];
+
+    // Function to play random construction sound
+    function playRandomConstructionSound() {
+      const randomIndex = Math.floor(Math.random() * constructionSounds.length);
+      const audio = new Audio(constructionSounds[randomIndex]);
+      audio.volume = 0.5;
+      audio.play().catch(err => console.log('Audio play failed:', err));
+    }
+
+    // Function to show construction overlay
+    function showConstructionOverlay() {
+      constructionOverlay.classList.add('active');
+      playRandomConstructionSound();
+      
+      setTimeout(() => {
+        constructionOverlay.classList.remove('active');
+      }, 1000);
+    }
 
     const popup2 = document.getElementById('popup2');
     const popup2Img = document.getElementById('popup2-img');
@@ -248,24 +346,28 @@
       popup2.setAttribute('aria-hidden', 'true');
     }
 
-    // EVENTOS POPUP1: abrir categoría al hacer click
+    // EVENTOS POPUP1: abrir categoría al hacer click - NOW SHOWS CONSTRUCTION
     document.querySelectorAll('.categoria-card').forEach(card => {
       card.addEventListener('click', () => {
-        const categoria = card.dataset.categoria;
-        const popup = document.getElementById(`popup1-${categoria}`);
-        if (popup) {
-          openPopup1(popup);
-        }
+        showConstructionOverlay();
+        // Original popup functionality commented out for construction mode
+        // const categoria = card.dataset.categoria;
+        // const popup = document.getElementById(`popup1-${categoria}`);
+        // if (popup) {
+        //   openPopup1(popup);
+        // }
       });
 
       card.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          const categoria = card.dataset.categoria;
-          const popup = document.getElementById(`popup1-${categoria}`);
-          if (popup) {
-            openPopup1(popup);
-          }
+          showConstructionOverlay();
+          // Original popup functionality commented out for construction mode
+          // const categoria = card.dataset.categoria;
+          // const popup = document.getElementById(`popup1-${categoria}`);
+          // if (popup) {
+          //   openPopup1(popup);
+          // }
         }
       });
     });

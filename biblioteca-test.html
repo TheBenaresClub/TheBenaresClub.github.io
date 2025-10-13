@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca | Club Benares</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="./media/A00 Logo - Light.png" type="image/png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <style>
+    /* Biblioteca specific styles */
+    .biblioteca-container {
+      padding: 2rem 1rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      overflow-y: auto;
+      height: 100%;
+    }
+
+    /* Hero Section */
+    .biblioteca-hero {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: rgba(15, 15, 15, 0.4);
+      backdrop-filter: blur(10px) saturate(120%);
+      border-radius: 15px;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .biblioteca-hero h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .biblioteca-hero p {
+      font-size: 1.1rem;
+      color: #ccc;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Search Bar */
+    .search-section {
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 1rem 3rem 1rem 1rem;
+      background: rgba(15, 15, 15, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      color: white;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .search-btn {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      padding: 0.7rem 1.2rem;
+      border-radius: 25px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .search-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Categories */
+    .categories-section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .category-card {
+      background: rgba(15, 15, 15, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .category-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .category-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Featured Books */
+    .featured-section {
+      margin-bottom: 3rem;
+    }
+
+    .books-carousel {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      padding: 1rem 0;
+      scroll-snap-type: x mandatory;
+    }
+
+    .books-carousel::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .books-carousel::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+    }
+
+    .books-carousel::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+    }
+
+    /* Book Card */
+    .book-card {
+      flex: 0 0 200px;
+      background: rgba(15, 15, 15, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      scroll-snap-align: start;
+    }
+
+    .book-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+    }
+
+    .book-cover {
+      width: 100%;
+      height: 280px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .book-cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255, 255, 255, 0.05) 10px,
+        rgba(255, 255, 255, 0.05) 20px
+      );
+      animation: shimmer 3s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .book-cover i {
+      font-size: 3rem;
+      color: rgba(255, 255, 255, 0.9);
+      z-index: 1;
+    }
+
+    .book-info {
+      padding: 1rem;
+    }
+
+    .book-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .book-author {
+      font-size: 0.85rem;
+      color: #999;
+      margin-bottom: 0.5rem;
+    }
+
+    .book-year {
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    /* Reading Lists */
+    .lists-section {
+      margin-bottom: 3rem;
+    }
+
+    .lists-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .list-card {
+      background: rgba(15, 15, 15, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .list-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+    }
+
+    .list-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .list-icon {
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      color: #fff;
+    }
+
+    .list-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .list-description {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-bottom: 1rem;
+    }
+
+    .list-count {
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    /* Book Detail Modal */
+    .book-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 10000;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .book-modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: rgba(15, 15, 15, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      max-width: 800px;
+      width: 100%;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: rotate(90deg);
+    }
+
+    .modal-book-details {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .modal-book-cover {
+      width: 100%;
+      height: 280px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-book-info h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-book-info .author {
+      font-size: 1.1rem;
+      color: #aaa;
+      margin-bottom: 1rem;
+    }
+
+    .modal-book-meta {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: #999;
+    }
+
+    .modal-book-description {
+      line-height: 1.6;
+      color: #ccc;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-action {
+      padding: 0.8rem 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-action:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .biblioteca-hero h1 {
+        font-size: 1.8rem;
+      }
+      
+      .modal-book-details {
+        grid-template-columns: 1fr;
+      }
+      
+      .categories-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      }
+      
+      .lists-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="bg-biblioteca">
+
+  <!-- Header container where JavaScript will insert the header -->
+  <div id="header-container"></div>
+
+  <main>
+    <div class="biblioteca-container">
+      
+      <!-- Hero Section -->
+      <div class="biblioteca-hero">
+        <h1>Biblioteca Nacional</h1>
+        <p>Explore nossa coleção curada de obras que transcendem o tempo e o espaço. Um santuário de conhecimento e inspiração.</p>
+      </div>
+
+      <!-- Search Section -->
+      <div class="search-section">
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Buscar por título, autor ou tema..." id="searchInput">
+          <button class="search-btn" onclick="searchBooks()">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Categories Section -->
+      <div class="categories-section">
+        <h2 class="section-title">Explorar por Categoria</h2>
+        <div class="categories-grid">
+          <div class="category-card" onclick="filterByCategory('filosofia')">
+            <span class="category-icon">🧘</span>
+            <span class="category-name">Filosofia</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('literatura')">
+            <span class="category-icon">📚</span>
+            <span class="category-name">Literatura</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('arte')">
+            <span class="category-icon">🎨</span>
+            <span class="category-name">Arte</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('ciencia')">
+            <span class="category-icon">🔬</span>
+            <span class="category-name">Ciência</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('historia')">
+            <span class="category-icon">📜</span>
+            <span class="category-name">História</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('psicologia')">
+            <span class="category-icon">🧠</span>
+            <span class="category-name">Psicologia</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('espiritualidade')">
+            <span class="category-icon">✨</span>
+            <span class="category-name">Espiritualidade</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('poesia')">
+            <span class="category-icon">🌙</span>
+            <span class="category-name">Poesia</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Books Section -->
+      <div class="featured-section">
+        <h2 class="section-title">Destaques da Semana</h2>
+        <div class="books-carousel" id="featuredBooks">
+          <!-- Book cards will be dynamically generated -->
+        </div>
+      </div>
+
+      <!-- Reading Lists Section -->
+      <div class="lists-section">
+        <h2 class="section-title">Listas de Leitura</h2>
+        <div class="lists-grid">
+          <div class="list-card">
+            <div class="list-header">
+              <span class="list-icon">🌟</span>
+              <h3 class="list-title">Essenciais do Clube</h3>
+            </div>
+            <p class="list-description">Os livros fundamentais que definem a essência do Club Benares</p>
+            <span class="list-count">24 obras selecionadas</span>
+          </div>
+          
+          <div class="list-card">
+            <div class="list-header">
+              <span class="list-icon">🔥</span>
+              <h3 class="list-title">Tendências Atuais</h3>
+            </div>
+            <p class="list-description">As obras mais discutidas e relevantes do momento</p>
+            <span class="list-count">15 títulos em destaque</span>
+          </div>
+          
+          <div class="list-card">
+            <div class="list-header">
+              <span class="list-icon">🌍</span>
+              <h3 class="list-title">Vozes do Mundo</h3>
+            </div>
+            <p class="list-description">Literatura internacional e perspectivas globais</p>
+            <span class="list-count">32 autores diversos</span>
+          </div>
+          
+          <div class="list-card">
+            <div class="list-header">
+              <span class="list-icon">💫</span>
+              <h3 class="list-title">Jornadas Místicas</h3>
+            </div>
+            <p class="list-description">Explorações do transcendente e do espiritual</p>
+            <span class="list-count">18 textos sagrados</span>
+          </div>
+          
+          <div class="list-card">
+            <div class="list-header">
+              <span class="list-icon">🎭</span>
+              <h3 class="list-title">Teatro & Drama</h3>
+            </div>
+            <p class="list-description">Peças clássicas e contemporâneas que moldam o palco</p>
+            <span class="list-count">21 peças essenciais</span>
+          </div>
+          
+          <div class="list-card">
+            <div class="list-header">
+              <span class="list-icon">🌸</span>
+              <h3 class="list-title">Primavera Literária</h3>
+            </div>
+            <p class="list-description">Renovação e florescimento através das palavras</p>
+            <span class="list-count">12 leituras inspiradoras</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Book Detail Modal -->
+  <div class="book-modal" id="bookModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeBookModal()">×</button>
+      <div class="modal-book-details">
+        <div class="modal-book-cover">
+          <i class="fas fa-book" style="font-size: 4rem; color: white;"></i>
+        </div>
+        <div class="modal-book-info">
+          <h2 id="modalBookTitle">Título do Livro</h2>
+          <p class="author" id="modalBookAuthor">Autor</p>
+          <div class="modal-book-meta">
+            <div class="meta-item">
+              <i class="far fa-calendar"></i>
+              <span id="modalBookYear">2024</span>
+            </div>
+            <div class="meta-item">
+              <i class="far fa-file-alt"></i>
+              <span id="modalBookPages">300 páginas</span>
+            </div>
+            <div class="meta-item">
+              <i class="far fa-bookmark"></i>
+              <span id="modalBookCategory">Categoria</span>
+            </div>
+          </div>
+          <p class="modal-book-description" id="modalBookDescription">
+            Uma obra fascinante que explora os limites do conhecimento humano e transcende as barreiras convencionais do pensamento.
+          </p>
+          <div class="modal-actions">
+            <button class="btn-action btn-primary">
+              <i class="fas fa-book-open"></i> Ler Agora
+            </button>
+            <button class="btn-action">
+              <i class="far fa-bookmark"></i> Guardar
+            </button>
+            <button class="btn-action">
+              <i class="fas fa-share-alt"></i> Partilhar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="copyright">
+      &copy; 2025 Club Benares. Todos os direitos reservados.
+    </div>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/thebenaresclub" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="mailto:charlie@thebenaresclub.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+    </div>
+  </footer>
+
+  <!-- Load shared header -->
+  <script src="shared-header.js"></script>
+
+  <script>
+    // Sample book data
+    const books = [
+      { id: 1, title: "O Alquimista", author: "Paulo Coelho", year: "1988", category: "literatura", featured: true },
+      { id: 2, title: "Assim Falou Zaratustra", author: "Friedrich Nietzsche", year: "1883", category: "filosofia", featured: true },
+      { id: 3, title: "Cem Anos de Solidão", author: "Gabriel García Márquez", year: "1967", category: "literatura", featured: true },
+      { id: 4, title: "O Poder do Agora", author: "Eckhart Tolle", year: "1997", category: "espiritualidade", featured: true },
+      { id: 5, title: "Sapiens", author: "Yuval Noah Harari", year: "2011", category: "historia", featured: true },
+      { id: 6, title: "A Interpretação dos Sonhos", author: "Sigmund Freud", year: "1899", category: "psicologia", featured: true },
+      { id: 7, title: "O Livro do Desassossego", author: "Fernando Pessoa", year: "1982", category: "poesia", featured: true },
+      { id: 8, title: "História da Arte", author: "E.H. Gombrich", year: "1950", category: "arte", featured: true },
+      { id: 9, title: "Cosmos", author: "Carl Sagan", year: "1980", category: "ciencia", featured: true },
+      { id: 10, title: "1984", author: "George Orwell", year: "1949", category: "literatura", featured: true }
+    ];
+
+    // Generate featured books carousel
+    function generateFeaturedBooks() {
+      const container = document.getElementById('featuredBooks');
+      const featuredBooks = books.filter(book => book.featured);
+      
+      container.innerHTML = featuredBooks.map(book => `
+        <div class="book-card" onclick="openBookModal(${book.id})">
+          <div class="book-cover" style="background: linear-gradient(135deg, ${getRandomGradient()});">
+            <i class="fas fa-book"></i>
+          </div>
+          <div class="book-info">
+            <h3 class="book-title">${book.title}</h3>
+            <p class="book-author">${book.author}</p>
+            <p class="book-year">${book.year}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Get random gradient for book covers
+    function getRandomGradient() {
+      const gradients = [
+        '#667eea 0%, #764ba2 100%',
+        '#f093fb 0%, #f5576c 100%',
+        '#4facfe 0%, #00f2fe 100%',
+        '#43e97b 0%, #38f9d7 100%',
+        '#fa709a 0%, #fee140 100%',
+        '#30cfd0 0%, #330867 100%'
+      ];
+      return gradients[Math.floor(Math.random() * gradients.length)];
+    }
+
+    // Open book modal
+    function openBookModal(bookId) {
+      const book = books.find(b => b.id === bookId);
+      if (book) {
+        document.getElementById('modalBookTitle').textContent = book.title;
+        document.getElementById('modalBookAuthor').textContent = book.author;
+        document.getElementById('modalBookYear').textContent = book.year;
+        document.getElementById('modalBookCategory').textContent = book.category;
+        document.getElementById('bookModal').classList.add('active');
+      }
+    }
+
+    // Close book modal
+    function closeBookModal() {
+      document.getElementById('bookModal').classList.remove('active');
+    }
+
+    // Search books
+    function searchBooks() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      console.log('Searching for:', searchTerm);
+      // Implement search functionality
+    }
+
+    // Filter by category
+    function filterByCategory(category) {
+      console.log('Filtering by category:', category);
+      // Implement category filter
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      generateFeaturedBooks();
+    });
+
+    // Close modal on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeBookModal();
+      }
+    });
+
+    // Close modal on background click
+    document.getElementById('bookModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeBookModal();
+      }
+    });
+  </script>
+
+</body>
+</html>

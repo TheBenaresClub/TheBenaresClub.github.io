@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laboratorio | Club Benares</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="./media/A00 Logo - Light.png" type="image/png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* Reset and base styles */
+    html {
+      background-color: #0a0a0a;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    
+    /* Override main overflow to allow scaling beyond boundaries */
+    body.bg-laboratorio {
+      overflow: hidden;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      background-color: #0a0a0a;
+    }
+    
+    body.bg-laboratorio main {
+      overflow: visible !important;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .steenbeck-div {
+      background-image: url("media/steenbeck.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 900px;
+      height: 600px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      transform: scale(1); /* Start at scale 1 */
+      transition: transform 1s ease-in-out; /* Faster initial zoom */
+      transform-origin: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .pantalla {
+      background-color: #000000;
+      border: 2px solid #333333;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      width: 90%;
+      height: 85%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Inter', sans-serif;
+      z-index: 10;
+      overflow: hidden;
+    }
+    
+    .pantalla::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        transparent 50%,
+        rgba(0, 255, 0, 0.02) 50%
+      );
+      background-size: 100% 6px;
+      pointer-events: none;
+      z-index: 30;
+      opacity: 0.3;
+    }
+    
+    
+    .pantalla-content {
+      position: relative;
+      z-index: 20;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background-color: #1a1a1a;
+      animation: bootUp 0.5s ease-out;
+    }
+    
+    .desktop-area {
+      flex: 1;
+      background-color: #1a1a1a;
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(120, 120, 120, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(120, 120, 120, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(120, 120, 120, 0.04) 0%, transparent 50%);
+      position: relative;
+      padding: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 100px);
+      grid-template-rows: repeat(auto-fill, 110px);
+      gap: 25px;
+      align-content: start;
+    }
+    
+    .desktop-icon {
+      width: 100px;
+      height: 110px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 6px;
+      padding: 10px;
+      transition: background-color 0.2s ease;
+    }
+    
+    .desktop-icon:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .desktop-icon.selected {
+      background-color: rgba(100, 150, 255, 0.3);
+      border: 1px solid rgba(100, 150, 255, 0.5);
+    }
+    
+    .desktop-icon-image {
+      width: 64px;
+      height: 64px;
+      background-color: #333;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: #888;
+    }
+    
+    .desktop-icon-label {
+      color: #ddd;
+      font-size: 13px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+    
+    .taskbar {
+      height: 56px;
+      background-color: #0a0a0a;
+      border-top: 1px solid #333;
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      gap: 12px;
+    }
+    
+    .taskbar-button {
+      height: 40px;
+      padding: 0 20px;
+      background-color: #222;
+      border: 1px solid #444;
+      border-radius: 4px;
+      color: #ddd;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    
+    .taskbar-button:hover {
+      background-color: #333;
+      border-color: #555;
+    }
+    
+    .taskbar-button:active {
+      background-color: #111;
+    }
+    
+    .taskbar-button.active {
+      background-color: #2a4a2a;
+      border-color: #3a5a3a;
+    }
+    
+    .taskbar-start {
+      background-color: #1a4e1a;
+      border-color: #2a5e2a;
+      font-weight: 600;
+    }
+    
+    .taskbar-start:hover {
+      background-color: #2a5e2a;
+    }
+    
+    .taskbar-clock {
+      margin-left: auto;
+      color: #bbb;
+      font-size: 14px;
+      padding: 0 15px;
+    }
+    
+    /* OS Window Styles */
+    .os-window {
+      position: absolute;
+      background-color: #1e1e1e;
+      border: 1px solid #444;
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      min-width: 500px;
+      min-height: 400px;
+      display: none;
+      flex-direction: column;
+      z-index: 100;
+    }
+    
+    .os-window.active {
+      display: flex;
+    }
+    
+    .window-header {
+      height: 40px;
+      background-color: #2a2a2a;
+      border-bottom: 1px solid #444;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      cursor: move;
+    }
+    
+    .window-title {
+      flex: 1;
+      color: #ddd;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .window-controls {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .window-control {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+    
+    .window-control.close {
+      background-color: #ff5f57;
+    }
+    
+    .window-control.close:hover {
+      background-color: #ff3b30;
+    }
+    
+    .window-control.minimize {
+      background-color: #ffbd2e;
+    }
+    
+    .window-control.minimize:hover {
+      background-color: #ff9500;
+    }
+    
+    .window-control.maximize {
+      background-color: #28ca42;
+    }
+    
+    .window-control.maximize:hover {
+      background-color: #00d026;
+    }
+    
+    .window-content {
+      flex: 1;
+      padding: 25px;
+      overflow-y: auto;
+      color: #ddd;
+    }
+    
+    /* Terminal specific styles */
+    .terminal-cursor {
+      display: inline-block;
+      width: 10px;
+      height: 20px;
+      background-color: #0f0;
+      animation: blink 1s infinite;
+    }
+    
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+    
+    /* Boot animation */
+    @keyframes bootUp {
+      0% {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      50% {
+        opacity: 0.5;
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Pantalla Modal Styles - eventos style */
+    .service-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(5, 5, 5, 0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .service-modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: rgba(15, 15, 15, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px) saturate(120%);
+      -webkit-backdrop-filter: blur(10px) saturate(120%);
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      padding: 3rem;
+      max-width: 600px;
+      width: 90%;
+      color: #f0f0f0;
+      position: relative;
+      animation: modalSlideIn 0.3s ease-out;
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin: -3rem -3rem 1.5rem -3rem;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .modal-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    }
+
+    .modal-close {
+      width: 16px;
+      height: 16px;
+      background-color: rgba(255, 79, 79, 0.4);
+      backdrop-filter: blur(10px) saturate(120%);
+      -webkit-backdrop-filter: blur(10px) saturate(120%);
+      border: 1px solid rgba(255, 79, 79, 0.6);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      padding: 0;
+      box-shadow: 0 0 6px 2px rgba(255, 79, 79, 0.5);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      box-shadow: 0 0 10px 4px rgba(255, 79, 79, 0.8);
+      background-color: rgba(255, 79, 79, 0.6);
+    }
+
+    .modal-body {
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .service-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    .service-list li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+    }
+
+    .service-list li:last-child {
+      border-bottom: none;
+    }
+
+    .service-list li::before {
+      content: "•";
+      color: #ffffff;
+      font-weight: bold;
+      margin-right: 1rem;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    }
+
+    .contact-info {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 1.2rem;
+      margin-top: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .contact-info strong {
+      color: #ffffff;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+    }
+    
+    /* Ensure header and footer stay on top */
+    #header-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+    
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 10px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    
+    .copyright {
+      color: #aaa;
+      font-size: 13px;
+    }
+    
+    .social-icons a {
+      color: #aaa;
+      font-size: 20px;
+      margin-left: 20px;
+      transition: color 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body class="bg-laboratorio">
+
+  <!-- Header container where JavaScript will insert the header -->
+  <div id="header-container"></div>
+
+  <main>
+    <div class="container">
+      <div class="steenbeck-div" id="steenbeckDiv">
+        <div class="pantalla" id="pantalla">
+          <div class="pantalla-content">
+            <div class="desktop-area" id="desktopArea">
+              <!-- Desktop icons -->
+              <div class="desktop-icon" id="folderIcon">
+                <div class="desktop-icon-image">📁</div>
+                <div class="desktop-icon-label">Projetos</div>
+              </div>
+              <div class="desktop-icon" id="cameraIcon">
+                <div class="desktop-icon-image">📷</div>
+                <div class="desktop-icon-label">Câmera</div>
+              </div>
+              <div class="desktop-icon" id="filmIcon">
+                <div class="desktop-icon-image">🎬</div>
+                <div class="desktop-icon-label">Edição</div>
+              </div>
+              <div class="desktop-icon" id="audioIcon">
+                <div class="desktop-icon-image">🎵</div>
+                <div class="desktop-icon-label">Áudio</div>
+              </div>
+              
+              <!-- OS Windows -->
+              <div class="os-window" id="terminalWindow" style="top: 80px; left: 150px; width: 700px; height: 450px;">
+                <div class="window-header">
+                  <div class="window-title">Terminal</div>
+                  <div class="window-controls">
+                    <div class="window-control minimize"></div>
+                    <div class="window-control maximize"></div>
+                    <div class="window-control close" onclick="closeWindow('terminalWindow')"></div>
+                  </div>
+                </div>
+                <div class="window-content" style="font-family: monospace; background-color: #0a0a0a; font-size: 16px;">
+                  <div style="color: #0f0;">benares@lab:~$ <span class="terminal-cursor"></span></div>
+                </div>
+              </div>
+            </div>
+            <div class="taskbar">
+              <button class="taskbar-button taskbar-start" id="startBtn">
+                <span>Início</span>
+              </button>
+              <button class="taskbar-button" id="filesBtn">
+                <span>Arquivos</span>
+              </button>
+              <button class="taskbar-button" id="terminalBtn">
+                <span>Terminal</span>
+              </button>
+              <button class="taskbar-button" id="labBtn">
+                <span>Laboratório</span>
+              </button>
+              <div class="taskbar-clock" id="taskbarClock">
+                <span id="clockTime">00:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Service Modals -->
+  <div class="service-modal" id="servicosModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">SERVIÇOS</h2>
+        <button class="modal-close" onclick="closeModal('servicosModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <ul class="service-list">
+          <li>Revelação Analógica</li>
+          <li>Digitalização de Filmes</li>
+          <li>Restauro de Imagens</li>
+          <li>Workshops de Fotografia</li>
+          <li>Laboratório Criativo</li>
+          <li>Arquivo Pessoal</li>
+          <li>Produção de Vídeo SD</li>
+          <li>Transferência VHS/Hi8/MiniDV</li>
+        </ul>
+        <div class="contact-info">
+          <strong>Contacto:</strong> charlie@thebenaresclub.com
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-modal" id="portfolioModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">PORTFÓLIO</h2>
+        <button class="modal-close" onclick="closeModal('portfolioModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <ul class="service-list">
+          <li>Documentários em 16mm</li>
+          <li>Videoclipes em VHS</li>
+          <li>Fotografias Químicas</li>
+          <li>Experimentação Visual</li>
+          <li>Arquivo Histórico</li>
+          <li>Trabalhos de Restauro</li>
+        </ul>
+        <div class="contact-info">
+          <strong>Ver mais:</strong> Disponível em breve
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-modal" id="equipasModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">EQUIPAS</h2>
+        <button class="modal-close" onclick="closeModal('equipasModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <ul class="service-list">
+          <li>Directores de Fotografia</li>
+          <li>Técnicos de Laboratório</li>
+          <li>Editores Analógicos</li>
+          <li>Arquivistas</li>
+          <li>Artistas Colaboradores</li>
+          <li>Investigadores de Imagem</li>
+        </ul>
+        <div class="contact-info">
+          <strong>Juntar-se:</strong> charlie@thebenaresclub.com
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="copyright">
+      &copy; 2025 Club Benares. Todos os direitos reservados.
+    </div>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/thebenaresclub" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="mailto:charlie@thebenaresclub.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+    </div>
+  </footer>
+
+  <!-- Load shared header -->
+  <script src="shared-header.js"></script>
+  
+  <script>
+    // Scale system: Base size is 900x600px, starts at 1.2x scale
+    // This gives us a 1080x720px initial view of the steenbeck
+    // The pantalla OS inside is 90% x 85% of that (810x510px at base, 972x612px at 1.2x)
+    let scale = 1.2; // Start closer to actual size
+    const minScale = 0.8;
+    const maxScale = 3; // Adjust max zoom for bigger base size
+    const scaleIncrement = 0.05;
+    
+    // Modal functions - make them global
+    window.openModal = function(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    
+    window.closeModal = function(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'hidden'; // Keep overflow hidden as per original design
+      }
+    }
+    
+    // Close modal when clicking outside content
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('service-modal')) {
+        e.target.classList.remove('active');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const activeModal = document.querySelector('.service-modal.active');
+        if (activeModal) {
+          activeModal.classList.remove('active');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+    });
+    
+    // Update clock
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const clockTime = document.getElementById('clockTime');
+      if (clockTime) {
+        clockTime.textContent = `${hours}:${minutes}`;
+      }
+    }
+    
+    // Window functions
+    window.openWindow = function(windowId) {
+      const win = document.getElementById(windowId);
+      if (win) {
+        win.classList.add('active');
+        // Add active state to corresponding taskbar button
+        if (windowId === 'terminalWindow') {
+          document.getElementById('terminalBtn')?.classList.add('active');
+        }
+      }
+    }
+    
+    window.closeWindow = function(windowId) {
+      const win = document.getElementById(windowId);
+      if (win) {
+        win.classList.remove('active');
+        // Remove active state from corresponding taskbar button
+        if (windowId === 'terminalWindow') {
+          document.getElementById('terminalBtn')?.classList.remove('active');
+        }
+      }
+    }
+    
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      const steenbeckDiv = document.getElementById('steenbeckDiv');
+      
+      // Update clock immediately and then every minute
+      updateClock();
+      setInterval(updateClock, 60000);
+      
+      // Add event listeners for taskbar buttons
+      const startBtn = document.getElementById('startBtn');
+      const filesBtn = document.getElementById('filesBtn');
+      const terminalBtn = document.getElementById('terminalBtn');
+      const labBtn = document.getElementById('labBtn');
+      
+      if (startBtn) {
+        startBtn.addEventListener('click', function() {
+          console.log('Start menu clicked');
+          // Add start menu functionality here
+        });
+      }
+      
+      if (filesBtn) {
+        filesBtn.addEventListener('click', function() {
+          console.log('Files clicked');
+          // Add file manager functionality here
+        });
+      }
+      
+      if (terminalBtn) {
+        terminalBtn.addEventListener('click', function() {
+          console.log('Terminal clicked');
+          const terminalWindow = document.getElementById('terminalWindow');
+          if (terminalWindow?.classList.contains('active')) {
+            window.closeWindow('terminalWindow');
+          } else {
+            window.openWindow('terminalWindow');
+          }
+        });
+      }
+      
+      if (labBtn) {
+        labBtn.addEventListener('click', function() {
+          console.log('Lab clicked');
+          window.openModal('servicosModal');
+        });
+      }
+      
+      // Add event listeners for desktop icons
+      const folderIcon = document.getElementById('folderIcon');
+      const cameraIcon = document.getElementById('cameraIcon');
+      const filmIcon = document.getElementById('filmIcon');
+      const audioIcon = document.getElementById('audioIcon');
+      
+      if (folderIcon) {
+        folderIcon.addEventListener('dblclick', function() {
+          console.log('Projects folder opened');
+          window.openModal('portfolioModal');
+        });
+      }
+      
+      if (cameraIcon) {
+        cameraIcon.addEventListener('dblclick', function() {
+          console.log('Camera app opened');
+          // Add camera functionality here
+        });
+      }
+      
+      if (filmIcon) {
+        filmIcon.addEventListener('dblclick', function() {
+          console.log('Video editor opened');
+          window.openModal('servicosModal');
+        });
+      }
+      
+      if (audioIcon) {
+        audioIcon.addEventListener('dblclick', function() {
+          console.log('Audio app opened');
+          // Add audio functionality here
+        });
+      }
+      
+      // Handle desktop icon selection
+      const desktopIcons = document.querySelectorAll('.desktop-icon');
+      desktopIcons.forEach(icon => {
+        icon.addEventListener('click', function(e) {
+          // Remove selection from all icons
+          desktopIcons.forEach(i => i.classList.remove('selected'));
+          // Add selection to clicked icon
+          this.classList.add('selected');
+          e.stopPropagation();
+        });
+      });
+      
+      // Click on desktop to deselect all
+      document.getElementById('desktopArea').addEventListener('click', function(e) {
+        if (e.target === this) {
+          desktopIcons.forEach(i => i.classList.remove('selected'));
+        }
+      });
+      
+      // Handle window dragging
+      let draggedWindow = null;
+      let dragOffset = { x: 0, y: 0 };
+      
+      document.addEventListener('mousedown', function(e) {
+        if (e.target.classList.contains('window-header') || e.target.parentElement?.classList.contains('window-header')) {
+          const windowEl = e.target.closest('.os-window');
+          if (windowEl) {
+            draggedWindow = windowEl;
+            const rect = windowEl.getBoundingClientRect();
+            dragOffset.x = e.clientX - rect.left;
+            dragOffset.y = e.clientY - rect.top;
+            windowEl.style.zIndex = 1000;
+          }
+        }
+      });
+      
+      document.addEventListener('mousemove', function(e) {
+        if (draggedWindow) {
+          const pantallaRect = document.getElementById('pantalla').getBoundingClientRect();
+          const newX = e.clientX - pantallaRect.left - dragOffset.x;
+          const newY = e.clientY - pantallaRect.top - dragOffset.y;
+          
+          draggedWindow.style.left = `${newX}px`;
+          draggedWindow.style.top = `${newY}px`;
+        }
+      });
+      
+      document.addEventListener('mouseup', function() {
+        if (draggedWindow) {
+          draggedWindow.style.zIndex = 100;
+          draggedWindow = null;
+        }
+      });
+      
+      // CSS already sets scale to 1, so just animate to 1.2 after delay
+      setTimeout(() => {
+        steenbeckDiv.style.transform = `scale(${scale})`;
+        
+        // After animation completes, switch to fast transitions for user interaction
+        setTimeout(() => {
+          steenbeckDiv.style.transition = 'transform 0.1s ease-out';
+        }, 1000);
+      }, 100);
+      
+      // Handle mouse wheel events
+      document.addEventListener('wheel', function(e) {
+        e.preventDefault(); // Prevent default scroll behavior
+        
+        if (e.deltaY < 0) {
+          // Scroll up - increase scale
+          scale = Math.min(scale + scaleIncrement, maxScale);
+        } else {
+          // Scroll down - decrease scale
+          scale = Math.max(scale - scaleIncrement, minScale);
+        }
+        
+        // Apply the scale transformation
+        steenbeckDiv.style.transform = `scale(${scale})`;
+      }, { passive: false });
+      
+      // Handle touch/trackpad gestures on mobile
+      let lastTouchDistance = 0;
+      
+      document.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 2) {
+          lastTouchDistance = Math.hypot(
+            e.touches[0].pageX - e.touches[1].pageX,
+            e.touches[0].pageY - e.touches[1].pageY
+          );
+        }
+      });
+      
+      document.addEventListener('touchmove', function(e) {
+        if (e.touches.length === 2) {
+          e.preventDefault();
+          
+          const currentDistance = Math.hypot(
+            e.touches[0].pageX - e.touches[1].pageX,
+            e.touches[0].pageY - e.touches[1].pageY
+          );
+          
+          if (lastTouchDistance > 0) {
+            const scaleDelta = (currentDistance - lastTouchDistance) * 0.001;
+            scale = Math.max(minScale, Math.min(maxScale, scale + scaleDelta));
+            steenbeckDiv.style.transform = `scale(${scale})`;
+          }
+          
+          lastTouchDistance = currentDistance;
+        }
+      }, { passive: false });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca | Club Benares</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="./media/A00 Logo - Light.png" type="image/png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <style>
+    /* Custom fonts */
+    @font-face {
+      font-family: 'Yuji';
+      src: url('./media/fontes/YujiBoku-Regular.ttf') format('truetype');
+    }
+    
+    @font-face {
+      font-family: 'INX';
+      src: url('./media/fontes/Afrah-Bold.ttf') format('truetype');
+    }
+    
+    @font-face {
+      font-family: 'Montserrat';
+      src: url('./media/fontes/Montserrat-VariableFont_wght.ttf') format('truetype');
+    }
+    
+    @font-face {
+      font-family: 'Day';
+      src: url('./media/fontes/Montserrat-VariableFont_wght.ttf') format('truetype');
+    }
+    
+    /* Biblioteca specific styles */
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+    
+    .fade-container {
+      position: relative;
+      display: inline-block;
+      max-width: 900px;
+      width: 100%;
+    }
+    
+    .Librera {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .Imagenes-Portas-Landing {
+      position: absolute;
+      display: flex;
+      gap: 1%;
+      align-items: flex-end;
+      left: 13%;  /* Adjusted for bigger books */
+      bottom: 64.5%;  /* Adjusted for bigger books */
+      flex-direction: row;
+    }
+    
+    .LIVRO {
+      display: block;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .LIVRO:hover {
+      transform: scale(1.05);
+      filter: brightness(1.2);
+    }
+    
+    .LIVRO img {
+      height: calc(900px * 0.27); /* 1.5x bigger (was 0.18) */
+      max-height: 240px; /* 1.5x bigger (was 160px) */
+      min-height: 150px; /* 1.5x bigger (was 100px) */
+      width: auto;
+      border-radius: 2px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+    
+    @media (max-width: 900px) {
+      .LIVRO img {
+        height: 27vw; /* 1.5x bigger (was 18vw) */
+        max-height: 240px;
+        min-height: 120px;
+      }
+    }
+    
+    /* Book Reader Overlay - INX Style */
+    .book-reader-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      z-index: 9999;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    
+    .book-reader-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+    
+    /* Book Cover (Tapa) */
+    .book-cover {
+      position: absolute;
+      width: 700px;  /* Bigger from 600px */
+      max-width: 90%;
+      height: auto;
+      cursor: pointer;
+      border-radius: 20px;
+      z-index: 1000;
+      transition: transform 0.3s ease;
+      display: none;
+    }
+    
+    .book-cover.active {
+      display: block;
+    }
+    
+    .book-cover:hover {
+      transform: scale(1.02);
+    }
+    
+    /* Book Content Container */
+    .book-content-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1270px;
+      max-width: 85vw;
+      height: 90vh;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .book-content-container.active {
+      display: flex;
+    }
+    
+    /* Book Pages/Sections Container */
+    #bookSections {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    /* Book Pages/Sections */
+    .book-section {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .book-section.active {
+      display: flex;
+    }
+    
+    .book-section img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      max-width: 1270px;
+    }
+    
+    /* Navigation Menu - positioned like left page */
+    .book-nav-menu {
+      position: fixed;
+      left: 280px;  /* Moved right from 50px */
+      top: 45%;     /* Moved up from 50% */
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;    /* Smaller gap */
+      z-index: 10002;
+    }
+    
+    .book-nav-btn {
+      background: transparent;
+      border: none;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 32px;  /* Smaller from 40px */
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      padding: 8px 0;   /* Smaller padding */
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    
+    .book-nav-btn:hover {
+      transform: translateX(10px);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    
+    .book-nav-btn.active,
+    .book-nav-btn:focus {
+      text-decoration: underline;
+      color: #fff;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    }
+    
+    /* Close Button */
+    .book-close-btn {
+      position: fixed;
+      bottom: 100px;  /* Adjusted position */
+      left: 280px;    /* Aligned with navigation */
+      background: transparent;
+      border: none;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 32px;  /* Smaller to match navigation */
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10002;
+    }
+    
+    .book-close-btn:hover {
+      transform: scale(1.1);
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    }
+    
+    /* Back to Library Button */
+    .back-to-library {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 24px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      z-index: 10003;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .back-to-library:hover {
+      background: white;
+      transform: scale(1.1);
+    }
+    
+    /* Interactive elements within sections */
+    .section-links {
+      position: absolute;
+      z-index: 10001;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+    
+    .section-link {
+      position: absolute;
+      color: black;
+      font-family: 'INX', 'Day', sans-serif;
+      font-size: 20px;
+      text-decoration: none;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .section-link:hover {
+      transform: scale(1.05);
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Gallery buttons */
+    .gallery-btn {
+      position: absolute;
+      background: transparent;
+      border: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: black;
+      text-align: center;
+    }
+    
+    .gallery-info {
+      position: absolute;
+      background: transparent;
+      border: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 25px;
+      text-align: center;
+      color: black;
+      pointer-events: none;
+    }
+    
+    .gallery-btn:hover {
+      transform: scale(1.05);
+      text-decoration: underline;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
+      .book-nav-menu {
+        left: 100px;  /* Adjusted for smaller screens */
+      }
+      
+      .book-close-btn {
+        left: 100px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .book-content-container {
+        width: 95vw;
+        max-width: 95vw;
+      }
+      
+      .book-nav-menu {
+        left: 20px;
+        top: 45%;
+        gap: 8px;
+      }
+      
+      .book-nav-btn {
+        font-size: 20px;
+      }
+      
+      .book-close-btn {
+        font-size: 24px;
+        left: 20px;
+        bottom: 30px;
+      }
+      
+      .book-cover {
+        width: 450px;  /* Bigger from 400px */
+      }
+      
+      .section-link {
+        font-size: 14px;
+      }
+      
+      .gallery-info {
+        font-size: 18px;
+      }
+      
+      .gallery-btn {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body class="bg-biblioteca">
+
+  <!-- Header container where JavaScript will insert the header -->
+  <div id="header-container"></div>
+
+  <main>
+    <div class="fade-container" id="fade">
+      <!-- Book container - books flow left to right -->
+      <div class="Imagenes-Portas-Landing">
+        <div class="LIVRO" onclick="openBook('inexistente')">
+          <img class="INX" src="./media/04_Arquivo_Nacional_-_INX.png" alt="I N E X I S T E N T E">
+        </div>
+
+        <div class="LIVRO" onclick="openBook('artista')">
+          <img class="EAC" src="./media/04_Arquivo_Nacional_-_EAC.png" alt="El Artista Comprendido">
+        </div>
+        
+        <!-- Add more books here - they will continue to the right -->
+      </div>
+
+     
+    <!-- Book Reader Overlay -->
+    <div class="book-reader-overlay" id="bookReader">
+      <button class="back-to-library" onclick="closeBook()">✕</button>
+      
+      <!-- Book Cover -->
+      <img class="book-cover" id="bookCover" onclick="openBookContent()" alt="Book Cover">
+      
+      <!-- Book Content Container -->
+      <div class="book-content-container" id="bookContent">
+        <!-- Navigation Menu -->
+        <div class="book-nav-menu" id="bookNavMenu">
+          <!-- Navigation buttons will be inserted here dynamically -->
+        </div>
+        
+        <!-- Book Sections Wrapper -->
+        <div id="bookSections">
+          <!-- Sections will be inserted here dynamically -->
+        </div>
+        
+        <!-- Close Book Button -->
+        <button class="book-close-btn" onclick="closeBookContent()">Fechar</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Audio elements for book sounds -->
+  <audio id="openBookSound" src="./media/audios/Open Book Sound Effect.mp3" preload="auto"></audio>
+  <audio id="closeBookSound" src="./media/audios/Close Book Sound Effect.mp3" preload="auto"></audio>
+
+  <script>
+    // Book data - define sections for each book
+    const books = {
+      inexistente: {
+        title: "INEXISTENTE",
+        cover: "./media/books/00 INX - tapa.png",
+        sections: {
+          notas: {
+            label: "Notas Charlie",
+            image: "./media/books/01 INX-Notas.png",
+            links: []
+          },
+          fichaTecnica: {
+            label: "Ficha Técnica",
+            image: "./media/books/02 INX - Ficha Tecnica.png",
+            links: [
+              { text: "Charlie Chaves", url: "https://www.instagram.com/charliechavess/", x: "82%", y: "55%" },
+              { text: "João Nobre", url: "https://www.instagram.com/joaonalua/", x: "81%", y: "62%" }
+            ]
+          },
+          fichaArtistica: {
+            label: "Ficha Artística",
+            image: "./media/books/03 INX - Ficha Artistica.png",
+            links: [
+              { text: 'Alessandro Barboza | "Pedro Amaral"', url: "https://www.instagram.com/_alessandrobv/", x: "65%", y: "30%" },
+              { text: 'Pedro Cabral | "Helder Saramago"', url: "https://www.instagram.com/azorvedzanets/", x: "65%", y: "37%" },
+              { text: 'Pedro Senna Nunes | "Reporter"', url: "https://www.instagram.com/pedro.senna.nunes/", x: "65%", y: "44%" },
+              { text: "Mi Mamalety", url: "#", x: "65%", y: "65%" },
+              { text: "Mis amigos Menes & JJ", url: "#", x: "65%", y: "72%" }
+            ]
+          },
+          sinopse: {
+            label: "Sinopse",
+            image: "./media/books/04 INX - Sinopse.png",
+            links: []
+          },
+          fotografias: {
+            label: "Fotografias",
+            image: "./media/books/05 INX - Fotografias.png",
+            links: [],
+            galleries: [
+              { label: "20 Imagens Fotografias: João Nobre", action: "viewGallery('INXrodagem')", x: "70%", y: "38%" },
+              { label: "Visualizar", action: "window.open('./INXrodagem.html', '_blank')", x: "70%", y: "48%" },
+              { label: "5 Frames Dirección: Charlie Chaves", action: "viewGallery('INXframes')", x: "70%", y: "63%" },
+              { label: "Visualizar", action: "window.open('./INXframes.html', '_blank')", x: "70%", y: "73%" }
+            ]
+          },
+          extras: {
+            label: "Extras",
+            image: "./media/books/07 INX - Extras.png",
+            links: [
+              { text: "+ Media de divulgação", url: "./INXextras.html", x: "65%", y: "35%" },
+              { text: "+ Vê o filme aqui!", url: "/A Side/A03 El Cuarto de Charlie/El Cuarto de Charlie.html", x: "65%", y: "42%" }
+            ]
+          }
+        }
+      },
+      artista: {
+        title: "El Artista Comprendido",
+        cover: "./media/books/00 EAC - tapa.png",
+        sections: {
+          notas: {
+            label: "Notas Charlie",
+            image: "./media/books/01 EAC - Notas.png",
+            links: []
+          },
+          fichaTecnica: {
+            label: "Ficha Técnica",
+            image: "./media/books/02 EAC - Ficha Tecnica.png",
+            links: [
+              { text: "Charlie Chaves", url: "https://www.instagram.com/charliechavess/", x: "83%", y: "49%" },
+              { text: "Nityam", url: "https://www.instagram.com/nityamnow/", x: "77%", y: "56%" },
+              { text: "Nityam", url: "https://www.instagram.com/nityamnow/", x: "78%", y: "63%" },
+              { text: "Valdir Neves", url: "https://www.instagram.com/val.nevs/", x: "68%", y: "70%" },
+              { text: "Gonçalo Pereira", url: "https://www.instagram.com/goncalopereiraaa/", x: "69%", y: "63%" },
+              { text: "Patricia Pontes", url: "https://www.instagram.com/pontes_filmworks/", x: "82%", y: "56%" }
+            ]
+          },
+          fichaArtistica: {
+            label: "Ficha Artística",
+            image: "./media/books/03 EAC - Ficha Artistica.png",
+            links: [
+              { text: "Charlie Chaves", url: "https://www.instagram.com/charliechavess/", x: "71%", y: "41%" },
+              { text: "Bruno de Franclieu", url: "https://www.instagram.com/nobru_defranfran/", x: "70%", y: "59%" }
+            ]
+          },
+          sinopse: {
+            label: "Sinopse",
+            image: "./media/books/04 EAC - Sinopse.png",
+            links: []
+          },
+          fotografias: {
+            label: "Fotografias",
+            image: "./media/books/05 EAC - Fotografias.png",
+            links: [],
+            galleries: [
+              { label: "71 Imagens Fotografias: Valdir Neves", action: "viewGallery('EACrodagem')", x: "70%", y: "40%" },
+              { label: "Visualizar", action: "window.open('./EACrodagem.html', '_blank')", x: "70%", y: "50%" },
+              { label: "4 Frames Dirección: Charlie Chaves", action: "viewGallery('EACframes')", x: "70%", y: "64%" },
+              { label: "Visualizar", action: "window.open('./EACframes.html', '_blank')", x: "70%", y: "74%" }
+            ]
+          },
+          extras: {
+            label: "Extras",
+            image: "./media/books/06 EAC - Extras.png",
+            links: [
+              { text: "+ Vê o filme aqui!", url: "/A Side/A03 El Cuarto de Charlie/El Cuarto de Charlie.html", x: "69%", y: "36%" }
+            ]
+          }
+        }
+      }
+    };
+    
+    let currentBook = null;
+    let currentSection = null;
+    let isBookOpen = false;
+    
+    function openBook(bookId) {
+      currentBook = books[bookId];
+      
+      if (currentBook) {
+        const overlay = document.getElementById('bookReader');
+        const cover = document.getElementById('bookCover');
+        const content = document.getElementById('bookContent');
+        
+        // Reset state
+        isBookOpen = false;
+        cover.classList.add('active');
+        content.classList.remove('active');
+        
+        // Set cover image
+        cover.src = currentBook.cover;
+        
+        // Show overlay
+        overlay.classList.add('active');
+        
+        // Play open sound
+        const openSound = document.getElementById('openBookSound');
+        if (openSound) {
+          openSound.currentTime = 0;
+          openSound.play().catch(e => console.log('Audio play failed:', e));
+        }
+        
+        // Setup navigation menu
+        setupBookNavigation();
+      }
+    }
+    
+    function openBookContent() {
+      if (!currentBook) return;
+      
+      const cover = document.getElementById('bookCover');
+      const content = document.getElementById('bookContent');
+      
+      // Hide cover, show content
+      cover.classList.remove('active');
+      content.classList.add('active');
+      isBookOpen = true;
+      
+      // Show first section
+      const firstSectionKey = Object.keys(currentBook.sections)[0];
+      showSection(firstSectionKey);
+      
+      // Play open sound
+      const openSound = document.getElementById('openBookSound');
+      if (openSound) {
+        openSound.currentTime = 0;
+        openSound.play().catch(e => console.log('Audio play failed:', e));
+      }
+    }
+    
+    function closeBookContent() {
+      const cover = document.getElementById('bookCover');
+      const content = document.getElementById('bookContent');
+      
+      // Show cover, hide content
+      cover.classList.add('active');
+      content.classList.remove('active');
+      isBookOpen = false;
+      
+      // Play close sound
+      const closeSound = document.getElementById('closeBookSound');
+      if (closeSound) {
+        closeSound.currentTime = 0;
+        closeSound.play().catch(e => console.log('Audio play failed:', e));
+      }
+    }
+    
+    function closeBook() {
+      const overlay = document.getElementById('bookReader');
+      overlay.classList.remove('active');
+      
+      // Play close sound
+      const closeSound = document.getElementById('closeBookSound');
+      if (closeSound) {
+        closeSound.currentTime = 0;
+        closeSound.play().catch(e => console.log('Audio play failed:', e));
+      }
+      
+      // Reset state
+      currentBook = null;
+      currentSection = null;
+      isBookOpen = false;
+    }
+    
+    function setupBookNavigation() {
+      if (!currentBook) return;
+      
+      const navMenu = document.getElementById('bookNavMenu');
+      navMenu.innerHTML = '';
+      
+      // Create navigation buttons for each section
+      Object.keys(currentBook.sections).forEach(sectionKey => {
+        const section = currentBook.sections[sectionKey];
+        const btn = document.createElement('button');
+        btn.className = 'book-nav-btn';
+        btn.textContent = section.label;
+        btn.onclick = () => showSection(sectionKey);
+        btn.id = `nav-${sectionKey}`;
+        navMenu.appendChild(btn);
+      });
+    }
+    
+    function showSection(sectionKey) {
+      if (!currentBook || !currentBook.sections[sectionKey]) return;
+      
+      currentSection = sectionKey;
+      const section = currentBook.sections[sectionKey];
+      const sectionsContainer = document.getElementById('bookSections');
+      
+      // Clear previous content
+      sectionsContainer.innerHTML = '';
+      
+      // Create section element
+      const sectionEl = document.createElement('div');
+      sectionEl.className = 'book-section active';
+      
+      // Create wrapper for page and interactive elements
+      const pageWrapper = document.createElement('div');
+      pageWrapper.className = 'book-page-wrapper';
+      
+      // Add main image
+      const img = document.createElement('img');
+      img.src = section.image;
+      img.alt = section.label;
+      pageWrapper.appendChild(img);
+      
+      // Add interactive links if any
+      if (section.links && section.links.length > 0) {
+        const linksContainer = document.createElement('div');
+        linksContainer.className = 'section-links';
+        
+        section.links.forEach(link => {
+          const linkEl = document.createElement('a');
+          linkEl.className = 'section-link';
+          linkEl.href = link.url;
+          linkEl.target = '_blank';
+          linkEl.textContent = link.text;
+          linkEl.style.left = link.x;
+          linkEl.style.top = link.y;
+          linksContainer.appendChild(linkEl);
+        });
+        
+        pageWrapper.appendChild(linksContainer);
+      }
+      
+      // Add gallery buttons if any
+      if (section.galleries && section.galleries.length > 0) {
+        const linksContainer = document.createElement('div');
+        linksContainer.className = 'section-links';
+        
+        section.galleries.forEach((gallery, index) => {
+          // Check if it's an info label or action button
+          if (gallery.label.includes('Imagens') || gallery.label.includes('Frames')) {
+            // This is an info label
+            const info = document.createElement('div');
+            info.className = 'gallery-info';
+            info.textContent = gallery.label;
+            info.style.left = gallery.x;
+            info.style.top = gallery.y;
+            info.style.width = '230px';
+            linksContainer.appendChild(info);
+          } else {
+            // This is an action button
+            const btn = document.createElement('button');
+            btn.className = 'gallery-btn';
+            btn.textContent = gallery.label;
+            btn.style.left = gallery.x;
+            btn.style.top = gallery.y;
+            btn.style.width = '200px';
+            btn.onclick = () => eval(gallery.action);
+            linksContainer.appendChild(btn);
+          }
+        });
+        
+        pageWrapper.appendChild(linksContainer);
+      }
+      
+      sectionEl.appendChild(pageWrapper);
+      sectionsContainer.appendChild(sectionEl);
+      
+      // Update navigation active state
+      document.querySelectorAll('.book-nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      const activeBtn = document.getElementById(`nav-${sectionKey}`);
+      if (activeBtn) {
+        activeBtn.classList.add('active');
+      }
+    }
+    
+    function viewGallery(galleryType) {
+      // Placeholder for gallery functionality
+      alert(`Opening ${galleryType} gallery...`);
+      // You can implement a lightbox or carousel here
+    }
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        if (isBookOpen) {
+          closeBookContent();
+        } else if (currentBook) {
+          closeBook();
+        }
+      }
+    });
+  </script>
+
+  <div id="footer-container"></div>
+  <script src="shared.js"></script>
+
+</body>
+</html>

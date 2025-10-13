@@ -1,0 +1,57 @@
+.crt-container {
+  position: relative;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.crt-container::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 128, 0, 0.07) 0%,
+      rgba(0, 128, 0, 0.07) 0.5%,
+      transparent 0.5%,
+      transparent 1.5%
+    );
+  mix-blend-mode: screen;
+  z-index: 10;
+}
+
+.crt-container::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.1) 0.2%,
+      transparent 0.2%,
+      transparent 0.4%
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.1) 0.2%,
+      transparent 0.2%,
+      transparent 0.4%
+    );
+  mix-blend-mode: screen;
+  opacity: 0.2;
+  z-index: 11;
+  animation: noiseMove 0.6s linear infinite;
+}
+
+@keyframes noiseMove {
+  0% {
+    background-position: 0% 0%, 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%, 100% 100%;
+  }
+}

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comunidade | Club Benares</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="./media/A00 Logo - Light.png" type="image/png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <style>
+    /* Grayscale filter for entire page */
+    body.bg-comunidade {
+      filter: grayscale(100%);
+      position: relative;
+    }
+    
+    /* Add subtle texture to the background */
+    body.bg-comunidade::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.01) 35px, rgba(255,255,255,.01) 70px),
+        repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(0,0,0,.02) 35px, rgba(0,0,0,.02) 70px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Corkboard styling - Masonry/Organic Layout */
+    .corkboard {
+      padding: 2rem;
+      min-height: calc(100vh - 200px);
+      position: relative;
+      overflow-y: auto;
+      
+      /* CSS Grid Masonry-like layout */
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 220px);
+      grid-auto-rows: 20px;
+      gap: 12px 15px;
+      justify-content: center;
+      align-items: start;
+      
+      /* Allow items to slightly overlap */
+      margin: 0 auto;
+      max-width: 1400px;
+    }
+
+    /* Add some items with negative margins for overlap effect */
+    .sticky-note:nth-child(3n) {
+      margin-top: -10px;
+    }
+    
+    .sticky-note:nth-child(5n) {
+      margin-left: -5px;
+    }
+    
+    .sticky-note:nth-child(7n) {
+      margin-right: -5px;
+    }
+    
+    .corkboard-photo:nth-child(even) {
+      margin-top: -15px;
+    }
+
+    /* Base sticky note styles */
+    .sticky-note {
+      width: 220px;
+      min-height: 220px;
+      padding: 20px 15px 15px 15px;
+      position: relative;
+      background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.85) 100%);
+      font-family: 'Kalam', cursive;
+      color: #333;
+      box-shadow: 
+        2px 2px 5px rgba(0,0,0,0.2),
+        inset -1px -1px 2px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, z-index 0s;
+      cursor: default;
+      display: flex;
+      flex-direction: column;
+      
+      /* Grid span for standard notes */
+      grid-row: span 11;
+    }
+
+    /* Small sticky notes */
+    .sticky-small {
+      min-height: 160px;
+      grid-row: span 8;
+    }
+
+    /* Large sticky notes */
+    .sticky-large {
+      min-height: 280px;
+      grid-row: span 14;
+    }
+
+    /* Sticky note tape effect */
+    .sticky-note::before {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 30px;
+      background: rgba(255,255,255,0.4);
+      border: 1px solid rgba(200,200,200,0.3);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      z-index: 1;
+    }
+
+    /* Yellow sticky notes - now will be gray */
+    .sticky-yellow {
+      background: linear-gradient(135deg, #d0d0d0 0%, #b0b0b0 100%);
+    }
+    .sticky-yellow::before {
+      background: rgba(200,200,200,0.3);
+    }
+
+    /* Pink sticky notes - now will be gray */
+    .sticky-pink {
+      background: linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 100%);
+    }
+    .sticky-pink::before {
+      background: rgba(180,180,180,0.3);
+    }
+
+    /* Blue sticky notes - now will be gray */
+    .sticky-blue {
+      background: linear-gradient(135deg, #909090 0%, #707070 100%);
+      color: white;
+    }
+    .sticky-blue::before {
+      background: rgba(120,120,120,0.3);
+    }
+    .sticky-blue a {
+      color: #f0f0f0 !important;
+    }
+
+    /* Green sticky notes - now will be gray */
+    .sticky-green {
+      background: linear-gradient(135deg, #b8b8b8 0%, #989898 100%);
+    }
+    .sticky-green::before {
+      background: rgba(160,160,160,0.3);
+    }
+
+    /* Orange sticky notes - now will be gray */
+    .sticky-orange {
+      background: linear-gradient(135deg, #c8c8c8 0%, #a8a8a8 100%);
+    }
+    .sticky-orange::before {
+      background: rgba(190,190,190,0.3);
+    }
+
+    /* Purple sticky notes - now will be gray */
+    .sticky-purple {
+      background: linear-gradient(135deg, #d8d8d8 0%, #b8b8b8 100%);
+    }
+    .sticky-purple::before {
+      background: rgba(210,210,210,0.3);
+    }
+
+    /* Rotation classes with z-index layering */
+    .tilt-left {
+      transform: rotate(-5deg);
+      z-index: 3;
+    }
+    .tilt-right {
+      transform: rotate(4deg);
+      z-index: 2;
+    }
+    .tilt-left-small {
+      transform: rotate(-2deg);
+      z-index: 4;
+    }
+    .tilt-right-small {
+      transform: rotate(3deg);
+      z-index: 1;
+    }
+    .tilt-left-large {
+      transform: rotate(-8deg);
+      z-index: 5;
+    }
+    
+    /* Create depth with z-index patterns */
+    .sticky-note:nth-child(2n) {
+      z-index: 6;
+    }
+    .sticky-note:nth-child(3n) {
+      z-index: 3;
+    }
+    .sticky-note:nth-child(5n) {
+      z-index: 7;
+    }
+    .corkboard-photo {
+      z-index: 4;
+    }
+
+    /* Hover effects */
+    .sticky-note:hover, .corkboard-photo:hover {
+      transform: rotate(0deg) scale(1.05);
+      box-shadow: 
+        4px 4px 12px rgba(0,0,0,0.3),
+        inset -1px -1px 2px rgba(0,0,0,0.05);
+      z-index: 50 !important;
+    }
+
+    /* Sticky note content */
+    .sticky-note h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .sticky-note p {
+      font-size: 1rem;
+      line-height: 1.4;
+      margin-bottom: 0.8rem;
+      flex-grow: 1;
+    }
+
+    .sticky-note a {
+      color: #2a2a2a;
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s ease;
+      display: inline-block;
+      margin-top: auto;
+    }
+
+    .sticky-note a:hover {
+      border-bottom-color: currentColor;
+    }
+
+    /* Special handwritten-style list */
+    .sticky-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0;
+    }
+
+    .sticky-list li {
+      padding: 0.3rem 0;
+      position: relative;
+      padding-left: 1.2rem;
+    }
+
+    .sticky-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: inherit;
+      opacity: 0.7;
+    }
+
+    /* Polaroid-style images */
+    .corkboard-photo {
+      width: 220px;
+      height: 440px;
+      position: relative;
+      background: white;
+      padding: 10px 10px 50px 10px;
+      box-shadow: 
+        2px 2px 8px rgba(0,0,0,0.3),
+        inset 0 0 2px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, z-index 0s;
+      display: flex;
+      flex-direction: column;
+      
+      /* Grid span for photos - double height */
+      grid-row: span 22;
+    }
+
+    /* Photo frame effect */
+    .corkboard-photo::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 30px;
+      height: 30px;
+      background: radial-gradient(circle, #c0c0c0 0%, #808080 100%);
+      border-radius: 50%;
+      box-shadow: 
+        0 2px 4px rgba(0,0,0,0.3),
+        inset 0 -1px 2px rgba(255,255,255,0.5);
+      z-index: 1;
+    }
+
+    /* Push pin shadow */
+    .corkboard-photo::after {
+      content: '';
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.2);
+      filter: blur(3px);
+      z-index: 0;
+    }
+
+    /* Image container */
+    .photo-image {
+      width: 100%;
+      height: 370px;
+      background-size: cover;
+      background-position: center;
+      background-color: #f0f0f0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Photo caption */
+    .photo-caption {
+      font-family: 'Kalam', cursive;
+      text-align: center;
+      color: #333;
+      font-size: 0.9rem;
+      padding-top: 10px;
+      font-weight: 400;
+    }
+
+    /* Different photo tilts */
+    .photo-tilt-left {
+      transform: rotate(-4deg);
+    }
+    .photo-tilt-right {
+      transform: rotate(3deg);
+    }
+    .photo-tilt-slight {
+      transform: rotate(-1deg);
+    }
+
+    /* Photo hover effect */
+    .corkboard-photo:hover {
+      transform: rotate(0deg) scale(1.02);
+      box-shadow: 
+        4px 4px 15px rgba(0,0,0,0.4),
+        inset 0 0 2px rgba(0,0,0,0.1);
+      z-index: 20 !important;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .corkboard {
+        padding: 1rem;
+        gap: 10px;
+        grid-template-columns: repeat(auto-fill, 160px);
+        grid-auto-rows: 15px;
+      }
+      
+      .sticky-note {
+        width: 160px;
+        min-height: 160px;
+        font-size: 0.9rem;
+        grid-row: span 11;
+      }
+
+      .sticky-small {
+        min-height: 120px;
+        grid-row: span 8;
+      }
+
+      .sticky-large {
+        min-height: 200px;
+        grid-row: span 14;
+      }
+
+      .corkboard-photo {
+        width: 160px;
+        height: 320px;
+        grid-row: span 22;
+      }
+
+      .photo-image {
+        height: 260px;
+      }
+    }
+
+    /* Keep main scrollable */
+    main {
+      overflow-y: auto !important;
+    }
+  </style>
+</head>
+<body class="bg-comunidade">
+
+  <!-- Header container where JavaScript will insert the header -->
+  <div id="header-container"></div>
+
+  <main>
+    <div class="corkboard">
+      
+      <!-- Welcome Note -->
+      <div class="sticky-note sticky-yellow tilt-left">
+        <h3>Bem-vindo!</h3>
+        <p>A nossa comunidade é um espaço de partilha, criatividade e conexão. Junte-se a nós!</p>
+        <a href="https://www.instagram.com/thebenaresclub" target="_blank">Seguir no Instagram →</a>
+      </div>
+
+      <!-- Events Reminder -->
+      <div class="sticky-note sticky-pink tilt-right-small">
+        <h3>Próximo Evento</h3>
+        <p>Não perca o nosso próximo encontro! Música ao vivo, arte e boa companhia.</p>
+        <a href="eventos.html">Ver Calendário →</a>
+      </div>
+
+      <!-- Photo 1 - Event Photo -->
+      <div class="corkboard-photo photo-tilt-left">
+        <div class="photo-image" style="background-image: url('https://picsum.photos/220/370?random=1');"></div>
+        <div class="photo-caption">Última sessão DJ - Jan 2025</div>
+      </div>
+
+      <!-- Discord Community -->
+      <div class="sticky-note sticky-blue tilt-left-small">
+        <h3>Discord</h3>
+        <p>Junte-se ao nosso servidor Discord para conversas diárias e eventos exclusivos online!</p>
+        <a href="https://discord.gg/benares" target="_blank">Entrar no Discord →</a>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="sticky-note sticky-green">
+        <h3>Newsletter</h3>
+        <p>Receba as últimas novidades e convites exclusivos diretamente no seu email.</p>
+        <a href="mailto:charlie@thebenaresclub.com?subject=Newsletter">Subscrever →</a>
+      </div>
+
+      <!-- Member Benefits -->
+      <div class="sticky-note sticky-orange tilt-right">
+        <h3>Benefícios</h3>
+        <ul class="sticky-list">
+          <li>Acesso antecipado</li>
+          <li>Descontos exclusivos</li>
+          <li>Eventos privados</li>
+          <li>Biblioteca digital</li>
+        </ul>
+        <a href="mercado.html">Saber mais →</a>
+      </div>
+
+      <!-- Photo 2 - Art Exhibition -->
+      <div class="corkboard-photo photo-tilt-right">
+        <div class="photo-image" style="background-image: url('https://picsum.photos/220/370?random=2');"></div>
+        <div class="photo-caption">Exposição de Arte - Dez 2024</div>
+      </div>
+
+      <!-- Collaborations -->
+      <div class="sticky-note sticky-purple tilt-left-large">
+        <h3>Colaborações</h3>
+        <p>Interessado em colaborar? Estamos sempre abertos a novas ideias e parcerias criativas!</p>
+        <a href="mailto:charlie@thebenaresclub.com?subject=Colaboração">Contactar →</a>
+      </div>
+
+      <!-- Workshop Alert - SMALL -->
+      <div class="sticky-note sticky-yellow tilt-right-small sticky-small">
+        <h3>Workshop!</h3>
+        <p>Arte digital - Vagas limitadas!</p>
+        <a href="laboratorio.html">Inscrever →</a>
+      </div>
+
+      <!-- Photo 3 - Community Gathering -->
+      <div class="corkboard-photo photo-tilt-slight">
+        <div class="photo-image" style="background-image: url('https://picsum.photos/220/370?random=3');"></div>
+        <div class="photo-caption">Encontro Mensal - Nov 2024</div>
+      </div>
+
+      <!-- Community Rules - LARGE -->
+      <div class="sticky-note sticky-pink sticky-large">
+        <h3>Código de Conduta</h3>
+        <ul class="sticky-list">
+          <li>Respeito mútuo</li>
+          <li>Criatividade livre</li>
+          <li>Partilha de conhecimento</li>
+          <li>Inclusão total</li>
+          <li>Apoio comunitário</li>
+        </ul>
+        <a href="https://docs.google.com/community-rules" target="_blank">Ler completo →</a>
+      </div>
+
+      <!-- Film Club - SMALL -->
+      <div class="sticky-note sticky-blue tilt-left-small sticky-small">
+        <h3>Cinema</h3>
+        <p>Quintas 20h - Cinema PT</p>
+        <a href="cinemateca.html">Ver →</a>
+      </div>
+
+      <!-- Book Club -->
+      <div class="sticky-note sticky-green tilt-right">
+        <h3>Clube do Livro</h3>
+        <p>Leitura do mês: "O Ano da Morte de Ricardo Reis" - José Saramago</p>
+        <a href="biblioteca.html">Juntar-se →</a>
+      </div>
+
+      <!-- Photo 4 - Workshop Scene -->
+      <div class="corkboard-photo photo-tilt-left">
+        <div class="photo-image" style="background-image: url('https://picsum.photos/220/370?random=4');"></div>
+        <div class="photo-caption">Workshop de Criatividade</div>
+      </div>
+
+      <!-- Volunteer - SMALL -->
+      <div class="sticky-note sticky-orange tilt-left sticky-small">
+        <h3>Voluntariado</h3>
+        <p>Ajude-nos a crescer!</p>
+        <a href="mailto:charlie@thebenaresclub.com?subject=Voluntariado">Candidatar →</a>
+      </div>
+
+      <!-- Social Media - LARGE -->
+      <div class="sticky-note sticky-purple tilt-right-small sticky-large">
+        <h3>Redes Sociais</h3>
+        <ul class="sticky-list">
+          <li>Instagram: @thebenaresclub</li>
+          <li>Twitter: @benares_club</li>
+          <li>TikTok: @clubbenares</li>
+          <li>YouTube: /clubbenares</li>
+        </ul>
+        <a href="https://linktr.ee/clubbenares" target="_blank">Todos os links →</a>
+      </div>
+
+      <!-- Photo 5 - Music Night -->
+      <div class="corkboard-photo photo-tilt-right">
+        <div class="photo-image" style="background-image: url('https://picsum.photos/220/370?random=5');"></div>
+        <div class="photo-caption">Noite de Jazz - Out 2024</div>
+      </div>
+
+      <!-- Quick Notes - Additional small notes to fill gaps -->
+      <div class="sticky-note sticky-yellow sticky-small tilt-left-small">
+        <h3>Hoje!</h3>
+        <p>Jam session às 21h</p>
+        <a href="eventos.html">Info →</a>
+      </div>
+
+      <div class="sticky-note sticky-green sticky-small tilt-right">
+        <h3>WiFi</h3>
+        <p>Rede: ClubBenares<br>Pass: arte2025</p>
+      </div>
+
+      <div class="sticky-note sticky-pink sticky-small">
+        <h3>Urgente!</h3>
+        <p>Reunião segunda 19h</p>
+        <a href="mailto:charlie@thebenaresclub.com">RSVP →</a>
+      </div>
+
+      <div class="sticky-note sticky-orange sticky-small tilt-left">
+        <h3>Playlist</h3>
+        <p>Nova seleção disponível!</p>
+        <a href="https://spotify.com/benares" target="_blank">Ouvir →</a>
+      </div>
+
+    </div>
+
+
+  </main>
+  <div id="footer-container"></div>
+  <script src="shared.js"></script>
+</body>
+</html>

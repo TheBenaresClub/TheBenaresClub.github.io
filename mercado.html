@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mercado | Club Benares</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="./media/A00 Logo - Light.png" type="image/png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* ===========================
+         MERCADO STYLES - LAYOUT FIX ONLY
+    =========================== */
+
+    /* Fixed: Contenedor principal de las categorías - now ensures single row */
+    .mercado-categorias {
+      display: flex;
+      justify-content: center;
+      flex-wrap: nowrap; /* Prevent wrapping to keep all 3 in one row */
+      gap: clamp(0.5rem, 2vw, 1rem); /* Reduced gap for better fit */
+      padding: clamp(1rem, 4vw, 1rem) 1rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      min-height: 80vh;
+      align-items: stretch;
+    }
+
+    /* Fixed: Each category card - adjusted to fit 3 in one row */
+    .categoria-card {
+      background-color: rgba(15, 15, 15, 0.6);
+      backdrop-filter: blur(10px) saturate(120%);
+      -webkit-backdrop-filter: blur(10px) saturate(120%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+      color: #fff;
+      padding: clamp(1.5rem, 4vw, 2rem);
+      flex: 1 1 0; /* Equal flexible basis for 3 items */
+      min-width: 0; /* Allow shrinking below content size */
+      max-width: 350px; /* Prevent items from getting too large */
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      user-select: none;
+      outline-offset: 4px;
+      height: 100%;
+      min-height: clamp(250px, 50vh, 400px);
+      touch-action: manipulation;
+    }
+
+    .categoria-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.15), 0 0 40px rgba(255, 255, 255, 0.08);
+    }
+
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 768px) {
+      .mercado-categorias {
+        flex-direction: column; /* Stack vertically on mobile */
+        gap: 1rem;
+        padding: 1rem;
+      }
+      
+      .categoria-card {
+        min-height: 200px;
+        max-width: none;
+      }
+    }
+
+    /* Popup responsiveness fixes */
+    .popup1-window {
+      width: clamp(320px, 90vw, 700px);
+      max-width: 95vw;
+      height: clamp(400px, 85vh, 80vh);
+      max-height: 90vh;
+      padding: clamp(1rem, 3vw, 2rem);
+    }
+
+    .popup1-title {
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      margin-top: 1rem;
+    }
+
+    .popup1-products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: clamp(0.75rem, 2vw, 1rem);
+    }
+
+    .popup1-product {
+      flex: 1 1 clamp(250px, 45%, 48%);
+      max-width: 100%;
+      min-width: 250px;
+      padding: clamp(0.75rem, 2vw, 1rem);
+    }
+  </style>
+</head>
+<body class="bg-mercado">
+
+  <div id="header-container" role="banner"></div>
+
+  <main>
+    <section class="mercado-categorias" aria-label="Categorias do Mercado">
+      <div class="categoria-card" data-categoria="rigs" tabindex="0" role="button" aria-pressed="false">
+        <h2 style="font-size: 1.8rem; margin-bottom: 1rem; font-family: 'RIG';" >LINDEPENDANT</h2>
+        <p style="font-size: 1rem; line-height: 1.4;">Proximamente.</p>
+      </div>
+      <div class="categoria-card" data-categoria="merch" tabindex="0" role="button" aria-pressed="false">
+        <h2 style="font-size: 1.8rem; margin-bottom: 1rem;font-family: 'LIB';">LIBERDADE</h2>
+        <p style="font-size: 1rem; line-height: 1.4;">Proximamente.</p>
+      </div>
+      <div class="categoria-card" data-categoria="projetos" tabindex="0" role="button" aria-pressed="false">
+        <h2 style="font-size: 2rem; margin-bottom: 1rem; font-family: 'FAB';">LA FABRICA</h2>
+        <p style="font-size: 1rem; line-height: 1.4;">Proximamente.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Overlay principal -->
+  <div id="popup1Overlay" class="popup1-overlay"></div>
+
+  <!-- Popups de categorías -->
+  <div id="popup1-rigs" class="popup1-window" aria-hidden="true">
+    <button class="popup1-close" aria-label="Fechar janela">&times;</button>
+    <h2 style="font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 700; margin-bottom: 1rem; color: white; margin-top: 1rem;">Rigs Low Cost</h2>
+    <div class="popup1-products">
+      <div class="popup1-product" data-popup="rig1">
+        <img src="media/FX3test.jpg" alt="Rig Básico">
+        <div style="font-size: clamp(0.9rem, 3vw, 1.1rem);">Rig Básico<br>€40</div>
+      </div>
+      <div class="popup1-product" data-popup="rig2">
+        <img src="media/FX3test.jpg" alt="Shoulder Rig">
+        <div style="font-size: clamp(0.9rem, 3vw, 1.1rem);">Shoulder Rig<br>€60</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="popup1-merch" class="popup1-window" aria-hidden="true">
+    <button class="popup1-close" aria-label="Fechar janela">&times;</button>
+    <h2 style="font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 700; margin-bottom: 1rem; color: white; margin-top: 1rem;">Merch Club Benares</h2>
+    <div class="popup1-products">
+      <div class="popup1-product" data-popup="merch1">
+        <img src="media/HOODIEtest.jpg" alt="Camiseta Club">
+        <div style="font-size: clamp(0.9rem, 3vw, 1.1rem);">Camiseta Club<br>€20</div>
+      </div>
+      <div class="popup1-product" data-popup="merch2">
+        <img src="media/HOODIEtest.jpg" alt="Boné Preto">
+        <div style="font-size: clamp(0.9rem, 3vw, 1.1rem);">Boné Preto<br>€15</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="popup1-projetos" class="popup1-window" aria-hidden="true">
+    <button class="popup1-close" aria-label="Fechar janela">&times;</button>
+    <h2 style="font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 700; margin-bottom: 1rem; color: white; margin-top: 1rem;">Projetos Experimentais</h2>
+    <div class="popup1-products">
+      <div class="popup1-product" data-popup="proj1">
+        <img src="media/3Dcameratest.jpeg" alt="Câmera DIY">
+        <div style="font-size: clamp(0.9rem, 3vw, 1.1rem);">Câmera DIY<br>€120</div>
+      </div>
+      <div class="popup1-product" data-popup="proj2">
+        <img src="media/3Dcameratest.jpeg" alt="Slider 3D">
+        <div style="font-size: clamp(0.9rem, 3vw, 1.1rem);">Slider Impresso 3D<br>€35</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup2 - Product Detail (moved to end for higher stacking) -->
+  <div id="popup2Overlay" class="popup2-overlay" tabindex="-1" aria-hidden="true"></div>
+
+  <div id="popup2" class="popup2-window" tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="popup2-close" aria-label="Fechar janela">&times;</button>
+    <h2 id="popup2-title" class="popup2-title">titulo</h2>
+    <img id="popup2-img" src="" alt="" />
+    <p id="popup2-description"></p>
+    <div class="popup2-price" id="popup2-price"></div>
+    <button class="btn-comprar">Comprar</button>
+  </div>
+
+  <script>
+    const overlay1 = document.getElementById('popup1Overlay');
+    const overlay2 = document.getElementById('popup2Overlay');
+
+    let activePopup1 = null;
+
+    const popup2 = document.getElementById('popup2');
+    const popup2Img = document.getElementById('popup2-img');
+    const popup2Title = document.getElementById('popup2-title');
+    const popup2Desc = document.getElementById('popup2-description');
+    const popup2Price = document.getElementById('popup2-price');
+
+    const productDetails = {
+      rig1: { title: 'Rig Básico', img: 'media/FX3test.jpg', desc: 'Ideal para iniciantes e gravações leves.', price: '€40' },
+      rig2: { title: 'Shoulder Rig', img: 'media/FX3test.jpg', desc: 'Estabilidade superior para filmagens em movimento.', price: '€60' },
+      merch1: { title: 'Camiseta Club', img: 'media/HOODIEtest.jpg', desc: 'Confortável e estilosa com o logo do clube.', price: '€20' },
+      merch2: { title: 'Boné Preto', img: 'media/HOODIEtest.jpg', desc: 'Boné casual com bordado Club Benares.', price: '€15' },
+      proj1: { title: 'Câmera DIY', img: 'media/3Dcameratest.jpeg', desc: 'Montada artesanalmente, excelente para testes.', price: '€120' },
+      proj2: { title: 'Slider 3D', img: 'media/3Dcameratest.jpeg', desc: 'Feito em impressora 3D, ideal para planos suaves.', price: '€35' }
+    };
+
+    // FUNCIONES POPUP1
+    function openPopup1(popup) {
+      popup.classList.add('active');
+      popup.setAttribute('aria-hidden', 'false');
+      overlay1.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      activePopup1 = popup;
+    }
+
+    function closePopup1() {
+      if (activePopup1) {
+        activePopup1.classList.remove('active');
+        activePopup1.setAttribute('aria-hidden', 'true');
+        overlay1.classList.remove('active');
+        document.body.style.overflow = '';
+        activePopup1 = null;
+      }
+    }
+
+    // FUNCIONES POPUP2
+    function openPopup2(data) {
+      console.log('Opening popup2 with data:', data);
+      popup2Title.textContent = data.title;
+      popup2Img.src = data.img;
+      popup2Img.alt = data.title;
+      popup2Desc.textContent = data.desc;
+      popup2Price.textContent = data.price;
+      popup2.classList.add('active');
+      overlay2.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      popup2.setAttribute('aria-hidden', 'false');
+      
+      popup2.style.zIndex = '9999999';
+      overlay2.style.zIndex = '999999';
+    }
+
+    function closePopup2() {
+      popup2.classList.remove('active');
+      overlay2.classList.remove('active');
+      document.body.style.overflow = '';
+      popup2.setAttribute('aria-hidden', 'true');
+    }
+
+    // EVENTOS POPUP1: abrir categoría al hacer click
+    document.querySelectorAll('.categoria-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const categoria = card.dataset.categoria;
+        const popup = document.getElementById(`popup1-${categoria}`);
+        if (popup) {
+          openPopup1(popup);
+        }
+      });
+
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const categoria = card.dataset.categoria;
+          const popup = document.getElementById(`popup1-${categoria}`);
+          if (popup) {
+            openPopup1(popup);
+          }
+        }
+      });
+    });
+
+    // EVENTOS POPUP1: botón cerrar y overlay
+    document.querySelectorAll('.popup1-close').forEach(btn => {
+      btn.addEventListener('click', closePopup1);
+    });
+    overlay1.addEventListener('click', closePopup1);
+
+    // EVENTOS POPUP2: abrir detalle producto
+    document.querySelectorAll('.popup1-product').forEach(prod => {
+      prod.addEventListener('click', () => {
+        const key = prod.dataset.popup;
+        const data = productDetails[key];
+        if (data) {
+          openPopup2(data);
+        }
+      });
+    });
+
+    // EVENTOS POPUP2: botón cerrar y overlay
+    document.querySelector('.popup2-close').addEventListener('click', closePopup2);
+    overlay2.addEventListener('click', closePopup2);
+
+    // ESCAPE cierra ambos popups
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        closePopup2();
+        closePopup1();
+      }
+    });
+
+    // Buy button functionality (placeholder)
+    document.querySelector('.btn-comprar').addEventListener('click', () => {
+      alert('Funcionalidade de compra será implementada em breve!');
+    });
+  </script>
+
+  <div id="footer-container"></div>
+  <script src="shared.js"></script>
+</body>
+</html>

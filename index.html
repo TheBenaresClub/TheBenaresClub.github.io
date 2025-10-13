@@ -1,26 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dark Mode</title>
-  <style>
-    :root {
-      color-scheme: dark;
-    }
-    body {
-      margin: 0;
-      font-family: system-ui, sans-serif;
-      background: #000;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club Benares</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="./media/A00 Logo - Light.png" type="image/png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body>
-  <h1>hehe</h1>
+<body class="bg-club">
+
+  <!-- Header container where JavaScript will insert the header -->
+  <div id="header-container"></div>
+
+  <main>
+    
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="utf-8">
+    <title>Source code</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.3dflipbook.net/js/jquery.min.js"></script>
+    </head>
+    <body>
+    <div class="source-link">
+      <a class="show-source" data="simple-tag-pdf"></a>
+    </div>
+    
+    <div class="sample-container-box">
+      <div class="sample-container flip-book-container" src="books/gallery/Food/Catalago-Natal-22.pdf">
+    
+      </div>
+    </div>
+    
+    
+    
+    <script src="js/three.min.js"></script>
+    <script src="js/pdf.min.js"></script>
+    
+    <script type="text/javascript">
+      window.PDFJS_LOCALE = {
+        pdfJsWorker: 'js/pdf.worker.js',
+        pdfJsCMapUrl: 'cmaps'
+      };
+    </script>
+    <script src="js/3dflipbook.min.js"></script>
+    </body>
+    </html>
+  </main>
+
+  <footer>
+    <div class="copyright">
+      &copy; 2025 Club Benares. Todos os direitos reservados.
+    </div>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/thebenaresclub" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="mailto:charlie@thebenaresclub.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+    </div>
+  </footer>
+
+  <!-- Load shared header -->
+  <script src="shared-header.js"></script>
+
 </body>
 </html>

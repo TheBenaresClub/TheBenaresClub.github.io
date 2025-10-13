@@ -8,242 +8,6 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="./media/A00 Logo - Light.png" type="image/png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  
-  <style>
-    
-    /* ===========================
-         EVENTOS STYLES
-    =========================== */
-
-    .proximos-eventos {
-      margin: 2rem auto;
-      padding: 2rem 3rem;
-      max-width: 1050px;
-      min-width: 320px;
-      width: 90%;
-      background-color: rgba(15, 15, 15, 0.6);
-      backdrop-filter: blur(10px) saturate(120%);
-      -webkit-backdrop-filter: blur(10px) saturate(120%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      box-sizing: border-box;
-    }
-
-    .proximos-eventos h2 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-      padding-bottom: 0.5rem;
-    }
-
-    .evento-listado {
-      display: flex;
-      justify-content: space-between;
-      background-color: rgba(255,255,255,0.05);
-      padding: 1rem 2rem;
-      border-radius: 10px;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: nowrap;
-      max-width: 100%;
-      box-sizing: border-box;
-    }
-
-    .evento-info {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      min-width: 200px;
-    }
-
-    .evento-info h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-
-    .evento-info p {
-      font-size: 0.9rem;
-      color: #ccc;
-    }
-
-    .evento-botao button {
-      background-color: #fff;
-      color: #000;
-      padding: 0.5rem 1rem;
-      font-weight: 600;
-      font-size: 0.85rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-
-    .evento-botao button:hover {
-      background-color: #ddd;
-      transform: scale(1.05);
-    }
-
-    /* EVENTOS SIGNATURE */
-    .eventos-signature {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9rem;
-      justify-content: center;
-      padding: 2rem 1rem 1rem 1rem;
-      max-width: 1300px;
-      margin: 0 auto;
-    }
-
-    .evento-card {
-      flex: 0 0 320px;
-      height: 230px;
-      position: relative;
-      border-radius: 15px;
-      overflow: hidden;
-      background-color: rgba(15, 15, 15, 0.6);
-      backdrop-filter: blur(10px) saturate(120%);
-      -webkit-backdrop-filter: blur(10px) saturate(120%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s ease;
-    }
-
-    .evento-card:hover {
-      transform: scale(1.03);
-    }
-
-    .card-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-size: cover;
-      background-position: center;
-      opacity: 0.4;
-      z-index: 1;
-    }
-
-    .card-content {
-      position: relative;
-      z-index: 2;
-      padding: 1rem;
-      color: #fff;
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .card-content h2 {
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-
-    .card-content p {
-      font-size: 0.9rem;
-      color: #ddd;
-    }
-
-    .card-content .ver-detalhes {
-      align-self: flex-start;
-      background-color: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px) saturate(120%);
-      -webkit-backdrop-filter: blur(10px) saturate(120%);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #fff;
-      padding: 0.5rem 1rem;
-      font-weight: 600;
-      font-size: 0.85rem;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
-    }
-
-    .card-content .ver-detalhes:hover {
-      background-color: rgba(255, 255, 255, 0.25);
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
-      transform: scale(1.05);
-    }
-
-    /* POPUP STYLES */
-    .popup-overlay {
-      position: fixed;
-      top: 0; 
-      left: 0;
-      width: 100%; 
-      height: 100%;
-      background: rgba(5, 5, 5, 0.6);
-      backdrop-filter: blur(4px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-
-    .popup-window {
-      width: 500px;
-      max-width: 90%;
-      background: rgba(15, 15, 15, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(10px) saturate(120%);
-      -webkit-backdrop-filter: blur(10px) saturate(120%);
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-      color: white;
-      overflow: hidden;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .popup-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(255,255,255,0.1);
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .popup-title {
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-
-    .popup-close {
-      width: 12px;
-      height: 12px;
-      background-color: rgba(255, 79, 79, 0.4);
-      backdrop-filter: blur(10px) saturate(120%);
-      -webkit-backdrop-filter: blur(10px) saturate(120%);
-      border: 1px solid rgba(255, 79, 79, 0.6);
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-      padding: 0;
-      line-height: 0;
-      box-shadow: 0 0 6px 2px rgba(255, 79, 79, 0.5);
-    }
-
-    .popup-close:hover {
-      box-shadow: 0 0 10px 4px rgba(255, 79, 79, 0.8);
-      background-color: rgba(255, 79, 79, 0.6);
-    }
-
-    .popup-content {
-      padding: 1rem;
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-  </style>
 </head>
 <body class="bg-eventos">
 
@@ -313,21 +77,20 @@
   </main>
 
   <!-- Popup ventana flotante -->
-<div class="popup-overlay" id="popupOverlay">
-  <div class="popup-window" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
-    <div class="popup-header">
-      <span class="popup-title" id="popupTitle">Detalhes do Evento</span>
-      <button class="popup-close" id="popupClose" aria-label="Fechar janela"></button>
-    </div>
-    <div class="popup-content" id="popupContent">
-      <!-- Contenido dinámico -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-window" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+      <div class="popup-header">
+        <span class="popup-title" id="popupTitle">Detalhes do Evento</span>
+        <button class="popup-close" id="popupClose" aria-label="Fechar janela"></button>
+      </div>
+      <div class="popup-content" id="popupContent">
+        <!-- Contenido dinámico -->
+      </div>
     </div>
   </div>
-</div>
 
   <div id="footer-container"></div>
   <script src="shared.js"></script>
-
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -337,7 +100,7 @@
       const popupClose = document.getElementById('popupClose');
     
       const detalhesEventos = {
-        "Battle Royale": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500...",
+        "BATTLE ROYALE": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500...",
         "Night Lounge": "Descrição detalhada e independente para Night Lounge, com mais informações que não aparecem na tarjeta.",
         "Circuito Nacional": "Texto exclusivo para Circuito Nacional, detalhando o evento de forma independente."
       };
@@ -345,7 +108,7 @@
       detalhesBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           const card = btn.closest('.evento-card');
-          const title = card.querySelector('h2')?.textContent || 'Evento';
+          const title = card.querySelector('h2')?.textContent.trim() || 'Evento';
           const detalhe = detalhesEventos[title] || 'Detalhes indisponíveis.';
     
           popupContent.innerHTML = `
@@ -369,7 +132,7 @@
         }
       });
     });
-    </script>
+  </script>
 
 </body>
 </html>

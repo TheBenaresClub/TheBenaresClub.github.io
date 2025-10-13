@@ -8,6 +8,13 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="./media/A00 Logo - Light.png" type="image/png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  
+  <style>
+    main {
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+    }
+  </style>
 </head>
 <body class="bg-eventos">
 
@@ -57,7 +64,7 @@
           <p><strong>Hora:</strong> 21h00</p>
         </div>
         <div class="evento-botao">
-          <button onclick="window.open('https://eventbrite.com', '_blank')">Buy tickets / Book your place</button>
+          <button onclick="window.open('https://eventbrite.com', '_blank')" style="cursor: pointer;">Buy tickets / Book your place</button>
         </div>
       </div>
 
@@ -68,7 +75,7 @@
           <p><strong>Hora:</strong> 19h00</p>
         </div>
         <div class="evento-botao">
-          <button onclick="window.open('https://eventbrite.com', '_blank')">Buy tickets / Book your place</button>
+          <button onclick="window.open('https://eventbrite.com', '_blank')" style="cursor: pointer;">Buy tickets / Book your place</button>
         </div>
       </div>
 
@@ -100,20 +107,38 @@
       const popupClose = document.getElementById('popupClose');
     
       const detalhesEventos = {
-        "BATTLE ROYALE": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500...",
-        "Night Lounge": "Descrição detalhada e independente para Night Lounge, com mais informações que não aparecem na tarjeta.",
-        "Circuito Nacional": "Texto exclusivo para Circuito Nacional, detalhando o evento de forma independente."
+        "BATTLE ROYALE": {
+          description: "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500...",
+          image: "https://picsum.photos/640/360?random=1",
+          link: "#"
+        },
+        "Night Lounge": {
+          description: "Descrição detalhada e independente para Night Lounge, com mais informações que não aparecem na tarjeta.",
+          image: "https://picsum.photos/640/360?random=2",
+          link: "#"
+        },
+        "Circuito Nacional": {
+          description: "Texto exclusivo para Circuito Nacional, detalhando o evento de forma independente.",
+          image: "https://picsum.photos/640/360?random=3",
+          link: "#"
+        }
       };
     
       detalhesBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           const card = btn.closest('.evento-card');
           const title = card.querySelector('h2')?.textContent.trim() || 'Evento';
-          const detalhe = detalhesEventos[title] || 'Detalhes indisponíveis.';
+          const evento = detalhesEventos[title] || { 
+            description: 'Detalhes indisponíveis.', 
+            image: 'https://picsum.photos/640/360?random=0',
+            link: '#'
+          };
     
           popupContent.innerHTML = `
-            <h3>${title}</h3>
-            <p>${detalhe}</p>
+            <h3 style="margin-bottom: 1rem;">${title}</h3>
+            <img src="${evento.image}" alt="${title}" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 8px; margin-bottom: 1rem;">
+            <p style="margin-bottom: 1rem;">${evento.description}</p>
+            <a href="${evento.link}" style="display: inline-block; background-color: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; padding: 0.6rem 1.2rem; font-weight: 600; font-size: 0.9rem; border-radius: 8px; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 0 6px rgba(255, 255, 255, 0.1);">Saber Mais</a>
           `;
           popupOverlay.style.display = 'flex';
           document.body.style.overflow = 'hidden';

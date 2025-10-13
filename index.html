@@ -3,66 +3,447 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Club Benares</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <title>Sample | Club Benares</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="./media/A00 Logo - Light.png" type="image/png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-color: #000000;
+      --text-color: #f0f0f0;
+      --accent-color: #ffffff;
+      --font-family: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      background-image: url('./media/B01 Club Benares.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    /* Header */
+    header {
+      background-color: rgba(0, 0, 0, 0.4);
+      color: var(--accent-color);
+      text-align: center;
+      padding: 0.75rem 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      border-radius: 0 0 10px 10px;
+    }
+
+    header h1 {
+      font-size: 1.25rem;
+      font-weight: 500;
+    }
+
+    header img {
+      height: 30px;
+    }
+
+    /* Nav */
+    nav {
+      background-color: rgba(0, 0, 0, 0.4);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      border-radius: 0 0 10px 10px;
+    }
+
+    nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      list-style: none;
+      padding: 0.5rem;
+      gap: 0.75rem;
+    }
+
+    nav a {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.75rem;
+      padding: 0.4rem 0.6rem;
+      border-radius: 10px;
+      background: transparent;
+      border: none;
+      transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.2s ease;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      color: #fff;
+      text-shadow:
+        0 0 5px rgba(255, 255, 255, 0.8),
+        0 0 10px rgba(255, 255, 255, 0.6),
+        0 0 20px rgba(255, 255, 255, 0.4);
+      transform: scale(1.05);
+      outline: none;
+    }
+
+    nav a.active {
+      color: #fff;
+      text-shadow:
+        0 0 8px rgba(255, 255, 255, 1),
+        0 0 15px rgba(255, 255, 255, 0.8),
+        0 0 25px rgba(255, 255, 255, 0.6);
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer {
+      background-color: rgba(0, 0, 0, 0.4);
+      color: var(--accent-color);
+      text-align: center;
+      padding: 0rem 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+      border-radius: 10px 10px 0 0;
+      font-size: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      flex-shrink: 0;
+      min-height: 40px;
+      max-height: 40px;
+    }
+
+    footer .copyright {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    /* Main Content */
+    main {
+      padding: 3rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      overflow-y: auto;
+      min-height: 0;
+    }
+
+    /* Title Section */
+    .title-section {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .title-section h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .social-icons a {
+      color: var(--accent-color);
+      font-size: 2rem;
+      transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.2s ease;
+    }
+
+    .social-icons a:hover {
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      transform: scale(1.1);
+    }
+
+    /* Story Section */
+    .story-section {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      background-color: rgba(15, 15, 15, 0.6);
+      backdrop-filter: blur(10px) saturate(120%);
+      -webkit-backdrop-filter: blur(10px) saturate(120%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+
+    .story-section h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .story-section p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #ddd;
+    }
+
+    /* Photo Grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .photo-item {
+      aspect-ratio: 3/2;
+      overflow: hidden;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .photo-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Fullscreen Modal */
+    .fullscreen-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.95);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .fullscreen-modal.active {
+      display: flex;
+    }
+
+    .fullscreen-modal img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      font-size: 3rem;
+      color: white;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      line-height: 1;
+      padding: 0;
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .title-section h1 {
+        font-size: 2rem;
+      }
+
+      .story-section {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+      }
+
+      main {
+        padding: 2rem 1rem;
+      }
+
+      .close-btn {
+        top: 1rem;
+        right: 1rem;
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
-<body class="bg-club">
+<body>
 
   <!-- Header container where JavaScript will insert the header -->
   <div id="header-container"></div>
 
   <main>
-    
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <meta charset="utf-8">
-    <title>Source code</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.3dflipbook.net/js/jquery.min.js"></script>
-    </head>
-    <body>
-    <div class="source-link">
-      <a class="show-source" data="simple-tag-pdf"></a>
-    </div>
-    
-    <div class="sample-container-box">
-      <div class="sample-container flip-book-container" src="books/gallery/Food/Catalago-Natal-22.pdf">
-    
+    <!-- Title Section -->
+    <div class="title-section">
+      <h1>CLUB BENARES</h1>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/thebenaresclub" target="_blank" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/thebenaresclub" target="_blank" aria-label="Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="mailto:charlie@thebenaresclub.com" aria-label="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
       </div>
     </div>
-    
-    
-    
-    <script src="js/three.min.js"></script>
-    <script src="js/pdf.min.js"></script>
-    
-    <script type="text/javascript">
-      window.PDFJS_LOCALE = {
-        pdfJsWorker: 'js/pdf.worker.js',
-        pdfJsCMapUrl: 'cmaps'
-      };
-    </script>
-    <script src="js/3dflipbook.min.js"></script>
-    </body>
-    </html>
+
+    <!-- Story Section -->
+    <div class="story-section">
+      <h2>How it all started</h2>
+      <p>
+        Club Benares began as a vision to create a space where culture, creativity, and community converge. 
+        Founded in the heart of the city, our journey started with a simple belief: that art, music, and 
+        meaningful connections can transform lives. From intimate gatherings to grand celebrations, we've 
+        grown into a vibrant hub where diverse voices come together. Our story is written by every member, 
+        every event, and every moment shared within these walls. What began as a dream has evolved into 
+        a movement, celebrating the richness of human expression and the power of collective experience.
+      </p>
+    </div>
+
+    <!-- Photo Grid -->
+    <div class="photo-grid">
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&h=400&fit=crop" alt="Gallery Image 1">
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&h=400&fit=crop" alt="Gallery Image 2">
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=400&fit=crop" alt="Gallery Image 3">
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=400&fit=crop" alt="Gallery Image 4">
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&h=400&fit=crop" alt="Gallery Image 5">
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?w=600&h=400&fit=crop" alt="Gallery Image 6">
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1501612780327-45045538702b?w=600&h=400&fit=crop" alt="Gallery Image 7">
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=600&h=400&fit=crop" alt="Gallery Image 8">
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&h=400&fit=crop" alt="Gallery Image 9">
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1445985543470-41fba5c3144a?w=600&h=400&fit=crop" alt="Gallery Image 10">
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=600&h=400&fit=crop" alt="Gallery Image 11">
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?w=600&h=400&fit=crop" alt="Gallery Image 12">
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=600&h=400&fit=crop" alt="Gallery Image 13">
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1598387993441-a364f854c3e1?w=600&h=400&fit=crop" alt="Gallery Image 14">
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?w=600&h=400&fit=crop" alt="Gallery Image 15">
+      </div>
+    </div>
+
   </main>
 
-  <footer>
-    <div class="copyright">
-      &copy; 2025 Club Benares. Todos os direitos reservados.
-    </div>
-    <div class="social-icons">
-      <a href="https://www.instagram.com/thebenaresclub" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="mailto:charlie@thebenaresclub.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-    </div>
-  </footer>
+  <div id="footer-container"></div>
 
-  <!-- Load shared header -->
-  <script src="shared-header.js"></script>
+  <!-- Fullscreen Modal -->
+  <div class="fullscreen-modal" id="fullscreenModal">
+    <div class="close-btn" id="closeBtn">×</div>
+    <img src="" alt="Fullscreen Image" id="fullscreenImg">
+  </div>
+
+  <script>
+    // Fullscreen image functionality
+    const photoItems = document.querySelectorAll('.photo-item');
+    const modal = document.getElementById('fullscreenModal');
+    const fullscreenImg = document.getElementById('fullscreenImg');
+    const closeBtn = document.getElementById('closeBtn');
+
+    photoItems.forEach(item => {
+      item.addEventListener('click', function() {
+        const imgSrc = this.querySelector('img').src;
+        fullscreenImg.src = imgSrc;
+        modal.classList.add('active');
+      });
+    });
+
+    closeBtn.addEventListener('click', function() {
+      modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+
+    // Close with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        modal.classList.remove('active');
+      }
+    });
+  </script>
+
+  <!-- Load shared -->
+  <script src="shared.js"></script>
 
 </body>
 </html>

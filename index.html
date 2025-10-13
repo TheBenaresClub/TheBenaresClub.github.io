@@ -9,6 +9,13 @@
   <link rel="icon" href="./media/A00 Logo - Light.png" type="image/png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+    @font-face {
+      font-family: 'Extenda';
+      src: url('./fuentes/Extenda30Deca.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     .bg-sample {
       background-image: url('./media/B01 Club Benares.png');
       background-size: cover;
@@ -57,10 +64,11 @@
     }
 
     .title-section h1 {
-      font-size: 3rem;
-      font-weight: 700;
+      font-family: 'Extenda', sans-serif;
+      font-size: 8rem;
+      font-weight: 100;
       margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+      line-height: 1;
     }
 
     .social-icons-main {
@@ -110,7 +118,7 @@
     /* Photo Grid */
     .photo-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 1rem;
       margin-bottom: 3rem;
     }
@@ -188,7 +196,7 @@
     /* Mobile Responsive */
     @media (max-width: 768px) {
       .title-section h1 {
-        font-size: 2rem;
+        font-size: 4rem;
       }
 
       .story-section {
@@ -196,7 +204,7 @@
       }
 
       .photo-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 0.5rem;
       }
 
@@ -240,12 +248,7 @@
     <div class="story-section">
       <h2>How it all started</h2>
       <p>
-        Club Benares began as a vision to create a space where culture, creativity, and community converge. 
-        Founded in the heart of the city, our journey started with a simple belief: that art, music, and 
-        meaningful connections can transform lives. From intimate gatherings to grand celebrations, we've 
-        grown into a vibrant hub where diverse voices come together. Our story is written by every member, 
-        every event, and every moment shared within these walls. What began as a dream has evolved into 
-        a movement, celebrating the richness of human expression and the power of collective experience.
+        Club Benares began as a vision to create a space where culture, creativity, and community converge. From intimate gatherings to grand celebrations, we've grown into a vibrant hub where diverse voices come together. Our story is written by every member, every event, and every moment shared within these walls.
       </p>
     </div>
 
@@ -274,27 +277,6 @@
       </div>
       <div class="photo-item">
         <img src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=600&h=400&fit=crop" alt="Gallery Image 8">
-      </div>
-      <div class="photo-item">
-        <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&h=400&fit=crop" alt="Gallery Image 9">
-      </div>
-      <div class="photo-item">
-        <img src="https://images.unsplash.com/photo-1445985543470-41fba5c3144a?w=600&h=400&fit=crop" alt="Gallery Image 10">
-      </div>
-      <div class="photo-item">
-        <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=600&h=400&fit=crop" alt="Gallery Image 11">
-      </div>
-      <div class="photo-item">
-        <img src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?w=600&h=400&fit=crop" alt="Gallery Image 12">
-      </div>
-      <div class="photo-item">
-        <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=600&h=400&fit=crop" alt="Gallery Image 13">
-      </div>
-      <div class="photo-item">
-        <img src="https://images.unsplash.com/photo-1598387993441-a364f854c3e1?w=600&h=400&fit=crop" alt="Gallery Image 14">
-      </div>
-      <div class="photo-item">
-        <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?w=600&h=400&fit=crop" alt="Gallery Image 15">
       </div>
     </div>
 

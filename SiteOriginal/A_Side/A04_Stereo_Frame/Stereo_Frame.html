@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radiolina | Club Benares</title>
+  <!-- Fixed: Use underscore path for CSS -->
+  <link rel="stylesheet" href="../A00_Club_Benares/Club_Benares.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <!-- Fixed: All navigation links updated for underscore folder names -->
+        <li><a href="../A00_Club_Benares/Club_Benares.html">
+          <img src="../A00_Club_Benares/Materiales/Imagenes/A00_Logo_&_title_-_light.png" alt="Club Benares Logo" class="logo">
+        </a></li>
+        <li><a href="../A01_Eventos/Eventos.html">Eventos</a></li>
+        <li><a href="../A02_La_Biblioteca_Nacional/La_Biblioteca_Nacional.html">Biblioteca Nacional</a></li>
+        <li><a href="../A03_El_Cuarto_de_Charlie/El_Cuarto_de_Charlie.html">El Cuarto de Charlie</a></li>
+        <li><a href="../A04_Stereo_Frame/Stereo_Frame.html" class="active">Stereo Frame</a></li>
+        <li><a href="../A05_El_Mercado_Central/El_Mercado_Central.html">El Mercado Central</a></li>
+        <li><a href="../A06_Comunidade/Comunidade.html">Comunidade</a></li>
+        <li><a href="../A07_Contactos/Contactos.html">Contactos</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <section id="RadiolinaBG">
+      <!-- Contenido específico de la página Radiolina -->
+      <main>
+        <section id="StereoFrameBG">
+          <div class="ventana-stereo">
+            <div class="barra-superior">
+              <span>Stereo Frame - Productora Analógica</span>
+              <div class="botones">
+                <div class="boton cerrar"></div>
+                <div class="boton minimizar"></div>
+              </div>
+            </div>
+            <div class="barra-navegacao">
+              <button onclick="mostrarSecao('sobre')">🧊 Sobre</button>
+              <button onclick="mostrarSecao('servicos')">🛠️ Serviços</button>
+              <button onclick="mostrarSecao('portfolio')">📷 Portfolio</button>
+              <button onclick="mostrarSecao('clientes')">🤝 Clientes</button>
+              <button onclick="mostrarSecao('contacto')">📞 Contacto</button>
+            </div>
+            <div class="conteudo-dinamico">
+              <div id="secao-sobre" class="secao ativa">
+                <h2>Sobre nós</h2>
+                <p>
+                  Estúdio de imagem com foco em processos analógicos. Exploramos o cinema e a fotografia como ferramentas para criar memória, textura e presença.
+                </p>
+              </div>
+              <div id="secao-servicos" class="secao">
+                <h2>Serviços</h2>
+                <ul>
+                  <li>📷 Sessões fotográficas em 35mm / médio formato</li>
+                  <li>🎥 Filmagens em Super 8 / 16mm</li>
+                  <li>🔬 Digitalização e revelação</li>
+                  <li>💡 Direção de fotografia</li>
+                  <li>✂️ Edição híbrida</li>
+                </ul>
+              </div>
+              <div id="secao-portfolio" class="secao">
+                <h2>Portfolio</h2>
+                <div class="galeria">
+                  <div class="imagen-placeholder">Projeto A</div>
+                  <div class="imagen-placeholder">Projeto B</div>
+                  <div class="imagen-placeholder">Projeto C</div>
+                </div>
+              </div>
+              <div id="secao-clientes" class="secao">
+                <h2>Clientes e colaborações</h2>
+                <p>Colaboramos com artistas, marcas e festivais.</p>
+                <ul>
+                  <li>🎤 Festival X</li>
+                  <li>🎬 Artista Y</li>
+                  <li>🎶 Marca Z</li>
+                </ul>
+              </div>
+              <div id="secao-contacto" class="secao">
+                <h2>Contacto</h2>
+                <p>📧 Email: contacto@stereoframe.pt</p>
+                <p>📍 Lisboa, Portugal</p>
+                <p>📷 Instagram: @stereoframe.lab</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </section>
+  </main>
+
+  <script>
+    function mostrarSecao(id) {
+      const secoes = document.querySelectorAll('.secao');
+      secoes.forEach(secao => secao.classList.remove('ativa'));
+    
+      const secaoAtiva = document.getElementById('secao-' + id);
+      if (secaoAtiva) secaoAtiva.classList.add('ativa');
+    }
+  </script>
+</body>
+</html>

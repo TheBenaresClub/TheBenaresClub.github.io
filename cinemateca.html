@@ -15,6 +15,9 @@
     html, body {
       overflow: hidden;
       height: 100vh;
+      -webkit-text-size-adjust: 100%;
+      -moz-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
 
     body {
@@ -26,8 +29,8 @@
     .tv-container {
       position: relative;
       width: 100%;
-      max-width: min(1300px, 90vw, calc(90vh * 1.5)); /* Scale width based on height too */
-      max-height: min(90vh, calc(90vw / 1.5)); /* Scale height based on width too */
+      max-width: min(1300px, 90vw, calc(90vh * 1.5));
+      max-height: min(90vh, calc(90vw / 1.5));
       margin: 0 auto;
       padding: 1rem;
       box-sizing: border-box;
@@ -37,7 +40,7 @@
       position: relative;
       width: 100%;
       max-height: calc(100vh - 8rem);
-      aspect-ratio: 1.5 / 1; /* Maintain TV aspect ratio */
+      aspect-ratio: 1.5 / 1;
     }
 
     .tv-background {
@@ -56,6 +59,13 @@
       height: 66%;
       background: transparent;
       overflow: hidden;
+    }
+
+    @media (max-width: 1024px) {
+      .tv-frame {
+        transform: scale(1.5) translateX(30px);
+        transform-origin: top center;
+      }
     }
 
     .tv-content {
@@ -134,6 +144,12 @@
       width: 100%;
     }
 
+    @media (max-width: 1024px) {
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* Movie slots use percentage-based sizing */
     .movie-slot {
       background: transparent;
@@ -162,20 +178,23 @@
       display: flex;
       flex-direction: row;
       margin-bottom: 3%;
+      gap: 4%;
+      align-items: flex-start;
     }
 
     .movie-poster {
       width: 30%;
-      height: 120px;
+      min-width: 30%;
+      max-width: 30%;
+      aspect-ratio: 2 / 3;
       background: #333;
       border-radius: 3px;
-      margin-right: 4%;
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
-      flex-shrink: 0;
       cursor: pointer;
       transition: all 0.3s ease;
+      flex-shrink: 0;
     }
 
     .movie-poster:hover {
@@ -188,25 +207,27 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      min-width: 0;
     }
 
     .movie-info h3 {
-      font-size: 1.1rem;
+      font-size: clamp(0.75rem, 1.8vw, 1.1rem);
       margin-bottom: 2%;
       text-shadow: 0 0 8px rgba(255,255,255,0.5);
       line-height: 1.2;
       flex-shrink: 0;
+      word-break: break-word;
     }
 
     .movie-meta {
-      font-size: 0.9rem;
+      font-size: clamp(0.65rem, 1.2vw, 0.9rem);
       opacity: 0.8;
       margin-bottom: 2%;
       flex-shrink: 0;
     }
 
     .movie-synopsis {
-      font-size: 0.9rem;
+      font-size: clamp(0.6rem, 1.1vw, 0.9rem);
       line-height: 1.4;
       opacity: 0.9;
       display: -webkit-box;
@@ -225,7 +246,7 @@
       cursor: pointer;
       border-radius: 3px;
       transition: background 0.3s ease;
-      font-size: 0.7rem;
+      font-size: clamp(0.6rem, 1.2vw, 0.7rem);
       min-width: 60px;
     }
 
@@ -246,33 +267,33 @@
       right: 20%;
       background: transparent;
       border: none;
-      width: clamp(5%, 10%, 12%); /* Use percentage-based constraints */
+      width: clamp(5%, 10%, 12%);
       height: auto;
       cursor: pointer;
       z-index: 1001;
     }
 
-.power-button img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  animation: pulse-brightness 2s infinite;
-  transition: filter 0.8s ease; /* Smooth fade-out */
-}
+    .power-button img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      animation: pulse-brightness 2s infinite;
+      transition: filter 0.8s ease;
+    }
 
-@keyframes pulse-brightness {
-  0%, 100% {
-    filter: brightness(1);
-  }
-  50% {
-    filter: brightness(0.5);
-  }
-}
+    @keyframes pulse-brightness {
+      0%, 100% {
+        filter: brightness(1);
+      }
+      50% {
+        filter: brightness(0.5);
+      }
+    }
 
-.power-button img.stop-animation {
-  animation: none !important;
-  filter: none !important;
-}
+    .power-button img.stop-animation {
+      animation: none !important;
+      filter: none !important;
+    }
 
     /* Video Player */
     .video-player {
@@ -312,6 +333,7 @@
       cursor: pointer;
       font-family: 'Courier New', monospace;
       z-index: 1001;
+      font-size: clamp(0.8rem, 2vw, 1rem);
     }
 
     /* Custom fonts for specific elements */
@@ -329,14 +351,14 @@
     
     .special-title {
       font-family: 'A_DAY_WITHOUT_SUN', 'Courier New', monospace;
-      font-size: 2.3rem !important;
+      font-size: clamp(0.9rem, 1.8vw, 2.3rem) !important;
       font-weight: normal;
       letter-spacing: .2rem;
     }
     
     .inexistente-title {
       font-family: 'Afrah-Bold', 'Courier New', monospace;
-      font-size: 1.2rem !important;
+      font-size: clamp(0.8rem, 1.4vw, 1.2rem) !important;
       font-weight: normal;
       letter-spacing: .15rem;
     }
@@ -364,6 +386,13 @@
     .poster-popup.show {
       opacity: 1;
       transform: scale(1);
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .poster-popup {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -459,7 +488,7 @@
     let tvIsOn = false;
     let currentPage = 0;
     let activeVideo = null;
-    const moviesPerPage = 2;
+    let currentMoviesPerPage = window.innerWidth <= 1024 ? 1 : 2;
 
     // Movie Database
     const allMovies = [
@@ -514,9 +543,12 @@
 
     // Render Movies for Current Page
     function renderMovies() {
-      const startIndex = currentPage * moviesPerPage;
-      const endIndex = startIndex + moviesPerPage;
-      const currentMovies = allMovies.slice(startIndex, endIndex);
+      // Filter out empty slots
+      const nonEmptyMovies = allMovies.filter(m => !m.empty);
+      const itemsPerPage = window.innerWidth <= 1024 ? 1 : 2;
+      const startIndex = currentPage * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const currentMovies = nonEmptyMovies.slice(startIndex, endIndex);
 
       movieGrid.innerHTML = '';
 
@@ -536,10 +568,10 @@
                 <div class="movie-meta">${movie.date} • ${movie.duration}</div>
                 <h3 ${movie.specialTitle ? 'class="special-title"' : movie.inexistenteTitle ? 'class="inexistente-title"' : ''}>${movie.title}</h3>
                 <div class="movie-meta">${movie.director}</div>
+                <div class="movie-synopsis">
+                  ${movie.synopsis}
+                </div>
               </div>
-            </div>
-            <div class="movie-synopsis">
-              ${movie.synopsis}
             </div>
           ` : `
             <div class="movie-info">
@@ -611,11 +643,9 @@
       const popupHeight = 450;
       const offset = 20;
       
-      // Calculate position to keep popup within viewport
       let left = mouseX + offset;
       let top = mouseY - (popupHeight / 2);
       
-      // Adjust if popup would go off screen
       if (left + popupWidth > window.innerWidth) {
         left = mouseX - popupWidth - offset;
       }
@@ -641,40 +671,37 @@
     });
 
     // Power Button Functionality
-powerBtn.addEventListener('click', function() {
-  // Stop pulsing after first click
-  const img = this.querySelector('img');
-  if (img && !img.classList.contains('stop-animation')) {
-    img.classList.add('stop-animation');
-  }
+    powerBtn.addEventListener('click', function() {
+      const img = this.querySelector('img');
+      if (img && !img.classList.contains('stop-animation')) {
+        img.classList.add('stop-animation');
+      }
 
-  playSound(powerSound);
-  
-  if (!tvIsOn) {
-    // Turn TV on - show on state for 1 second, then menu
-    tvOff.classList.remove('active');
-    tvBackground.src = './media/canal14_on.png';
-    
-    setTimeout(() => {
-      tvBackground.src = './media/canal14_menu.png';
-      tvOn.classList.add('active');
-      tvIsOn = true;
-      renderMovies();
-    }, 900);
-  } else {
-    // Turn TV off
-    closeAllVideos();
-    tvOn.classList.remove('active');
-    tvBackground.src = './media/canal14_off.png';
-    
-    setTimeout(() => {
-      tvOff.classList.add('active');
-      tvIsOn = false;
-    }, 300);
-  }
-});
+      playSound(powerSound);
+      
+      if (!tvIsOn) {
+        tvOff.classList.remove('active');
+        tvBackground.src = './media/canal14_on.png';
+        
+        setTimeout(() => {
+          tvBackground.src = './media/canal14_menu.png';
+          tvOn.classList.add('active');
+          tvIsOn = true;
+          renderMovies();
+        }, 900);
+      } else {
+        closeAllVideos();
+        tvOn.classList.remove('active');
+        tvBackground.src = './media/canal14_off.png';
+        
+        setTimeout(() => {
+          tvOff.classList.add('active');
+          tvIsOn = false;
+        }, 300);
+      }
+    });
 
-
+    // Navigation Buttons
     // Navigation Buttons
     prevBtn.addEventListener('click', function() {
       if (tvIsOn && !activeVideo) {
@@ -689,7 +716,10 @@ powerBtn.addEventListener('click', function() {
     nextBtn.addEventListener('click', function() {
       if (tvIsOn && !activeVideo) {
         playSound(buttonSound);
-        const maxPage = Math.ceil(allMovies.length / moviesPerPage) - 1;
+        // Update based on current window size
+        const itemsPerPage = window.innerWidth <= 1024 ? 1 : 2;
+        const nonEmptyMovies = allMovies.filter(m => !m.empty);
+        const maxPage = Math.ceil(nonEmptyMovies.length / itemsPerPage) - 1;
         if (currentPage < maxPage) {
           currentPage++;
           renderMovies();
@@ -703,10 +733,9 @@ powerBtn.addEventListener('click', function() {
       if (videoPlayer) {
         closeAllVideos();
         tvBackground.src = './media/canal14_off.png';
-        tvOn.classList.remove('active'); // Hide movie menu
+        tvOn.classList.remove('active');
         videoPlayer.classList.add('active');
         activeVideo = videoId;
-        // Disable navigation buttons
         prevBtn.disabled = true;
         nextBtn.disabled = true;
       }
@@ -718,12 +747,10 @@ powerBtn.addEventListener('click', function() {
         videoPlayer.classList.remove('active');
         activeVideo = null;
         tvBackground.src = './media/canal14_menu.png';
-        tvOn.classList.add('active'); // Show movie menu again
-        // Re-enable navigation buttons
+        tvOn.classList.add('active');
         prevBtn.disabled = false;
         nextBtn.disabled = false;
         
-        // Pause the video
         const iframe = videoPlayer.querySelector('iframe');
         if (iframe) {
           const src = iframe.src;
@@ -741,8 +768,7 @@ powerBtn.addEventListener('click', function() {
       });
       if (activeVideo) {
         tvBackground.src = './media/canal14_menu.png';
-        tvOn.classList.add('active'); // Show movie menu again
-        // Re-enable navigation buttons
+        tvOn.classList.add('active');
         prevBtn.disabled = false;
         nextBtn.disabled = false;
       }
@@ -753,9 +779,7 @@ powerBtn.addEventListener('click', function() {
     function playSound(audio) {
       if (audio) {
         audio.currentTime = 0;
-        audio.play().catch(() => {
-          // Handle autoplay restrictions
-        });
+        audio.play().catch(() => {});
       }
     }
 
@@ -797,19 +821,17 @@ powerBtn.addEventListener('click', function() {
       const deltaX = touchEndX - touchStartX;
       const deltaY = touchEndY - touchStartY;
 
-      // Horizontal swipe detection
       if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
         if (deltaX > 0) {
-          nextBtn.click(); // Swipe right
+          nextBtn.click();
         } else {
-          prevBtn.click(); // Swipe left
+          prevBtn.click();
         }
       }
     });
 
     // Initialize
     document.addEventListener('DOMContentLoaded', function() {
-      // Ensure TV starts in off state
       tvOff.classList.add('active');
       tvOn.classList.remove('active');
     });

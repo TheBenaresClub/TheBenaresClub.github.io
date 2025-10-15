@@ -61,13 +61,6 @@
       overflow: hidden;
     }
 
-    @media (max-width: 1024px) {
-      .tv-frame {
-        transform: scale(1.5) translateX(30px);
-        transform-origin: top center;
-      }
-    }
-
     .tv-content {
       position: absolute;
       top: 0;
@@ -132,6 +125,7 @@
       align-items: center;
       gap: 1rem;
       padding: 0 5%;
+      padding-bottom: 2%;
       box-sizing: border-box;
     }
 
@@ -211,7 +205,7 @@
     }
 
     .movie-info h3 {
-      font-size: clamp(0.75rem, 1.8vw, 1.1rem);
+      font-size: 1.045rem;
       margin-bottom: 2%;
       text-shadow: 0 0 8px rgba(255,255,255,0.5);
       line-height: 1.2;
@@ -220,14 +214,14 @@
     }
 
     .movie-meta {
-      font-size: clamp(0.65rem, 1.2vw, 0.9rem);
+      font-size: 0.855rem;
       opacity: 0.8;
       margin-bottom: 2%;
       flex-shrink: 0;
     }
 
     .movie-synopsis {
-      font-size: clamp(0.6rem, 1.1vw, 0.9rem);
+      font-size: 0.855rem;
       line-height: 1.4;
       opacity: 0.9;
       display: -webkit-box;
@@ -235,6 +229,15 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
       flex: 1;
+    }
+
+    .synopsis-desktop {
+      display: block;
+    }
+
+    .synopsis-mobile {
+      display: none !important;
+      font-size: 0.9rem !important;
     }
 
     .tv-internal-button {
@@ -246,7 +249,7 @@
       cursor: pointer;
       border-radius: 3px;
       transition: background 0.3s ease;
-      font-size: clamp(0.6rem, 1.2vw, 0.7rem);
+      font-size: 0.7rem;
       min-width: 60px;
     }
 
@@ -323,8 +326,8 @@
 
     .close-video {
       position: absolute;
-      top: 50px;
-      right: 40px;
+      top: 20px;
+      right: 20px;
       background: #ff0000;
       color: white;
       border: none;
@@ -333,7 +336,16 @@
       cursor: pointer;
       font-family: 'Courier New', monospace;
       z-index: 1001;
-      font-size: clamp(0.8rem, 2vw, 1rem);
+      font-size: 1rem;
+    }
+
+    @media (max-width: 1024px) {
+      .close-video {
+        top: 10px;
+        right: 10px;
+        padding: 0.3rem 0.6rem;
+        font-size: 0.6rem;
+      }
     }
 
     /* Custom fonts for specific elements */
@@ -351,14 +363,14 @@
     
     .special-title {
       font-family: 'A_DAY_WITHOUT_SUN', 'Courier New', monospace;
-      font-size: clamp(0.9rem, 1.8vw, 2.3rem) !important;
+      font-size: 2.185rem !important;
       font-weight: normal;
       letter-spacing: .2rem;
     }
     
     .inexistente-title {
       font-family: 'Afrah-Bold', 'Courier New', monospace;
-      font-size: clamp(0.8rem, 1.4vw, 1.2rem) !important;
+      font-size: 1.14rem !important;
       font-weight: normal;
       letter-spacing: .15rem;
     }
@@ -393,6 +405,52 @@
     @media (max-width: 768px) {
       .poster-popup {
         display: none;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .tv-frame {
+        transform: scale(1.5) translateX(30px);
+        transform-origin: top center;
+      }
+
+      .movie-info h3 {
+        font-size: 0.627rem;
+      }
+
+      .movie-meta {
+        font-size: 0.513rem;
+      }
+
+      .movie-synopsis {
+        font-size: 0.54rem;
+      }
+
+      .synopsis-mobile {
+        display: -webkit-box !important;
+        font-size: 0.513rem !important;
+        line-height: 1.4 !important;
+        opacity: 0.8 !important;
+        -webkit-line-clamp: 4 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+        margin-top: 2% !important;
+      }
+
+      .tv-internal-button {
+        font-size: 0.28rem;
+      }
+
+      .close-video {
+        font-size: 0.6rem;
+      }
+
+      .special-title {
+        font-size: 1.311rem !important;
+      }
+
+      .inexistente-title {
+        font-size: 0.684rem !important;
       }
     }
   </style>
@@ -489,7 +547,6 @@
     let tvIsOn = false;
     let currentPage = 0;
     let activeVideo = null;
-    let currentMoviesPerPage = window.innerWidth <= 1024 ? 1 : 2;
 
     // Movie Database
     const allMovies = [
@@ -512,18 +569,6 @@
         poster: './media/poster-artista.png',
         synopsis: 'Um jovem artista finaliza a sua obra-prima, mas a cada dia que passa, fica mais insatisfeito com o resultado final, por isso decide descartar o seu trabalho. Posteriormente, um crítico de arte encontra a sua obra...',
         specialTitle: true
-      },
-      {
-        id: 'empty1',
-        title: '[Empty Slot]',
-        synopsis: 'Coming Soon...',
-        empty: true
-      },
-      {
-        id: 'empty2',
-        title: '[Empty Slot]',
-        synopsis: 'Coming Soon...',
-        empty: true
       }
     ];
 
@@ -544,51 +589,46 @@
 
     // Render Movies for Current Page
     function renderMovies() {
-      // Filter out empty slots
-      const nonEmptyMovies = allMovies.filter(m => !m.empty);
       const itemsPerPage = window.innerWidth <= 1024 ? 1 : 2;
       const startIndex = currentPage * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
-      const currentMovies = nonEmptyMovies.slice(startIndex, endIndex);
+      const currentMovies = allMovies.slice(startIndex, endIndex);
 
       movieGrid.innerHTML = '';
 
       currentMovies.forEach(movie => {
         const movieSlot = document.createElement('div');
-        movieSlot.className = movie.empty ? 'movie-slot empty' : 'movie-slot';
-        
-        if (!movie.empty) {
-          movieSlot.setAttribute('data-video', movie.id);
-        }
+        movieSlot.className = 'movie-slot';
+        movieSlot.setAttribute('data-video', movie.id);
+
+        const isMobile = window.innerWidth <= 1024;
 
         movieSlot.innerHTML = `
-          ${!movie.empty ? `
-            <div class="movie-top-section">
-              <div class="movie-poster" style="background-image: url('${movie.poster}');" data-poster="${movie.poster}"></div>
-              <div class="movie-info">
-                <div class="movie-meta">${movie.date} • ${movie.duration}</div>
-                <h3 ${movie.specialTitle ? 'class="special-title"' : movie.inexistenteTitle ? 'class="inexistente-title"' : ''}>${movie.title}</h3>
-                <div class="movie-meta">${movie.director}</div>
-                <div class="movie-synopsis">
+          <div class="movie-top-section">
+            <div class="movie-poster" style="background-image: url('${movie.poster}');" data-poster="${movie.poster}"></div>
+            <div class="movie-info">
+              <div class="movie-meta">${movie.date} • ${movie.duration}</div>
+              <h3 ${movie.specialTitle ? 'class="special-title"' : movie.inexistenteTitle ? 'class="inexistente-title"' : ''}>${movie.title}</h3>
+              <div class="movie-meta">${movie.director}</div>
+              ${isMobile ? `
+                <div class="synopsis-mobile">
                   ${movie.synopsis}
                 </div>
-              </div>
+              ` : ''}
             </div>
-          ` : `
-            <div class="movie-info">
-              <h3>${movie.title}</h3>
-              <div class="movie-synopsis">
-                ${movie.synopsis}
-              </div>
+          </div>
+          ${!isMobile ? `
+            <div class="synopsis-desktop">
+              ${movie.synopsis}
             </div>
-          `}
+          ` : ''}
         `;
 
         movieGrid.appendChild(movieSlot);
       });
 
-      // Add click listeners to non-empty movies
-      movieGrid.querySelectorAll('.movie-slot:not(.empty)').forEach(slot => {
+      // Add click listeners to movies
+      movieGrid.querySelectorAll('.movie-slot').forEach(slot => {
         slot.addEventListener('click', function() {
           if (tvIsOn) {
             playSound(selectSound);
@@ -640,8 +680,8 @@
     function updatePosterPopupPosition(e, popup) {
       const mouseX = e.clientX;
       const mouseY = e.clientY;
-      const popupWidth = 300;
-      const popupHeight = 450;
+      const popupWidth = 212;
+      const popupHeight = 300;
       const offset = 20;
       
       let left = mouseX + offset;
@@ -703,7 +743,6 @@
     });
 
     // Navigation Buttons
-    // Navigation Buttons
     prevBtn.addEventListener('click', function() {
       if (tvIsOn && !activeVideo) {
         playSound(buttonSound);
@@ -717,10 +756,8 @@
     nextBtn.addEventListener('click', function() {
       if (tvIsOn && !activeVideo) {
         playSound(buttonSound);
-        // Update based on current window size
         const itemsPerPage = window.innerWidth <= 1024 ? 1 : 2;
-        const nonEmptyMovies = allMovies.filter(m => !m.empty);
-        const maxPage = Math.ceil(nonEmptyMovies.length / itemsPerPage) - 1;
+        const maxPage = Math.ceil(allMovies.length / itemsPerPage) - 1;
         if (currentPage < maxPage) {
           currentPage++;
           renderMovies();
@@ -835,6 +872,13 @@
     document.addEventListener('DOMContentLoaded', function() {
       tvOff.classList.add('active');
       tvOn.classList.remove('active');
+    });
+
+    // Re-render when window is resized (for switching between mobile/desktop)
+    window.addEventListener('resize', function() {
+      if (tvIsOn && !activeVideo) {
+        renderMovies();
+      }
     });
   </script>
 </body>

@@ -7,16 +7,42 @@
 <title>El Artista Comprendido | Club Benares</title>      
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
 body 
-    {background-color: black}
+    {background-color: black;
+     display: flex;
+     justify-content: center;
+     align-items: flex-start;
+     min-height: 100vh;}
+
+.main-wrapper
+    {position: relative;
+     width: 100%;
+     display: flex;
+     justify-content: center;}
+
+.content-container
+    {position: relative;
+     width: 1600px;
+     height: 100vh;
+     margin-left: -400px;}
  
 
 @font-face 
     {font-family: Yuji;
      src: url('./Fontes/YujiBoku-Regular.ttf');}
 
-
-     @font-face 
+@font-face 
      {font-family: Day;
       src: url('./Fontes/Montserrat-VariableFont_wght.ttf');}
 
@@ -26,8 +52,7 @@ body
  left: 600px;
  top: 60px;
  border-radius: 20px;
- z-index: 1000;
- position: fixed;}
+ z-index: 1000;}
 #EAC-tapa:hover{cursor: pointer;}
 
 #EAC-notas
@@ -35,46 +60,50 @@ body
  width: 1270px;
  top: -40px;
  left: 315px;
- position: fixed;}
+ z-index: 100;}
 
 #EAC-fichaT
 {position: absolute;
  width: 1270px;
  top: 38px;
  left: 315px;
- position: fixed;}
+ z-index: 100;}
 
 #EAC-fichaA
 {position: absolute;
  width: 1270px;
  top: 38px;
  left: 315px;
- position: fixed;}
+ z-index: 100;}
 
 #EAC-sinopse
 {position: absolute;
  width: 1270px;
  top: 38px;
  left: 315px;
- position: fixed;}
+ z-index: 100;}
 
 #EAC-foto
 {position: absolute;
  width: 1270px;
  top: 38px;
  left: 315px;
- position: fixed;}
+ z-index: 100;}
 
 #EAC-extras
 {position: absolute;
  width: 1270px;
  top: 38px;
  left: 315px;
- position: fixed;}
+ z-index: 100;}
 
 #Back
-{position: absolute;
- width: 100px;}
+{position: fixed;
+ width: 100px;
+ top: 20px;
+ left: 20px;
+ z-index: 10000;}
+#Back:hover{cursor: pointer;}
 
 
 
@@ -85,7 +114,8 @@ body
  font-family: Day;
  font-size: 40px;
  left: 550px;
- top: 275px;}
+ top: 275px;
+ z-index: 500;}
 #Notascharlie:focus,#Notascharlie:active
 {text-decoration: underline;}
 
@@ -96,7 +126,8 @@ body
   font-family: Day;
   font-size: 10px;
   left: 550px;
-  top: 405px;}
+  top: 405px;
+  z-index: 500;}
 
 
 
@@ -107,7 +138,8 @@ body
  font-family: Day;
  font-size: 40px;
  left: 550px;
- top: 340px;}
+ top: 340px;
+ z-index: 500;}
 #FichaTecnica:focus,#FichaTecnica:active
 {text-decoration: underline;} 
 
@@ -118,9 +150,9 @@ body
  top: 402px;
  left: 1330px;
  z-index: 1000;
-color: black;
-font-family: Day;
-white-space: nowrap;}
+ color: black;
+ font-family: Day;
+ white-space: nowrap;}
 
 
 #botonFichatE
@@ -186,7 +218,8 @@ white-space: nowrap;}
  font-family: Day;
  font-size: 40px;
  left: 550px;
- top: 405px;}
+ top: 405px;
+ z-index: 500;}
 #FichaArtistica:focus,#fichaArtistica:active
 {text-decoration: underline;}
 
@@ -221,7 +254,8 @@ white-space: nowrap;}
  font-family: Day;
  font-size: 40px;
  left: 550px;
- top: 470px;}
+ top: 470px;
+ z-index: 500;}
 #Sinopse:focus,#Sinopse:active
 {text-decoration: underline;}
  
@@ -233,7 +267,8 @@ white-space: nowrap;}
  font-family:Day;
  font-size: 40px;
  left: 550px;
- top: 535px;}
+ top: 535px;
+ z-index: 500;}
 #Fotografias:focus,#Fotografias:active
 {text-decoration: underline;}
 
@@ -246,7 +281,8 @@ white-space: nowrap;}
  font-size: 25px;
  text-align: center;
  border: none;
- background-color: transparent;}
+ background-color: transparent;
+ z-index: 500;}
 
 #GaleriaRodagem
 {position: absolute;
@@ -258,7 +294,8 @@ white-space: nowrap;}
     font-size: 18px;
     text-align: center;
     border: none;
-    background-color: transparent;}
+    background-color: transparent;
+    z-index: 500;}
 #GaleriaRodagem:hover{cursor: pointer;}
 
 #InfoFrames
@@ -270,7 +307,8 @@ white-space: nowrap;}
  font-size: 25px;
  border: none;
  background-color: transparent;
- text-align: center;}
+ text-align: center;
+ z-index: 500;}
 
 #GaleriaFrames
 {position: absolute;
@@ -282,7 +320,8 @@ white-space: nowrap;}
     font-size: 18px;
     text-align: center;
     border: none;
-    background-color: transparent;}
+    background-color: transparent;
+    z-index: 500;}
 #GaleriaFrames:hover{cursor: pointer;}
 
 
@@ -293,7 +332,8 @@ white-space: nowrap;}
  font-family: Day;
  font-size: 40px;
  left: 550px;
- top: 600px;}
+ top: 600px;
+ z-index: 500;}
 #Extras:focus,#Extras:active
 {text-decoration: underline;}
 
@@ -308,7 +348,8 @@ white-space: nowrap;}
  text-align: center;
  border: none;
  background-color: transparent;
- white-space: nowrap;}
+ white-space: nowrap;
+ z-index: 500;}
  #GaleriaExtras:hover{cursor: pointer;}
 
 #Cerrar
@@ -319,7 +360,8 @@ white-space: nowrap;}
  font-weight: bold;
  font-size: 40px;
  left: 550px;
- top: 665px;}
+ top: 665px;
+ z-index: 500;}
 
 
 
@@ -373,6 +415,9 @@ align-items: center;}
 
 </head>
 <body>
+
+<div class="main-wrapper">
+  <div class="content-container">
 
 <!-- LIBRO EL ARTISTA COMPRENDIDO -->
 
@@ -453,6 +498,9 @@ align-items: center;}
       <img id="Back" src="./Imagens/Sinal.png" class="imagem pos1">
     </a>
     <div id="transition-overlay"></div>
+  </div>
+</div>
+
   </div>
 </div>
 

@@ -6,13 +6,403 @@
 
 <title>I N E X I S T E N T E | Club Benares</title>      
 
-<link rel="stylesheet" href="INX.css">        
+<style>
+body 
+    {background-color: black;}
+ 
+
+@font-face 
+    {font-family: Yuji;
+     src: url('./Fontes/YujiBoku-Regular.ttf');}
+
+     @font-face 
+     {font-family: INX;
+      src: url('./Fontes/Afrah-Bold.ttf');}
 
 
+      @font-face 
+      {font-family: Montserrat;
+       src: url('./Fontes/Montserrat-VariableFont_wght.ttf');}
+
+
+
+#INX-tapa
+{position: absolute;
+ width: 600px;
+ left: 600px;
+ top: 60px;
+ border-radius: 20px;
+ z-index: 1000;
+ position: fixed;}
+#INX-tapa:hover{cursor: pointer;}
+
+
+
+#INX-notas
+{position: absolute;
+ width: 1270px;
+ top: -6px;
+ left: 315px;
+ position: fixed;}
+
+#botonFichatA
+{position: absolute;
+ width: 35px;
+ top: 445px;
+ left: 1320px;
+ z-index: 1000;
+ font-size: 20px;
+ color: black;
+ font-family: INX;
+ white-space: nowrap;}
+
+#botonFichatB
+{position: absolute;
+ width: 35px;
+ top: 500px;
+ left: 1295px;
+ z-index: 1000;
+ font-size: 20px;
+ color: black;
+ font-family: INX;
+ white-space: nowrap;}
+
+
+
+#INX-fichaT
+{position: absolute;
+ width: 1270px;
+ top: 38px;
+ left: 315px;
+ position: fixed;}
+
+#botonFicharA
+{position: absolute;
+ width: 25px;
+ top: 252px;
+ left: 1050px;
+ z-index: 1000;
+ font-size: 23px;
+ color: black;
+ font-family: INX;
+ white-space: nowrap;}
+ 
+#botonFicharB
+{position: absolute;
+ width: 25px;
+ top: 316px;
+ left: 1050px;
+ z-index: 1000;
+ font-size: 23px;
+ color: black;
+ font-family: INX;
+ white-space: nowrap;}
+
+ #botonFicharC
+ {position: absolute;
+  width: 25px;
+  top: 380px;
+  left: 1050px;
+  z-index: 1000;
+  font-size: 23px;
+  color: black;
+  font-family: INX;
+  white-space: nowrap;}
+
+  #botonFicharE
+  {position: absolute;
+   width: 25px;
+   top: 580px;
+   left: 1050px;
+   z-index: 1000;
+   font-size: 23px;
+   color: black;
+   font-family: INX;
+   white-space: nowrap;}
+
+   #botonFicharD
+ {position: absolute;
+  width: 25px;
+  top: 640px;
+  left: 1050px;
+  z-index: 1000;
+  font-size: 23px;
+  color: black;
+  font-family: INX;
+  white-space: nowrap;}
+ 
+
+
+
+#INX-fichaA
+{position: absolute;
+ width: 1270px;
+ top: 38px;
+ left: 315px;
+ position: fixed;}
+
+#INX-sinopse
+{position: absolute;
+ width: 1270px;
+ top: 38px;
+ left: 315px;
+ position: fixed;}
+
+#INX-foto
+{position: absolute;
+ width: 1270px;
+ top: 38px;
+ left: 315px;
+ position: fixed;}
+
+#InfoRodagem
+{position: absolute;
+ left: 1130px;
+ top: 320px;
+ width: 200px;
+ font-family: Montserrat;
+ font-size: 25px;
+ text-align: center;
+ border: none;
+ background-color: transparent;}
+
+#GaleriaRodagem
+{position: absolute;
+    left: 1130px;
+    top: 420px;
+    width: 200px;
+    font-family: Montserrat;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    border: none;
+    background-color: transparent;}
+#GaleriaRodagem:hover{cursor: pointer;}
+
+#InfoFrames
+{position: absolute;
+ left: 1110px;
+ top: 535px;
+ width: 230px;
+ font-family: Montserrat;
+ font-size: 25px;
+ border: none;
+ background-color: transparent;
+ text-align: center;}
+
+#GaleriaFrames
+{position: absolute;
+    left: 1130px;
+    top: 640px;
+    width: 200px;
+    font-family: Montserrat;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    border: none;
+    background-color: transparent;}
+#GaleriaFrames:hover{cursor: pointer;}
+
+
+
+
+
+#INX-extras
+{position: absolute;
+ width: 1270px;
+ top: 38px;
+ left: 315px;
+ position: fixed;}
+
+#GaleriaExtras
+{position: absolute;
+ left: 1050px;
+ top: 270px;
+ width: 200px;
+ font-family: INX;
+ font-weight: bold;
+ font-size: 25px;
+ text-align: center;
+ border: none;
+ background-color: transparent;
+ white-space: nowrap;}
+ #GaleriaExtras:hover{cursor: pointer;}
+
+
+ #GaleriaExtrasA
+ {position: absolute;
+  left: 1050px;
+  top: 340px;
+  width: 200px;
+  font-family: INX;
+  font-weight: bold;
+  font-size: 25px;
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  white-space: nowrap;}
+  #GaleriaExtrasA:hover{cursor: pointer;}
+ 
+
+#Back
+{position: absolute;
+ width: 100px;}
+
+
+
+
+#Notascharlie
+{position: absolute;
+ border: none;
+ background-color: transparent;
+ font-family: Montserrat;
+ font-size: 40px;
+ left: 550px;
+ top: 275px;}
+#Notascharlie:focus,#Notascharlie:active
+{text-decoration: underline;}
+
+#FichaTecnica
+{position: absolute;
+ border: none;
+ background-color: transparent;
+ font-family: Montserrat;
+ font-size: 40px;
+ left: 550px;
+ top: 340px;}
+#FichaTecnica:focus,#FichaTecnica:active
+{text-decoration: underline;}
+ 
+
+#FichaArtistica
+{position: absolute;
+ border: none;
+ background-color: transparent;
+ font-family:Montserrat;
+ font-size: 40px;
+ left: 550px;
+ top: 405px;}
+#FichaArtistica:focus,#fichaArtistica:active
+{text-decoration: underline;}
+
+
+#Sinopse
+{position: absolute;
+ border: none;
+ background-color: transparent;
+ font-family:Montserrat;
+ font-size: 40px;
+ left: 550px;
+ top: 470px;}
+#Sinopse:focus,#Sinopse:active
+{text-decoration: underline;}
+ 
+
+#Fotografias
+{position: absolute;
+ border: none;
+ background-color: transparent;
+ font-family: Montserrat;
+ font-size: 40px;
+ left: 550px;
+ top: 535px;}
+#Fotografias:focus,#Fotografias:active
+{text-decoration: underline;}
+
+
+#Extras
+{position: absolute;
+ border: none;
+ background-color: transparent;
+ font-family: Montserrat;
+ font-size: 40px;
+ left: 550px;
+ top: 600px;}
+#Extras:focus,#Extras:active
+{text-decoration: underline;}
+
+
+#Cerrar
+{position: absolute;
+ border: none;
+ background-color: transparent;
+ font-family:Montserrat;
+ font-weight: bold;
+ font-size: 40px;
+ left: 550px;
+ top: 665px;}
+
+
+
+
+.fade-in 
+{opacity: 0;
+ transition: opacity 5s ease-in-out}
+
+.fade-in.active 
+{opacity: 1;}
+
+
+
+.container-slider
+{width: 100%;
+ max-width: 900px;
+ margin: auto;
+ box-shadow: 0 0 0 5px black, 0 0px 500px;
+ position: absolute;
+align-items: center;} 
+
+.slider
+{width: 100%;
+ height: 200px;}
+
+.slider__section
+{width: 100%;}
+
+.slider__img 
+{display: block;
+ width: 100%;
+ height: 100%;
+ object-fit: cover;
+ align-items: center;}
+
+ .INEXISTENTEr
+ {position: absolute;
+  font-family: INX;
+  font-size: 50px;
+  color: white;
+  z-index: 3000;
+  left: 300px;
+  top: 350px;}
+    
+
+
+  .fade-out {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+
+  #transition-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: black;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease;
+    z-index: 9999;
+  }
+  
+  #transition-overlay.fade-out {
+    opacity: 1;
+    pointer-events: auto;
+  }
+</style>
+
+</head>
+<body>
 
 <img id="INX-notas" src="./Imagens/01 INX-Notas.png" style="display: none;">
-
-
 <img id="INX-fichaT" src="./Imagens/02 INX - Ficha Tecnica.png" style="display: none;">
 <a href="https://www.instagram.com/charliechavess/" target="_blank"><p id="botonFichatA" style="display: none;">Charlie Chaves</P></a>
 <a href="https://www.instagram.com/joaonalua/" target="_blank"><p id="botonFichatB" style="display: none;">João Nobre</P></a>
@@ -21,9 +411,8 @@
 <a href="https://www.instagram.com/_alessandrobv/" target="_blank"><p id="botonFicharA" style="display: none;">Alessandro Barboza | "Pedro Amaral"</P></a>
 <a href="https://www.instagram.com/azorvedzanets/" target="_blank"><p id="botonFicharB" style="display: none;">Pedro Cabral | "Helder Saramago"</P></a>
 <a href="https://www.instagram.com/pedro.senna.nunes/" target="_blank"><p id="botonFicharC" style="display: none;">Pedro Senna Nunes | "Reporter"</P></a>
-  <p id="botonFicharE" style="display: none;">Mi Mamalety</P>
-    <p id="botonFicharD" style="display: none;">Mis amigos Menes & JJ</P></a>
-
+<p id="botonFicharE" style="display: none;">Mi Mamalety</P>
+<p id="botonFicharD" style="display: none;">Mis amigos Menes & JJ</P></a>
 
 <img id="INX-sinopse" src="./Imagens/04 INX - Sinopse.png" style="display: none;">
 
@@ -45,9 +434,8 @@
 </a>
 
 <a href="/A Side/A03 El Cuarto de Charlie/El Cuarto de Charlie.html" target="_blank">
-  <button id="GaleriaExtrasA" style="display: none;">+ Vê o filme aqui!</button>
-  </a>
-
+<button id="GaleriaExtrasA" style="display: none;">+ Vê o filme aqui!</button>
+</a>
 
 <button id="Notascharlie">Notas Charlie</button>
 <button id="FichaTecnica">Ficha Técnica</button>
@@ -56,50 +444,148 @@
 <button id="Fotografias">Fotografias</button>
 <button id="Extras">Extras</button>
 
-<script src="INX.js"></script> 
-
-
-
 <img id="INX-tapa" src="./Imagens/00 INX - tapa.png">
 <audio id="INX-tapa-click" src="/A Side/A00 Club Benares/Materiales/Audios/Open Book Sound Effect.mp3" preload="auto"></audio>
 
 <button id="Cerrar">Fechar</button>
 <audio id="INX-Cerrar-click" src="/A Side/A00 Club Benares/Materiales/Audios/Close Book Sound Effect.mp3" preload="auto"></audio>
 
-
 <div id="overlay"></div>
 
 <div class="fade-container" id="fade">
+  <div class="Imagenes-Portas-Landing">
+    <a href="index.html" onclick="handleFade(event, this.href)">
+      <img id="Back" src="./Imagens/Sinal.png">
+    </a>
+    <div id="transition-overlay"></div>
+  </div>
+</div>
 
-    <!-- Contenedor general con overlay de transición -->
- <div class="fade-container" id="fade">
- 
-   <!-- Contenedor visual de las puertas con sus posiciones -->
-   <div class="Imagenes-Portas-Landing">
-
-<a href="index.html" onclick="handleFade(event, this.href)">
-<img id="Back" src="./Imagens/Sinal.png"></a>
-
-<!-- Overlay de transición -->
-<div id="transition-overlay"></div>
-
-
-
-<!-- Script para fade + sonido -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const tapa = document.getElementById('INX-tapa');
-        const tapaAudio = document.getElementById('INX-tapa-click');
-    
-        if (tapa && tapaAudio) {
-            tapa.addEventListener('click', function () {
-                tapaAudio.currentTime = 0;
-                tapaAudio.play();
-            });
+document.addEventListener('DOMContentLoaded', function() {
+    const tapa = document.getElementById('INX-tapa');
+    const notas = document.getElementById('INX-notas');
+    const fichaTecnica = document.getElementById('INX-fichaT');
+    const fichaArtistica = document.getElementById('INX-fichaA');
+    const sinopse = document.getElementById('INX-sinopse');
+    const fotografias = document.getElementById('INX-foto');
+    const extras = document.getElementById('INX-extras');
+    const cerrar = document.getElementById('Cerrar');
+
+    // Función para ocultar todas las imágenes excepto la tapa
+    function ocultarTodas() {
+        notas.style.display = 'none';
+        fichaTecnica.style.display = 'none';
+        botonFichatA.style.display = 'none';
+        botonFichatB.style.display = 'none';
+        fichaArtistica.style.display = 'none';
+        botonFicharA.style.display = 'none';
+        botonFicharB.style.display = 'none';
+        botonFicharC.style.display = 'none';
+        botonFicharE.style.display = 'none';
+        botonFicharD.style.display = 'none';
+        sinopse.style.display = 'none';
+        fotografias.style.display = 'none';
+        InfoRodagem.display = 'none';
+        GaleriaRodagem.display = 'none';
+        InfoFrames.display = 'none';
+        GaleriaFrames.display = 'none';
+        extras.style.display = 'none';
+        GaleriaExtras.display = 'none';
+        GaleriaExtrasA.display = 'none';
+    }
+
+    // Función para mostrar cada imagen individualmente
+    function mostrarImagen(imagen) {
+        ocultarTodas(); // Ocultar todas las imágenes
+        imagen.style.display = 'block'; // Mostrar la imagen especificada
+
+        // Mostrar los botones correspondientes a la ficha técnica si se muestra esa imagen
+        if (imagen === fichaTecnica) 
+        {botonFichatA.style.display = 'block';
+         botonFichatB.style.display = 'block';}
+
+        if (imagen === fichaArtistica) 
+        {botonFicharA.style.display = 'block';
+         botonFicharB.style.display = 'block';
+         botonFicharC.style.display = 'block';
+         botonFicharE.style.display = 'block';
+         botonFicharD.style.display = 'block';}
+
+        if (imagen === fotografias)
+        {InfoRodagem.style.display = 'block';
+        GaleriaRodagem.style.display = 'block';
+        InfoFrames.style.display = 'block';
+        GaleriaFrames.style.display = 'block';}
+
+     else {
+        // Ocultar los elementos de fotografías si se muestra otra imagen
+        document.getElementById('InfoRodagem').style.display = 'none';
+        document.getElementById('GaleriaRodagem').style.display = 'none';
+        document.getElementById('InfoFrames').style.display = 'none';
+        document.getElementById('GaleriaFrames').style.display = 'none';}
+
+        if (imagen === extras)
+        {GaleriaExtras.style.display = 'block';
+         GaleriaExtrasA.style.display = 'block';
         }
+
+     else{ document.getElementById('GaleriaExtras').style.display = 'none';
+        document.getElementById('GaleriaExtrasA').style.display = 'none';
+     }}
+
+    // Agregar eventos de clic a cada botón
+    document.getElementById('Notascharlie').addEventListener('click', function() {
+        mostrarImagen(notas);
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('FichaTecnica').addEventListener('click', function() {
+        mostrarImagen(fichaTecnica);
+    });
+
+    document.getElementById('FichaArtistica').addEventListener('click', function() {
+        mostrarImagen(fichaArtistica);
+    });
+
+    document.getElementById('Sinopse').addEventListener('click', function() {
+        mostrarImagen(sinopse);
+    });
+
+    document.getElementById('Fotografias').addEventListener('click', function() {
+        mostrarImagen(fotografias);
+    });
+
+    document.getElementById('Extras').addEventListener('click', function() {
+        mostrarImagen(extras);
+    });
+
+    // Agregar evento de clic a la tapa
+    tapa.addEventListener('click', function() {
+        tapa.style.display = 'none'; // Ocultar la tapa
+        mostrarImagen(notas); // Mostrar la primera página del libro al hacer clic en la tapa
+    });
+
+    // Agregar evento de clic al botón Cerrar
+    cerrar.addEventListener('click', function() {
+        ocultarTodas(); // Ocultar todas las imágenes
+        tapa.style.display = 'block'; // Mostrar solo la tapa al cerrar el libro
+    });
+});
+
+// Audio effects
+document.addEventListener('DOMContentLoaded', function () {
+    const tapa = document.getElementById('INX-tapa');
+    const tapaAudio = document.getElementById('INX-tapa-click');
+
+    if (tapa && tapaAudio) {
+        tapa.addEventListener('click', function () {
+            tapaAudio.currentTime = 0;
+            tapaAudio.play();
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
     const cerrarBtn = document.getElementById('Cerrar');
     const cerrarAudio = document.getElementById('INX-Cerrar-click');
 
@@ -111,16 +597,20 @@
     }
 });
 
-backLink.addEventListener('click', function(event) {
-  event.preventDefault();
+const backLink = document.getElementById('Back');
+if (backLink) {
+  backLink.addEventListener('click', function(event) {
+    event.preventDefault();
 
-  if (overlay) overlay.classList.add('active');
-  document.body.classList.add('fade-out');
+    const overlay = document.getElementById('overlay');
+    if (overlay) overlay.classList.add('active');
+    document.body.classList.add('fade-out');
 
-  setTimeout(() => {
-    window.location.href = backLink.href;
-  }, 600);
-});
+    setTimeout(() => {
+      window.location.href = backLink.href;
+    }, 600);
+  });
+}
 
 function handleFade(event, url) {
     event.preventDefault();
@@ -138,9 +628,8 @@ function handleFade(event, url) {
     setTimeout(() => {
       window.location.href = url;
     }, 1000); // tiempo igual al transition
-  }
-  
-    </script>
+}
+</script>
 
-</head>
-<body>
+</body>
+</html>

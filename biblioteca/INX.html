@@ -7,8 +7,35 @@
 <title>I N E X I S T E N T E | Club Benares</title>      
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
 body 
-    {background-color: black;}
+    {background-color: black;
+     display: flex;
+     justify-content: center;
+     align-items: flex-start;
+     min-height: 100vh;}
+
+.main-wrapper
+    {position: relative;
+     width: 100%;
+     display: flex;
+     justify-content: center;}
+
+.content-container
+    {position: relative;
+     width: 1600px;
+     height: 100vh;
+     margin-left: -400px;}
  
 
 @font-face 
@@ -18,7 +45,6 @@ body
      @font-face 
      {font-family: INX;
       src: url('./Fontes/Afrah-Bold.ttf');}
-
 
       @font-face 
       {font-family: Montserrat;
@@ -32,18 +58,15 @@ body
  left: 600px;
  top: 60px;
  border-radius: 20px;
- z-index: 1000;
- position: fixed;}
+ z-index: 1000;}
 #INX-tapa:hover{cursor: pointer;}
-
-
 
 #INX-notas
 {position: absolute;
  width: 1270px;
  top: -6px;
  left: 315px;
- position: fixed;}
+ z-index: 100;}
 
 #botonFichatA
 {position: absolute;
@@ -67,14 +90,12 @@ body
  font-family: INX;
  white-space: nowrap;}
 
-
-
 #INX-fichaT
 {position: absolute;
  width: 1270px;
  top: 38px;
  left: 315px;
- position: fixed;}
+ z-index: 100;}
 
 #botonFicharA
 {position: absolute;
@@ -130,30 +151,27 @@ body
   color: black;
   font-family: INX;
   white-space: nowrap;}
- 
-
-
 
 #INX-fichaA
 {position: absolute;
  width: 1270px;
  top: 38px;
  left: 315px;
- position: fixed;}
+ z-index: 100;}
 
 #INX-sinopse
 {position: absolute;
  width: 1270px;
  top: 38px;
  left: 315px;
- position: fixed;}
+ z-index: 100;}
 
 #INX-foto
 {position: absolute;
  width: 1270px;
  top: 38px;
  left: 315px;
- position: fixed;}
+ z-index: 100;}
 
 #InfoRodagem
 {position: absolute;
@@ -164,7 +182,8 @@ body
  font-size: 25px;
  text-align: center;
  border: none;
- background-color: transparent;}
+ background-color: transparent;
+ z-index: 500;}
 
 #GaleriaRodagem
 {position: absolute;
@@ -176,7 +195,8 @@ body
     font-size: 18px;
     text-align: center;
     border: none;
-    background-color: transparent;}
+    background-color: transparent;
+    z-index: 500;}
 #GaleriaRodagem:hover{cursor: pointer;}
 
 #InfoFrames
@@ -188,7 +208,8 @@ body
  font-size: 25px;
  border: none;
  background-color: transparent;
- text-align: center;}
+ text-align: center;
+ z-index: 500;}
 
 #GaleriaFrames
 {position: absolute;
@@ -200,19 +221,16 @@ body
     font-size: 18px;
     text-align: center;
     border: none;
-    background-color: transparent;}
+    background-color: transparent;
+    z-index: 500;}
 #GaleriaFrames:hover{cursor: pointer;}
-
-
-
-
 
 #INX-extras
 {position: absolute;
  width: 1270px;
  top: 38px;
  left: 315px;
- position: fixed;}
+ z-index: 100;}
 
 #GaleriaExtras
 {position: absolute;
@@ -225,9 +243,9 @@ body
  text-align: center;
  border: none;
  background-color: transparent;
- white-space: nowrap;}
+ white-space: nowrap;
+ z-index: 500;}
  #GaleriaExtras:hover{cursor: pointer;}
-
 
  #GaleriaExtrasA
  {position: absolute;
@@ -240,16 +258,17 @@ body
   text-align: center;
   border: none;
   background-color: transparent;
-  white-space: nowrap;}
+  white-space: nowrap;
+  z-index: 500;}
   #GaleriaExtrasA:hover{cursor: pointer;}
  
-
 #Back
-{position: absolute;
- width: 100px;}
-
-
-
+{position: fixed;
+ width: 100px;
+ top: 20px;
+ left: 20px;
+ z-index: 10000;}
+#Back:hover{cursor: pointer;}
 
 #Notascharlie
 {position: absolute;
@@ -258,7 +277,8 @@ body
  font-family: Montserrat;
  font-size: 40px;
  left: 550px;
- top: 275px;}
+ top: 275px;
+ z-index: 500;}
 #Notascharlie:focus,#Notascharlie:active
 {text-decoration: underline;}
 
@@ -269,11 +289,11 @@ body
  font-family: Montserrat;
  font-size: 40px;
  left: 550px;
- top: 340px;}
+ top: 340px;
+ z-index: 500;}
 #FichaTecnica:focus,#FichaTecnica:active
 {text-decoration: underline;}
  
-
 #FichaArtistica
 {position: absolute;
  border: none;
@@ -281,10 +301,10 @@ body
  font-family:Montserrat;
  font-size: 40px;
  left: 550px;
- top: 405px;}
+ top: 405px;
+ z-index: 500;}
 #FichaArtistica:focus,#fichaArtistica:active
 {text-decoration: underline;}
-
 
 #Sinopse
 {position: absolute;
@@ -293,11 +313,11 @@ body
  font-family:Montserrat;
  font-size: 40px;
  left: 550px;
- top: 470px;}
+ top: 470px;
+ z-index: 500;}
 #Sinopse:focus,#Sinopse:active
 {text-decoration: underline;}
  
-
 #Fotografias
 {position: absolute;
  border: none;
@@ -305,10 +325,10 @@ body
  font-family: Montserrat;
  font-size: 40px;
  left: 550px;
- top: 535px;}
+ top: 535px;
+ z-index: 500;}
 #Fotografias:focus,#Fotografias:active
 {text-decoration: underline;}
-
 
 #Extras
 {position: absolute;
@@ -317,10 +337,10 @@ body
  font-family: Montserrat;
  font-size: 40px;
  left: 550px;
- top: 600px;}
+ top: 600px;
+ z-index: 500;}
 #Extras:focus,#Extras:active
 {text-decoration: underline;}
-
 
 #Cerrar
 {position: absolute;
@@ -330,10 +350,8 @@ body
  font-weight: bold;
  font-size: 40px;
  left: 550px;
- top: 665px;}
-
-
-
+ top: 665px;
+ z-index: 500;}
 
 .fade-in 
 {opacity: 0;
@@ -341,8 +359,6 @@ body
 
 .fade-in.active 
 {opacity: 1;}
-
-
 
 .container-slider
 {width: 100%;
@@ -375,15 +391,12 @@ align-items: center;}
   left: 300px;
   top: 350px;}
     
-
-
-  .fade-out {
+.fade-out {
     opacity: 0;
     transition: opacity 0.6s ease;
   }
 
-
-  #transition-overlay {
+#transition-overlay {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     background-color: black;
@@ -393,7 +406,7 @@ align-items: center;}
     z-index: 9999;
   }
   
-  #transition-overlay.fade-out {
+#transition-overlay.fade-out {
     opacity: 1;
     pointer-events: auto;
   }
@@ -401,6 +414,9 @@ align-items: center;}
 
 </head>
 <body>
+
+<div class="main-wrapper">
+  <div class="content-container">
 
 <img id="INX-notas" src="./Imagens/01 INX-Notas.png" style="display: none;">
 <img id="INX-fichaT" src="./Imagens/02 INX - Ficha Tecnica.png" style="display: none;">
@@ -461,6 +477,9 @@ align-items: center;}
   </div>
 </div>
 
+  </div>
+</div>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const tapa = document.getElementById('INX-tapa');
@@ -472,7 +491,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const extras = document.getElementById('INX-extras');
     const cerrar = document.getElementById('Cerrar');
 
-    // Función para ocultar todas las imágenes excepto la tapa
     function ocultarTodas() {
         notas.style.display = 'none';
         fichaTecnica.style.display = 'none';
@@ -495,12 +513,10 @@ document.addEventListener('DOMContentLoaded', function() {
         GaleriaExtrasA.display = 'none';
     }
 
-    // Función para mostrar cada imagen individualmente
     function mostrarImagen(imagen) {
-        ocultarTodas(); // Ocultar todas las imágenes
-        imagen.style.display = 'block'; // Mostrar la imagen especificada
+        ocultarTodas();
+        imagen.style.display = 'block';
 
-        // Mostrar los botones correspondientes a la ficha técnica si se muestra esa imagen
         if (imagen === fichaTecnica) 
         {botonFichatA.style.display = 'block';
          botonFichatB.style.display = 'block';}
@@ -517,9 +533,7 @@ document.addEventListener('DOMContentLoaded', function() {
         GaleriaRodagem.style.display = 'block';
         InfoFrames.style.display = 'block';
         GaleriaFrames.style.display = 'block';}
-
      else {
-        // Ocultar los elementos de fotografías si se muestra otra imagen
         document.getElementById('InfoRodagem').style.display = 'none';
         document.getElementById('GaleriaRodagem').style.display = 'none';
         document.getElementById('InfoFrames').style.display = 'none';
@@ -527,14 +541,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (imagen === extras)
         {GaleriaExtras.style.display = 'block';
-         GaleriaExtrasA.style.display = 'block';
-        }
-
+         GaleriaExtrasA.style.display = 'block';}
      else{ document.getElementById('GaleriaExtras').style.display = 'none';
-        document.getElementById('GaleriaExtrasA').style.display = 'none';
-     }}
+        document.getElementById('GaleriaExtrasA').style.display = 'none';}}
 
-    // Agregar eventos de clic a cada botón
     document.getElementById('Notascharlie').addEventListener('click', function() {
         mostrarImagen(notas);
     });
@@ -559,20 +569,17 @@ document.addEventListener('DOMContentLoaded', function() {
         mostrarImagen(extras);
     });
 
-    // Agregar evento de clic a la tapa
     tapa.addEventListener('click', function() {
-        tapa.style.display = 'none'; // Ocultar la tapa
-        mostrarImagen(notas); // Mostrar la primera página del libro al hacer clic en la tapa
+        tapa.style.display = 'none';
+        mostrarImagen(notas);
     });
 
-    // Agregar evento de clic al botón Cerrar
     cerrar.addEventListener('click', function() {
-        ocultarTodas(); // Ocultar todas las imágenes
-        tapa.style.display = 'block'; // Mostrar solo la tapa al cerrar el libro
+        ocultarTodas();
+        tapa.style.display = 'block';
     });
 });
 
-// Audio effects
 document.addEventListener('DOMContentLoaded', function () {
     const tapa = document.getElementById('INX-tapa');
     const tapaAudio = document.getElementById('INX-tapa-click');
@@ -627,7 +634,7 @@ function handleFade(event, url) {
 
     setTimeout(() => {
       window.location.href = url;
-    }, 1000); // tiempo igual al transition
+    }, 1000);
 }
 </script>
 

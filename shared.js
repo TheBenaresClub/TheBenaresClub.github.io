@@ -33,7 +33,7 @@ function createFooter() {
   return `
     <footer>
       <button id="shadow-toggle" class="shadow-toggle-btn shadows-off">
-        🎨 Sombras: OFF
+        Debug
       </button>
       
       <div class="copyright">
@@ -71,7 +71,7 @@ function toggleBoxShadows() {
     });
     
     // Update button
-    toggleBtn.textContent = '🎨 Sombras: OFF';
+    toggleBtn.textContent = 'Debug';
     toggleBtn.classList.add('shadows-off');
   } else {
     // Turn ON shadows
@@ -81,7 +81,7 @@ function toggleBoxShadows() {
     applyRandomBoxShadows();
     
     // Update button
-    toggleBtn.textContent = '🎨 Sombras: ON';
+    toggleBtn.textContent = 'Debug';
     toggleBtn.classList.remove('shadows-off');
   }
 }

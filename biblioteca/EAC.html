@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 
 <title>El Artista Comprendido | Club Benares</title>      
 
@@ -18,399 +18,454 @@ html, body {
   height: 100%;
 }
 
-body 
-    {background-color: black;
-     display: flex;
-     justify-content: center;
-     align-items: flex-start;
-     min-height: 100vh;}
+body {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  overflow-x: auto;
+  overflow-y: auto;
+}
 
-.main-wrapper
-    {position: relative;
-     width: 100%;
-     display: flex;
-     justify-content: center;}
+.main-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
-.content-container
-    {position: relative;
-     width: 1600px;
-     height: 100vh;
-     margin-left: -400px;}
- 
+.content-container {
+  position: relative;
+  width: 1600px;
+  height: 100vh;
+  margin-left: -400px;
+}
 
-@font-face 
-    {font-family: Yuji;
-     src: url('./Fontes/YujiBoku-Regular.ttf');}
+/* Mobile scaling */
+@media screen and (max-width: 1600px) {
+  .content-container {
+    transform-origin: top left;
+    transform: scale(var(--scale-factor));
+    margin-left: 0;
+    left: 50%;
+    margin-left: calc(-800px * var(--scale-factor));
+  }
+}
 
-@font-face 
-     {font-family: Day;
-      src: url('./Fontes/Montserrat-VariableFont_wght.ttf');}
+@font-face {
+  font-family: Yuji;
+  src: url('./Fontes/YujiBoku-Regular.ttf');
+}
 
-#EAC-tapa
-{position: absolute;
- width: 600px;
- left: 600px;
- top: 60px;
- border-radius: 20px;
- z-index: 1000;}
-#EAC-tapa:hover{cursor: pointer;}
+@font-face {
+  font-family: Day;
+  src: url('./Fontes/Montserrat-VariableFont_wght.ttf');
+}
 
-#EAC-notas
-{position: absolute;
- width: 1270px;
- top: -40px;
- left: 315px;
- z-index: 100;}
+#EAC-tapa {
+  position: absolute;
+  width: 600px;
+  left: 600px;
+  top: 60px;
+  border-radius: 20px;
+  z-index: 1000;
+}
+#EAC-tapa:hover { cursor: pointer; }
 
-#EAC-fichaT
-{position: absolute;
- width: 1270px;
- top: 38px;
- left: 315px;
- z-index: 100;}
+#EAC-notas {
+  position: absolute;
+  width: 1270px;
+  top: -40px;
+  left: 315px;
+  z-index: 100;
+}
 
-#EAC-fichaA
-{position: absolute;
- width: 1270px;
- top: 38px;
- left: 315px;
- z-index: 100;}
+#EAC-fichaT {
+  position: absolute;
+  width: 1270px;
+  top: 38px;
+  left: 315px;
+  z-index: 100;
+}
 
-#EAC-sinopse
-{position: absolute;
- width: 1270px;
- top: 38px;
- left: 315px;
- z-index: 100;}
+#EAC-fichaA {
+  position: absolute;
+  width: 1270px;
+  top: 38px;
+  left: 315px;
+  z-index: 100;
+}
 
-#EAC-foto
-{position: absolute;
- width: 1270px;
- top: 38px;
- left: 315px;
- z-index: 100;}
+#EAC-sinopse {
+  position: absolute;
+  width: 1270px;
+  top: 38px;
+  left: 315px;
+  z-index: 100;
+}
 
-#EAC-extras
-{position: absolute;
- width: 1270px;
- top: 38px;
- left: 315px;
- z-index: 100;}
+#EAC-foto {
+  position: absolute;
+  width: 1270px;
+  top: 38px;
+  left: 315px;
+  z-index: 100;
+}
 
-#Back
-{position: fixed;
- width: 100px;
- top: 20px;
- left: 20px;
- z-index: 10000;}
-#Back:hover{cursor: pointer;}
+#EAC-extras {
+  position: absolute;
+  width: 1270px;
+  top: 38px;
+  left: 315px;
+  z-index: 100;
+}
 
+#Back {
+  position: fixed;
+  width: 100px;
+  top: 20px;
+  left: 20px;
+  z-index: 10000;
+}
+#Back:hover { cursor: pointer; }
 
+#Notascharlie {
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  font-family: Day;
+  font-size: 40px;
+  left: 550px;
+  top: 275px;
+  z-index: 500;
+  cursor: pointer;
+}
+#Notascharlie:focus, #Notascharlie:active {
+  text-decoration: underline;
+}
 
-#Notascharlie
-{position: absolute;
- border: none;
- background-color: transparent;
- font-family: Day;
- font-size: 40px;
- left: 550px;
- top: 275px;
- z-index: 500;}
-#Notascharlie:focus,#Notascharlie:active
-{text-decoration: underline;}
-
-#InfoNotas
-{position: absolute;
+#InfoNotas {
+  position: absolute;
   border: none;
   background-color: transparent;
   font-family: Day;
   font-size: 10px;
   left: 550px;
   top: 405px;
-  z-index: 500;}
+  z-index: 500;
+}
 
+#FichaTecnica {
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  font-family: Day;
+  font-size: 40px;
+  left: 550px;
+  top: 340px;
+  z-index: 500;
+  cursor: pointer;
+}
+#FichaTecnica:focus, #FichaTecnica:active {
+  text-decoration: underline;
+}
 
+#botonFichatA {
+  position: absolute;
+  width: 30px;
+  top: 402px;
+  left: 1330px;
+  z-index: 1000;
+  color: black;
+  font-family: Day;
+  white-space: nowrap;
+}
 
-#FichaTecnica
-{position: absolute;
- border: none;
- background-color: transparent;
- font-family: Day;
- font-size: 40px;
- left: 550px;
- top: 340px;
- z-index: 500;}
-#FichaTecnica:focus,#FichaTecnica:active
-{text-decoration: underline;} 
+#botonFichatE {
+  position: absolute;
+  width: 30px;
+  top: 460px;
+  left: 1325px;
+  z-index: 1000;
+  color: black;
+  font-family: Day;
+  white-space: nowrap;
+}
 
+#botonFichatC {
+  position: absolute;
+  width: 30px;
+  top: 577px;
+  left: 1085px;
+  z-index: 1000;
+  color: black;
+  font-family: Day;
+  white-space: nowrap;
+}
 
-#botonFichatA
-{position: absolute;
- width: 30px;
- top: 402px;
- left: 1330px;
- z-index: 1000;
- color: black;
- font-family: Day;
- white-space: nowrap;}
+#botonFichatD {
+  position: absolute;
+  width: 30px;
+  top: 520px;
+  left: 1100px;
+  z-index: 1000;
+  color: black;
+  font-family: Day;
+  white-space: nowrap;
+}
 
+#botonFichatB {
+  position: absolute;
+  width: 30px;
+  top: 460px;
+  left: 1230px;
+  z-index: 1000;
+  color: black;
+  font-family: Day;
+  white-space: nowrap;
+}
 
-#botonFichatE
-{position: absolute;
- width: 30px;
- top: 460px;
- left: 1325px;
- z-index: 1000;
- color: black;
- font-family: Day;
- white-space: nowrap;}
-
-
-#botonFichatC
-{position: absolute;
- width: 30px;
- top: 577px;
- left: 1085px;
- z-index: 1000;
- color: black;
- font-family: Day;
- white-space: nowrap;}
-
-
-#botonFichatD
-{position: absolute;
- width: 30px;
- top: 520px;
- left: 1100px;
- z-index: 1000;
- color: black;
- font-family: Day;
- white-space: nowrap;}
-
-
-#botonFichatB
-{position: absolute;
- width: 30px;
- top: 460px;
- left: 1230px;
- z-index: 1000;
- color: black;
- font-family: Day;
- white-space: nowrap;}
-
- #botonFichatB1
- {position: absolute;
+#botonFichatB1 {
+  position: absolute;
   width: 30px;
   top: 520px;
   left: 1255px;
   z-index: 1000;
   color: black;
   font-family: Day;
-  white-space: nowrap;} 
- 
- 
+  white-space: nowrap;
+}
 
+#FichaArtistica {
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  font-family: Day;
+  font-size: 40px;
+  left: 550px;
+  top: 405px;
+  z-index: 500;
+  cursor: pointer;
+}
+#FichaArtistica:focus, #FichaArtistica:active {
+  text-decoration: underline;
+}
 
-#FichaArtistica
-{position: absolute;
- border: none;
- background-color: transparent;
- font-family: Day;
- font-size: 40px;
- left: 550px;
- top: 405px;
- z-index: 500;}
-#FichaArtistica:focus,#fichaArtistica:active
-{text-decoration: underline;}
+#botonFicharA {
+  position: absolute;
+  width: 70px;
+  font-size: 22px;
+  top: 340px;
+  left: 1139px;
+  z-index: 1000;
+  color: black;
+  font-family: Day;
+  white-space: nowrap;
+}
 
-#botonFicharA
-{position: absolute;
- width: 70px;
- font-size: 22px;
- top: 340px;
- left: 1139px;
- z-index: 1000;
- color: black;
- font-family: Day;
- white-space: nowrap;}
+#botonFicharB {
+  position: absolute;
+  width: 20px;
+  font-size: 22px;
+  top: 489px;
+  left: 1120px;
+  z-index: 1000;
+  color: black;
+  font-family: Day;
+  white-space: nowrap;
+}
 
-#botonFicharB
-{position: absolute;
- width: 20px;
- font-size: 22px;
- top: 489px;
- left: 1120px;
- z-index: 1000;
- color: black;
- font-family: Day;
- white-space: nowrap;}
- 
+#Sinopse {
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  font-family: Day;
+  font-size: 40px;
+  left: 550px;
+  top: 470px;
+  z-index: 500;
+  cursor: pointer;
+}
+#Sinopse:focus, #Sinopse:active {
+  text-decoration: underline;
+}
 
+#Fotografias {
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  font-family: Day;
+  font-size: 40px;
+  left: 550px;
+  top: 535px;
+  z-index: 500;
+  cursor: pointer;
+}
+#Fotografias:focus, #Fotografias:active {
+  text-decoration: underline;
+}
 
-#Sinopse
-{position: absolute;
- border: none;
- background-color: transparent;
- font-family: Day;
- font-size: 40px;
- left: 550px;
- top: 470px;
- z-index: 500;}
-#Sinopse:focus,#Sinopse:active
-{text-decoration: underline;}
- 
+#InfoRodagem {
+  position: absolute;
+  left: 1130px;
+  top: 330px;
+  width: 200px;
+  font-family: Day;
+  font-size: 25px;
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  z-index: 500;
+}
 
-#Fotografias
-{position: absolute;
- border: none;
- background-color: transparent;
- font-family:Day;
- font-size: 40px;
- left: 550px;
- top: 535px;
- z-index: 500;}
-#Fotografias:focus,#Fotografias:active
-{text-decoration: underline;}
+#GaleriaRodagem {
+  position: absolute;
+  left: 1130px;
+  top: 425px;
+  width: 200px;
+  font-family: Day;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  z-index: 500;
+}
+#GaleriaRodagem:hover { cursor: pointer; }
 
-#InfoRodagem
-{position: absolute;
- left: 1130px;
- top: 330px;
- width: 200px;
- font-family: Day;
- font-size: 25px;
- text-align: center;
- border: none;
- background-color: transparent;
- z-index: 500;}
+#InfoFrames {
+  position: absolute;
+  left: 1110px;
+  top: 540px;
+  width: 230px;
+  font-family: Day;
+  font-size: 25px;
+  border: none;
+  background-color: transparent;
+  text-align: center;
+  z-index: 500;
+}
 
-#GaleriaRodagem
-{position: absolute;
-    left: 1130px;
-    top: 425px;
-    width: 200px;
-    font-family: Day;
-    font-weight: bold;
-    font-size: 18px;
-    text-align: center;
-    border: none;
-    background-color: transparent;
-    z-index: 500;}
-#GaleriaRodagem:hover{cursor: pointer;}
+#GaleriaFrames {
+  position: absolute;
+  left: 1130px;
+  top: 640px;
+  width: 200px;
+  font-family: Day;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  z-index: 500;
+}
+#GaleriaFrames:hover { cursor: pointer; }
 
-#InfoFrames
-{position: absolute;
- left: 1110px;
- top: 540px;
- width: 230px;
- font-family: Day;
- font-size: 25px;
- border: none;
- background-color: transparent;
- text-align: center;
- z-index: 500;}
+#Extras {
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  font-family: Day;
+  font-size: 40px;
+  left: 550px;
+  top: 600px;
+  z-index: 500;
+  cursor: pointer;
+}
+#Extras:focus, #Extras:active {
+  text-decoration: underline;
+}
 
-#GaleriaFrames
-{position: absolute;
-    left: 1130px;
-    top: 640px;
-    width: 200px;
-    font-family: Day;
-    font-weight: bold;
-    font-size: 18px;
-    text-align: center;
-    border: none;
-    background-color: transparent;
-    z-index: 500;}
-#GaleriaFrames:hover{cursor: pointer;}
+#GaleriaExtras {
+  position: absolute;
+  left: 1110px;
+  top: 300px;
+  width: 200px;
+  font-family: Day;
+  font-weight: bold;
+  font-size: 25px;
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  white-space: nowrap;
+  z-index: 500;
+}
+#GaleriaExtras:hover { cursor: pointer; }
 
+#Cerrar {
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  font-family: Day;
+  font-weight: bold;
+  font-size: 40px;
+  left: 550px;
+  top: 665px;
+  z-index: 500;
+  cursor: pointer;
+}
 
-#Extras
-{position: absolute;
- border: none;
- background-color: transparent;
- font-family: Day;
- font-size: 40px;
- left: 550px;
- top: 600px;
- z-index: 500;}
-#Extras:focus,#Extras:active
-{text-decoration: underline;}
+.container-slider {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  box-shadow: 0 0 0 5px black, 0 0px 500px;
+  position: absolute;
+  align-items: center;
+}
 
-#GaleriaExtras
-{position: absolute;
- left: 1110px;
- top: 300px;
- width: 200px;
- font-family: Day;
- font-weight: bold;
- font-size: 25px;
- text-align: center;
- border: none;
- background-color: transparent;
- white-space: nowrap;
- z-index: 500;}
- #GaleriaExtras:hover{cursor: pointer;}
+.slider {
+  width: 100%;
+  height: 200px;
+}
 
-#Cerrar
-{position: absolute;
- border: none;
- background-color: transparent;
- font-family: Day;
- font-weight: bold;
- font-size: 40px;
- left: 550px;
- top: 665px;
- z-index: 500;}
+.slider__section {
+  width: 100%;
+}
 
+.slider__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  align-items: center;
+}
 
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
 
+#transition-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: black;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+  z-index: 9999;
+}
 
-.container-slider
-{width: 100%;
- max-width: 900px;
- margin: auto;
- box-shadow: 0 0 0 5px black, 0 0px 500px;
- position: absolute;
-align-items: center;} 
+#transition-overlay.fade-out {
+  opacity: 1;
+  pointer-events: auto;
+}
 
-.slider
-{width: 100%;
- height: 200px;}
-
-.slider__section
-{width: 100%;}
-
-.slider__img 
-{display: block;
- width: 100%;
- height: 100%;
- object-fit: cover;
- align-items: center;}
-
-
-
-
- .fade-out {
-    opacity: 0;
-    transition: opacity 0.6s ease;
-  }
-
-
-  #transition-overlay {
+/* Mobile adjustments for Back button only */
+@media screen and (max-width: 768px) {
+  #Back {
+    width: 60px;
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: black;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 1s ease;
-    z-index: 9999;
+    top: 10px;
+    left: 10px;
   }
   
-  #transition-overlay.fade-out {
-    opacity: 1;
-    pointer-events: auto;
+  body {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
   }
+}
 </style>
 
 </head>
@@ -424,7 +479,6 @@ align-items: center;}
 <img id="EAC-tapa" src="./Imagens/00 EAC - tapa.png">
 <audio id="EAC-tapa-click" src="/A Side/A00 Club Benares/Materiales/Audios/Open Book Sound Effect.mp3" preload="auto"></audio>
 
-
 <!-- NOTAS -->
 
 <img id="EAC-notas" src="./Imagens/01 EAC - Notas.png" style="display: none;">
@@ -433,52 +487,42 @@ align-items: center;}
 
 <img id="EAC-fichaT" src="./Imagens/02 EAC - Ficha Tecnica.png" style="display: none;">
 
-<a href="https://www.instagram.com/charliechavess/" target="_blank"><p id="botonFichatA" style="display: none;"> Charlie Chaves</P></a>
+<a href="https://www.instagram.com/charliechavess/" target="_blank"><p id="botonFichatA" style="display: none;">Charlie Chaves</p></a>
 
-<a href="https://www.instagram.com/nityamnow/" target="_blank"><p id="botonFichatB"style="display: none;"> Nityam</P></a>
-<a href="https://www.instagram.com/nityamnow/" target="_blank"><p id="botonFichatB1"style="display: none;"> Nityam</P></a>
+<a href="https://www.instagram.com/nityamnow/" target="_blank"><p id="botonFichatB" style="display: none;">Nityam</p></a>
+<a href="https://www.instagram.com/nityamnow/" target="_blank"><p id="botonFichatB1" style="display: none;">Nityam</p></a>
 
+<a href="https://www.instagram.com/val.nevs/" target="_blank"><p id="botonFichatC" style="display: none;">Valdir Neves</p></a>
 
-<a href="https://www.instagram.com/val.nevs/" target="_blank"><P id="botonFichatC" style="display: none;"> Valdir Neves</P></a>
+<a href="https://www.instagram.com/goncalopereiraaa/" target="_blank"><p id="botonFichatD" style="display: none;">Gonçalo Pereira</p></a>
 
-<a href="https://www.instagram.com/goncalopereiraaa/" target="_blank"><p id="botonFichatD"style="display: none;"> Gonçalo Pereira</P></a>
-
-<a href="https://www.instagram.com/pontes_filmworks/" target="_blank"><p id="botonFichatE" style="display: none;"> Patricia Pontes</P></a>
-
+<a href="https://www.instagram.com/pontes_filmworks/" target="_blank"><p id="botonFichatE" style="display: none;">Patricia Pontes</p></a>
 
 <!-- ARTISTICA -->
 
 <img id="EAC-fichaA" src="./Imagens/03 EAC - Ficha Artistica.png" style="display: none;">
 
-<a href="https://www.instagram.com/charliechavess/" target="_blank"><p id="botonFicharA" style="display: none;"> Charlie Chaves</p></a>
+<a href="https://www.instagram.com/charliechavess/" target="_blank"><p id="botonFicharA" style="display: none;">Charlie Chaves</p></a>
 
-<a href="https://www.instagram.com/nobru_defranfran/" target="_blank"><p id="botonFicharB" style="display: none;"> Bruno de Franclieu</p></a>
-
-
+<a href="https://www.instagram.com/nobru_defranfran/" target="_blank"><p id="botonFicharB" style="display: none;">Bruno de Franclieu</p></a>
 
 <img id="EAC-sinopse" src="./Imagens/04 EAC - Sinopse.png" style="display: none;">
 
-
 <img id="EAC-foto" src="./Imagens/05 EAC - Fotografias.png" style="display: none;">
-<button id="InfoRodagem">71 Imagens Fotografias: Valdir Neves</button>
-
+<button id="InfoRodagem" style="display: none;">71 Imagens Fotografias: Valdir Neves</button>
 
 <a href="./EACrodagem.html" target="_blank"> 
-<button id="GaleriaRodagem">Visualizar</button></a>
+<button id="GaleriaRodagem" style="display: none;">Visualizar</button></a>
 
-
-<button id="InfoFrames">4 Frames Dirección: Charlie Chaves</button>
+<button id="InfoFrames" style="display: none;">4 Frames Direccíon: Charlie Chaves</button>
 <a href="./EACframes.html" target="_blank">
-<button id="GaleriaFrames">Visualizar</button>
+<button id="GaleriaFrames" style="display: none;">Visualizar</button>
 </a>
-
 
 <img id="EAC-extras" src="./Imagens/06 EAC - Extras.png" style="display: none;">
 <a href="/A Side/A03 El Cuarto de Charlie/El Cuarto de Charlie.html" target="_blank">
-<button id="GaleriaExtras">+ Vê o filme aqui!</button>
+<button id="GaleriaExtras" style="display: none;">+ Vê o filme aqui!</button>
 </a>
-
-
 
 <button id="Notascharlie">Notas Charlie</button>
 <button id="FichaTecnica">Ficha Técnica</button>
@@ -505,6 +549,29 @@ align-items: center;}
 </div>
 
 <script>
+// Calculate and apply scale factor for mobile
+function applyScale() {
+    const container = document.querySelector('.content-container');
+    const viewportWidth = window.innerWidth;
+    const contentWidth = 1600;
+    
+    if (viewportWidth < contentWidth) {
+        const scaleFactor = viewportWidth / contentWidth;
+        container.style.setProperty('--scale-factor', scaleFactor);
+        
+        // Adjust container height to prevent cutoff
+        const scaledHeight = 100 / scaleFactor;
+        container.style.height = scaledHeight + 'vh';
+    } else {
+        container.style.setProperty('--scale-factor', 1);
+        container.style.height = '100vh';
+    }
+}
+
+// Apply scale on load and resize
+window.addEventListener('load', applyScale);
+window.addEventListener('resize', applyScale);
+
 document.addEventListener('DOMContentLoaded', function() {
     const tapa = document.getElementById('EAC-tapa');
     const notas = document.getElementById('EAC-notas');
@@ -515,65 +582,61 @@ document.addEventListener('DOMContentLoaded', function() {
     const extras = document.getElementById('EAC-extras');
     const cerrar = document.getElementById('Cerrar');
 
-    // Función para ocultar todas las imágenes excepto la tapa
+    // Function to hide all images except the cover
     function ocultarTodas() {
         notas.style.display = 'none';
         fichaTecnica.style.display = 'none';
-        botonFichatA.style.display = 'none';
-        botonFichatB.style.display = 'none';
-        botonFichatB1.style.display = 'none';
-        botonFichatC.style.display = 'none';
-        botonFichatD.style.display = 'none';
-        botonFichatE.style.display = 'none';
+        document.getElementById('botonFichatA').style.display = 'none';
+        document.getElementById('botonFichatB').style.display = 'none';
+        document.getElementById('botonFichatB1').style.display = 'none';
+        document.getElementById('botonFichatC').style.display = 'none';
+        document.getElementById('botonFichatD').style.display = 'none';
+        document.getElementById('botonFichatE').style.display = 'none';
         fichaArtistica.style.display = 'none';
         sinopse.style.display = 'none';
         fotografias.style.display = 'none';
         extras.style.display = 'none';
-        
+        document.getElementById('botonFicharA').style.display = 'none';
+        document.getElementById('botonFicharB').style.display = 'none';
+        document.getElementById('InfoRodagem').style.display = 'none';
+        document.getElementById('GaleriaRodagem').style.display = 'none';
+        document.getElementById('InfoFrames').style.display = 'none';
+        document.getElementById('GaleriaFrames').style.display = 'none';
+        document.getElementById('GaleriaExtras').style.display = 'none';
     }
 
-
-    // Función para mostrar cada imagen individualmente
+    // Function to show each image individually
     function mostrarImagen(imagen) {
-        ocultarTodas(); // Ocultar todas las imágenes
-        imagen.style.display = 'block'; // Mostrar la imagen especificada
+        ocultarTodas(); // Hide all images
+        imagen.style.display = 'block'; // Show the specified image
 
-    if (imagen === fichaTecnica) 
-        {botonFichatA.style.display = 'block';
-         botonFichatB.style.display = 'block';
-         botonFichatB1.style.display = 'block';
-         botonFichatC.style.display = 'block';
-         botonFichatD.style.display = 'block';
-         botonFichatE.style.display = 'block';
+        if (imagen === fichaTecnica) {
+            document.getElementById('botonFichatA').style.display = 'block';
+            document.getElementById('botonFichatB').style.display = 'block';
+            document.getElementById('botonFichatB1').style.display = 'block';
+            document.getElementById('botonFichatC').style.display = 'block';
+            document.getElementById('botonFichatD').style.display = 'block';
+            document.getElementById('botonFichatE').style.display = 'block';
+        }
+        
+        if (imagen === fichaArtistica) {
+            document.getElementById('botonFicharA').style.display = 'block';
+            document.getElementById('botonFicharB').style.display = 'block';
+        }
+
+        if (imagen === fotografias) {
+            document.getElementById('InfoRodagem').style.display = 'block';
+            document.getElementById('GaleriaRodagem').style.display = 'block';
+            document.getElementById('InfoFrames').style.display = 'block';
+            document.getElementById('GaleriaFrames').style.display = 'block';
+        }
+
+        if (imagen === extras) {
+            document.getElementById('GaleriaExtras').style.display = 'block';
+        }
     }
-    
-    if (imagen === fichaArtistica) 
-        {botonFicharA.style.display = 'block';
-         botonFicharB.style.display = 'block';}
 
-    else{document.getElementById('botonFicharA').style.display = 'none';
-         document.getElementById('botonFicharB').style.display = 'none';}
-
-    if (imagen === fotografias)
-        {InfoRodagem.style.display = 'block';
-         GaleriaRodagem.style.display = 'block';
-         InfoFrames.style.display = 'block';
-         GaleriaFrames.style.display = 'block';}
- 
-      else {
-         // Ocultar los elementos de fotografías si se muestra otra imagen
-         document.getElementById('InfoRodagem').style.display = 'none';
-         document.getElementById('GaleriaRodagem').style.display = 'none';
-         document.getElementById('InfoFrames').style.display = 'none';
-         document.getElementById('GaleriaFrames').style.display = 'none';} 
-    
-         if (imagen === extras)
-         {GaleriaExtras.style.display = 'block';}
- 
-      else{ document.getElementById('GaleriaExtras').style.display = 'none';}}
-
-
-    // Agregar eventos de clic a cada botón
+    // Add click events to each button
     document.getElementById('Notascharlie').addEventListener('click', function() {
         mostrarImagen(notas);
     });
@@ -598,16 +661,16 @@ document.addEventListener('DOMContentLoaded', function() {
         mostrarImagen(extras);
     });
 
-    // Agregar evento de clic a la tapa
+    // Add click event to the cover
     tapa.addEventListener('click', function() {
-        tapa.style.display = 'none'; // Ocultar la tapa
-        mostrarImagen(notas); // Mostrar la primera página del libro al hacer clic en la tapa
+        tapa.style.display = 'none'; // Hide the cover
+        mostrarImagen(notas); // Show the first page of the book when clicking the cover
     });
 
-    // Agregar evento de clic al botón Cerrar
+    // Add click event to the Close button
     cerrar.addEventListener('click', function() {
-        ocultarTodas(); // Ocultar todas las imágenes
-        tapa.style.display = 'block'; // Mostrar solo la tapa al cerrar el libro
+        ocultarTodas(); // Hide all images
+        tapa.style.display = 'block'; // Show only the cover when closing the book
     });
 });
 

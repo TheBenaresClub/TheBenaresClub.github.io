@@ -40,16 +40,17 @@
     .ch-hero {
       padding: 3.5rem 2.5rem 2rem;
       display: flex; align-items: flex-end; justify-content: space-between;
+      border-bottom: 2px solid var(--g);
     }
     .ch-name {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(3rem, 8vw, 6.5rem);
-      line-height: 0.9; color: var(--ink); letter-spacing: 0.01em;
+      line-height: 0.9; color: var(--g); letter-spacing: 0.01em;
     }
     .ch-roles { font-size: 0.72rem; color: var(--ink2); margin-top: 0.55rem; }
     .ch-hero-right { text-align: right; }
     .ch-hero-year { font-size: 0.55rem; color: var(--ink3); letter-spacing: 0.1em; display: block; margin-bottom: 0.15rem; }
-    .ch-hero-count { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--ink3); line-height: 1; }
+    .ch-hero-count { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: transparent; -webkit-text-stroke: 1.5px var(--g); line-height: 1; }
 
     /* ── SECTION ── */
     .ch-bar {
@@ -58,7 +59,7 @@
       border-top: 1px solid #eee;
       border-bottom: 1px solid #eee;
     }
-    .ch-bar-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink2); }
+    .ch-bar-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g); }
     .ch-bar-count { font-size: 0.58rem; color: var(--ink3); }
 
     /* ── FILM GRID ── */

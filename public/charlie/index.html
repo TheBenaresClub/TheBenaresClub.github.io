@@ -196,6 +196,42 @@
       .fm-body { padding: 1.25rem; }
       .lb-prev { left: 0.5rem; } .lb-next { right: 0.5rem; }
     }
+
+    /* ── SUBNAV ── */
+    .ch-subnav {
+      display: flex; align-items: center; gap: 0;
+      padding: 0 2.5rem;
+      border-bottom: 1px solid #eee;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .ch-subnav::-webkit-scrollbar { display: none; }
+    .ch-subnav-item {
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink3); cursor: pointer; padding: 0.75rem 1.1rem 0.65rem;
+      border-bottom: 2px solid transparent; margin-bottom: -1px;
+      white-space: nowrap; transition: color 0.15s, border-color 0.15s;
+      background: none; border-top: none; border-left: none; border-right: none;
+    }
+    .ch-subnav-item:hover { color: var(--ink2); }
+    .ch-subnav-item.active { color: var(--g); border-bottom-color: var(--g); font-weight: 600; }
+
+    /* ── TAB PANELS ── */
+    .ch-tab-panel { display: none; }
+    .ch-tab-panel.active { display: block; }
+
+    /* empty state */
+    .ch-empty {
+      padding: 4rem 2.5rem;
+      text-align: center;
+    }
+    .ch-empty-label {
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--ink3);
+    }
+    .ch-empty-note {
+      font-size: 0.7rem; color: var(--ink3); margin-top: 0.4rem;
+    }
   </style>
 </head>
 <body>
@@ -216,23 +252,48 @@
       </div>
     </section>
 
-    <!-- SECTION BAR -->
-    <div class="ch-bar">
-      <span class="ch-bar-label">Filmografia</span>
-      <span class="ch-bar-count">01 — 05</span>
+    <!-- SUBNAV -->
+    <nav class="ch-subnav" id="ch-subnav">
+      <button class="ch-subnav-item active" data-tab="cinema">Cinema</button>
+      <button class="ch-subnav-item" data-tab="cineclub">Cine Club</button>
+      <button class="ch-subnav-item" data-tab="festival">Film Festival</button>
+      <button class="ch-subnav-item" data-tab="photography">Photography</button>
+      <button class="ch-subnav-item" data-tab="videography">Videography</button>
+      <button class="ch-subnav-item" data-tab="daily">Daily Life</button>
+    </nav>
+
+    <!-- TAB: CINEMA -->
+    <div class="ch-tab-panel active" id="tab-cinema">
+      <div class="ch-bar">
+        <span class="ch-bar-label">Filmografia</span>
+        <span class="ch-bar-count">01 — 05</span>
+      </div>
+      <div class="filmography" id="filmography"></div>
     </div>
 
-    <!-- FILM GRID -->
-    <div class="filmography" id="filmography"></div>
-
-    <!-- SECTION BAR FOTOGRAFIA -->
-    <div class="ch-bar">
-      <span class="ch-bar-label">Fotografia</span>
-      <span class="ch-bar-count">178 frames</span>
+    <!-- TAB: CINE CLUB -->
+    <div class="ch-tab-panel" id="tab-cineclub">
+      <div class="ch-empty">
+        <p class="ch-empty-label">Cine Club</p>
+        <p class="ch-empty-note">Em breve</p>
+      </div>
     </div>
 
-    <!-- PHOTO SECTION -->
-    <div class="ch-photo-section">
+    <!-- TAB: FILM FESTIVAL -->
+    <div class="ch-tab-panel" id="tab-festival">
+      <div class="ch-empty">
+        <p class="ch-empty-label">Film Festival</p>
+        <p class="ch-empty-note">Em breve</p>
+      </div>
+    </div>
+
+    <!-- TAB: PHOTOGRAPHY -->
+    <div class="ch-tab-panel" id="tab-photography">
+      <div class="ch-bar">
+        <span class="ch-bar-label">Fotografia</span>
+        <span class="ch-bar-count">178 frames</span>
+      </div>
+      <div class="ch-photo-section">
 
       <section class="cs-roll">
         <div class="cs-roll-header">
@@ -322,6 +383,23 @@
         <div class="cs-grid" id="roll-nl3"></div>
       </section>
 
+      </div>
+    </div><!-- /tab-photography -->
+
+    <!-- TAB: VIDEOGRAPHY -->
+    <div class="ch-tab-panel" id="tab-videography">
+      <div class="ch-empty">
+        <p class="ch-empty-label">Videography</p>
+        <p class="ch-empty-note">Em breve</p>
+      </div>
+    </div>
+
+    <!-- TAB: DAILY LIFE -->
+    <div class="ch-tab-panel" id="tab-daily">
+      <div class="ch-empty">
+        <p class="ch-empty-label">Daily Life</p>
+        <p class="ch-empty-note">Em breve</p>
+      </div>
     </div>
 
   </main>
@@ -356,6 +434,25 @@
   <div id="footer-container"></div>
   <script src="/shared.js"></script>
   <script>
+
+    /* ── SUBNAV TAB SWITCHING ── */
+    (function () {
+      var nav = document.getElementById('ch-subnav');
+      if (!nav) return;
+      nav.addEventListener('click', function (e) {
+        var btn = e.target.closest('.ch-subnav-item');
+        if (!btn) return;
+        var tab = btn.dataset.tab;
+        // update buttons
+        nav.querySelectorAll('.ch-subnav-item').forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        // update panels
+        document.querySelectorAll('.ch-tab-panel').forEach(function (p) { p.classList.remove('active'); });
+        var panel = document.getElementById('tab-' + tab);
+        if (panel) panel.classList.add('active');
+      });
+    })();
+
     /* ── LOGO SWAP ── */
     document.addEventListener('DOMContentLoaded', function () {
       var logoImg = document.querySelector('header a img');

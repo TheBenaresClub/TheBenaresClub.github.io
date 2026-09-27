@@ -209,11 +209,10 @@
     .ch-subnav::-webkit-scrollbar { display: none; }
     .ch-subnav-item {
       font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em;
-      color: var(--ink2); cursor: pointer;
+      color: var(--ink2); text-decoration: none; display: inline-flex; align-items: center;
       padding: 1rem 1.25rem 0.9rem;
       border-bottom: 3px solid transparent; margin-bottom: -2px;
       white-space: nowrap; transition: color 0.15s, border-color 0.15s;
-      background: none; border-top: none; border-left: none; border-right: none;
       line-height: 1;
     }
     .ch-subnav-item:hover { color: var(--ink); }
@@ -222,9 +221,6 @@
       font-weight: 600;
     }
 
-    /* ── TAB PANELS ── */
-    .ch-tab-panel { display: none; }
-    .ch-tab-panel.active { display: block; }
 
     /* empty state */
     .ch-empty {
@@ -261,18 +257,18 @@
     </section>
 
     <!-- SUBNAV -->
-    <nav class="ch-subnav" id="ch-subnav">
-      <button class="ch-subnav-item active" data-tab="cinema">Cinema</button>
-      <button class="ch-subnav-item" data-tab="cineclub">Cine Club</button>
-      <button class="ch-subnav-item" data-tab="festival">Film Festival</button>
-      <button class="ch-subnav-item" data-tab="photography">Photography</button>
-      <button class="ch-subnav-item" data-tab="videography">Videography</button>
-      <button class="ch-subnav-item" data-tab="daily">Daily Life</button>
+    <nav class="ch-subnav">
+      <a class="ch-subnav-item active" href="/charlie/">Cinema</a>
+      <a class="ch-subnav-item" href="/charlie/cineclub/">Cine Club</a>
+      <a class="ch-subnav-item" href="/charlie/festival/">Film Festival</a>
+      <a class="ch-subnav-item" href="/charlie/photography/">Photography</a>
+      <a class="ch-subnav-item" href="/charlie/videography/">Videography</a>
+      <a class="ch-subnav-item" href="/charlie/daily/">Daily Life</a>
     </nav>
 
 
-    <!-- TAB: CINEMA -->
-    <div class="ch-tab-panel active" id="tab-cinema">
+
+    <!-- CINEMA -->
       <div class="ch-bar">
         <span class="ch-bar-label">Filmografia</span>
         <span class="ch-bar-count">01 — 05</span>
@@ -280,26 +276,17 @@
       <div class="filmography" id="filmography"></div>
     </div>
 
-    <!-- TAB: CINE CLUB -->
-    <div class="ch-tab-panel" id="tab-cineclub">
-      <div class="ch-empty">
-        <div class="ch-empty-icon">◎</div>
         <p class="ch-empty-label">Cine Club</p>
         <p class="ch-empty-note">Em breve</p>
       </div>
     </div>
 
-    <!-- TAB: FILM FESTIVAL -->
-    <div class="ch-tab-panel" id="tab-festival">
-      <div class="ch-empty">
-        <div class="ch-empty-icon">◈</div>
         <p class="ch-empty-label">Film Festival</p>
         <p class="ch-empty-note">Em breve</p>
       </div>
     </div>
 
-    <!-- TAB: PHOTOGRAPHY -->
-    <div class="ch-tab-panel" id="tab-photography">
+
       <div class="ch-bar">
         <span class="ch-bar-label">Fotografia</span>
         <span class="ch-bar-count">178 frames</span>
@@ -395,21 +382,13 @@
       </section>
 
       </div>
-    </div><!-- /tab-photography -->
 
-    <!-- TAB: VIDEOGRAPHY -->
-    <div class="ch-tab-panel" id="tab-videography">
-      <div class="ch-empty">
-        <div class="ch-empty-icon">▷</div>
+
         <p class="ch-empty-label">Videography</p>
         <p class="ch-empty-note">Em breve</p>
       </div>
     </div>
 
-    <!-- TAB: DAILY LIFE -->
-    <div class="ch-tab-panel" id="tab-daily">
-      <div class="ch-empty">
-        <div class="ch-empty-icon">◌</div>
         <p class="ch-empty-label">Daily Life</p>
         <p class="ch-empty-note">Em breve</p>
       </div>
@@ -448,23 +427,6 @@
   <script src="/shared.js"></script>
   <script>
 
-    /* ── SUBNAV TAB SWITCHING ── */
-    (function () {
-      var nav = document.getElementById('ch-subnav');
-      if (!nav) return;
-      nav.addEventListener('click', function (e) {
-        var btn = e.target.closest('.ch-subnav-item');
-        if (!btn) return;
-        var tab = btn.dataset.tab;
-        // update buttons
-        nav.querySelectorAll('.ch-subnav-item').forEach(function (b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        // update panels
-        document.querySelectorAll('.ch-tab-panel').forEach(function (p) { p.classList.remove('active'); });
-        var panel = document.getElementById('tab-' + tab);
-        if (panel) panel.classList.add('active');
-      });
-    })();
 
     /* ── LOGO SWAP ── */
     document.addEventListener('DOMContentLoaded', function () {

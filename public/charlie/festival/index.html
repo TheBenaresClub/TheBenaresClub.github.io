@@ -106,6 +106,21 @@
         logo.alt = 'Charlie Chaves · Club Benares';
         logo.style.height = '72px';
       }
+
+      var nav = document.querySelector('#main-nav ul');
+      if (nav) {
+        nav.innerHTML = [
+          ['/charlie/',             'Filmografia'],
+          ['/charlie/videography/', 'Videografia'],
+          ['/charlie/photography/', 'Fotografia'],
+          ['/charlie/cineclub/',    'Cine Club'],
+          ['/charlie/festival/',    'Film Festival'],
+          ['/contactos/',           'Contact'],
+        ].map(function(item) {
+          var active = window.location.pathname === item[0] ? 'active' : '';
+          return '<li><a href="' + item[0] + '" class="' + active + '">' + item[1] + '</a></li>';
+        }).join('');
+      }
     });
   </script>
 </body>

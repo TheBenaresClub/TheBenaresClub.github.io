@@ -424,6 +424,21 @@
     document.addEventListener('DOMContentLoaded', function() {
       var img = document.querySelector('#header-container img');
       if (img) img.src = '/Imagenes/01 Banners/Club Benares - Charlie logo.png';
+
+      var nav = document.querySelector('#main-nav ul');
+      if (nav) {
+        nav.innerHTML = [
+          ['/charlie/',             'Filmografia'],
+          ['/charlie/videography/', 'Videografia'],
+          ['/charlie/photography/', 'Fotografia'],
+          ['/charlie/cineclub/',    'Cine Club'],
+          ['/charlie/festival/',    'Film Festival'],
+          ['/contactos/',           'Contact'],
+        ].map(function(item) {
+          var active = window.location.pathname === item[0] ? ' active' : '';
+          return '<li><a href="' + item[0] + '" class="' + active.trim() + '">' + item[1] + '</a></li>';
+        }).join('');
+      }
     });
 
 

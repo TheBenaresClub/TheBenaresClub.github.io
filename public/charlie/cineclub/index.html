@@ -87,5 +87,15 @@
 
   <div id="footer-container"></div>
   <script src="/shared.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var logo = document.querySelector('#header-container img');
+      if (logo) {
+        logo.src = '/Imagenes/01 Banners/Charlie - Club Benares logo.png';
+        logo.alt = 'Charlie Chaves · Club Benares';
+        logo.style.height = '30px';
+      }
+    });
+  </script>
 </body>
 </html>

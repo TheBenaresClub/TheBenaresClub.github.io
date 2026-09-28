@@ -9,74 +9,54 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="/styles.css" />
   <style>
-    :root { --g: #5DA000; --ink: #f0f0f0; --ink2: #999; --ink3: #555; }
+    :root { --g: #5DA000; --neon: #39FF14; --ink: #f0f0f0; --ink2: #999; --ink3: #555; --border: rgba(255,255,255,0.08); }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { background: #000; color: var(--ink); font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; min-height: 100vh; }
     footer { background: #000 !important; border-top: 1px solid #1a1a1a !important; }
     footer a { color: #444 !important; }
+    #main-nav a { color: var(--g) !important; transition: color 0.15s, text-shadow 0.15s; }
+    #main-nav a:hover, #main-nav a.active { color: var(--neon) !important; text-shadow: 0 0 8px var(--neon), 0 0 20px var(--neon); background: transparent !important; box-shadow: none !important; }
 
-    .ch-hero {
-      padding: 3.5rem 2.5rem 2rem;
-      display: flex; align-items: flex-end; justify-content: space-between;
-      border-bottom: 2px solid var(--g);
-    }
-    .ch-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 8vw, 6.5rem); line-height: 0.9; color: var(--g); letter-spacing: 0.01em; }
+    .ch-hero { padding: 3.5rem 2.5rem 2rem; display: flex; align-items: flex-end; justify-content: space-between; border-bottom: 2px solid var(--g); }
+    .ch-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem,8vw,6.5rem); line-height: 0.9; color: var(--g); letter-spacing: 0.01em; }
     .ch-roles { font-size: 0.72rem; color: var(--ink2); margin-top: 0.55rem; }
     .ch-hero-right { text-align: right; }
     .ch-hero-year { font-size: 0.55rem; color: var(--ink3); letter-spacing: 0.1em; display: block; margin-bottom: 0.15rem; }
 
-    .ch-bar-nav {
-      display: flex; align-items: center;
-      padding: 0 2.5rem; background: #161616;
-      border-bottom: 1px solid #333;
-      overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
-    }
+    .ch-bar-nav { display: flex; align-items: center; padding: 0 2.5rem; background: #161616; border-bottom: 1px solid #333; overflow-x: auto; scrollbar-width: none; }
     .ch-bar-nav::-webkit-scrollbar { display: none; }
-    .ch-bar-nav-item {
-      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
-      text-transform: uppercase; text-decoration: none;
-      color: #aaa; padding: 1rem 1.2rem;
-      border-bottom: 3px solid transparent; margin-bottom: -1px;
-      white-space: nowrap; transition: color 0.15s, border-color 0.15s;
-      display: inline-flex; align-items: center;
-    }
+    .ch-bar-nav-item { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: #aaa; padding: 1rem 1.2rem; border-bottom: 3px solid transparent; margin-bottom: -1px; white-space: nowrap; transition: color 0.15s, border-color 0.15s; display: inline-flex; align-items: center; }
     .ch-bar-nav-item:hover { color: #eee; }
     .ch-bar-nav-item.active { color: var(--g); border-bottom-color: var(--g); font-weight: 600; }
 
-    .ch-empty { padding: 6rem 2.5rem; text-align: center; }
-    .ch-empty-icon { font-size: 1.5rem; margin-bottom: 1rem; opacity: 0.15; }
-    .ch-empty-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink3); }
-    .ch-empty-note { font-size: 0.72rem; color: var(--ink3); margin-top: 0.5rem; }
+    .sec-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--g); }
+    .placeholder { opacity: 0.18; pointer-events: none; }
 
+    .daily-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; padding: 2px; }
+    .daily-cell { aspect-ratio: 1; background: #0a0a0a; position: relative; overflow: hidden; cursor: pointer; }
+    .daily-cell.span2 { grid-column: span 2; grid-row: span 2; }
+    .daily-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+    .daily-placeholder svg { opacity: 0.06; }
+    .daily-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 2.5rem; border-bottom: 1px solid #1a1a1a; }
+    @media(max-width:600px) { .daily-grid { grid-template-columns: repeat(3,1fr); } }
     @media (max-width: 580px) {
       .ch-hero { padding: 2rem 1.5rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
       .ch-hero-right { display: none; }
-    }
-
-    /* ── HEADER NAV — verde radioactivo ── */
-    #main-nav a { color: #5DA000 !important; transition: color 0.15s, text-shadow 0.15s; }
-    #main-nav a:hover,
-    #main-nav a.active {
-      color: #39FF14 !important;
-      text-shadow: 0 0 8px #39FF14, 0 0 20px #39FF14;
-      background: transparent !important;
-      box-shadow: none !important;
-      backdrop-filter: none !important;
     }
   </style>
 </head>
 <body>
   <div id="grain"></div>
   <div id="header-container"></div>
-
   <main>
-    <section class="ch-hero">
+  <section class="ch-hero">
       <div>
         <h1 class="ch-name">Charlie<br>Chaves</h1>
         <p class="ch-roles">Director · Realizador · Lisboa</p>
       </div>
       <div class="ch-hero-right">
         <span class="ch-hero-year">2019 — 2026</span>
+        
       </div>
     </section>
 
@@ -89,13 +69,26 @@
         <a class="ch-bar-nav-item active" href="/charlie/daily/">Daily Life</a>
     </nav>
 
-    <div class="ch-empty">
-      <div class="ch-empty-icon">◌</div>
-      <p class="ch-empty-label">Daily Life</p>
-      <p class="ch-empty-note">Em breve</p>
+    <div class="daily-bar">
+      <span class="sec-label">Daily Life</span>
+    </div>
+
+    <div class="daily-grid">
+      <div class="daily-cell span2"><div class="daily-placeholder placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5" fill="white"/><path d="M21 15l-5-5L5 21"/></svg></div></div>
+      <div class="daily-cell"><div class="daily-placeholder placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5" fill="white"/><path d="M21 15l-5-5L5 21"/></svg></div></div>
+      <div class="daily-cell"><div class="daily-placeholder placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5" fill="white"/><path d="M21 15l-5-5L5 21"/></svg></div></div>
+      <div class="daily-cell"><div class="daily-placeholder placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5" fill="white"/><path d="M21 15l-5-5L5 21"/></svg></div></div>
+      <div class="daily-cell"><div class="daily-placeholder placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5" fill="white"/><path d="M21 15l-5-5L5 21"/></svg></div></div>
+      <div class="daily-cell"><div class="daily-placeholder placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5" fill="white"/><path d="M21 15l-5-5L5 21"/></svg></div></div>
+      <div class="daily-cell"><div class="daily-placeholder placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5" fill="white"/><path d="M21 15l-5-5L5 21"/></svg></div></div>
+      <div class="daily-cell"><div class="daily-placeholder placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5" fill="white"/><path d="M21 15l-5-5L5 21"/></svg></div></div>
+      <div class="daily-cell"><div class="daily-placeholder placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5" fill="white"/><path d="M21 15l-5-5L5 21"/></svg></div></div>
+      <div class="daily-cell"><div class="daily-placeholder placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5" fill="white"/><path d="M21 15l-5-5L5 21"/></svg></div></div>
+      <div class="daily-cell"><div class="daily-placeholder placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5" fill="white"/><path d="M21 15l-5-5L5 21"/></svg></div></div>
+      <div class="daily-cell"><div class="daily-placeholder placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5" fill="white"/><path d="M21 15l-5-5L5 21"/></svg></div></div>
+      <div class="daily-cell"><div class="daily-placeholder placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5" fill="white"/><path d="M21 15l-5-5L5 21"/></svg></div></div>
     </div>
   </main>
-
   <div id="footer-container"></div>
   <script src="/shared.js"></script>
   <script>
@@ -106,7 +99,6 @@
         logo.alt = 'Charlie Chaves · Club Benares';
         logo.style.height = '72px';
       }
-
       var nav = document.querySelector('#main-nav ul');
       if (nav) {
         nav.innerHTML = [

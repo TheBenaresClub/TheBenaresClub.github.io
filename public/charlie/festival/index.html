@@ -31,20 +31,20 @@
 
     .ch-bar-nav {
       display: flex; align-items: center;
-      padding: 0 2.5rem; background: #0d0d0d;
-      border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a;
+      padding: 0 2.5rem; background: #161616;
+      border-bottom: 1px solid #333;
       overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
     }
     .ch-bar-nav::-webkit-scrollbar { display: none; }
     .ch-bar-nav-item {
-      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em;
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
       text-transform: uppercase; text-decoration: none;
-      color: #888; padding: 0.75rem 1.1rem;
-      border-bottom: 2px solid transparent;
+      color: #aaa; padding: 1rem 1.2rem;
+      border-bottom: 3px solid transparent; margin-bottom: -1px;
       white-space: nowrap; transition: color 0.15s, border-color 0.15s;
       display: inline-flex; align-items: center;
     }
-    .ch-bar-nav-item:hover { color: #ccc; }
+    .ch-bar-nav-item:hover { color: #eee; }
     .ch-bar-nav-item.active { color: var(--g); border-bottom-color: var(--g); font-weight: 600; }
 
     .ch-empty { padding: 6rem 2.5rem; text-align: center; }

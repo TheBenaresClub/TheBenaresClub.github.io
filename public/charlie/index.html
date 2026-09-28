@@ -246,7 +246,12 @@
 </head>
 <body>
   <div id="grain"></div>
-  <div id="header-container"></div>
+  <header style="background:rgba(0,0,0,0.9);display:flex;align-items:center;justify-content:center;padding:0.75rem 1rem;border-bottom:1px solid #1a1a1a;">
+    <a href="/" style="display:flex;align-items:center;">
+      <img src="/Imagenes/01 Banners/Charlie - Club Benares logo.png" alt="Charlie Chaves · Club Benares" style="height:30px;">
+    </a>
+  </header>
+  <div id="header-container" style="display:none"></div>
 
   <main>
 
@@ -411,16 +416,6 @@
   <script src="/shared.js"></script>
   <script>
 
-
-    /* ── LOGO SWAP ── */
-    document.addEventListener('DOMContentLoaded', function () {
-      var logoImg = document.querySelector('header a img');
-      if (logoImg) {
-        logoImg.src = '/Imagenes/01 Banners/Logo & Charlie - light.png';
-        logoImg.alt = 'Charlie Chaves · Club Benares';
-        logoImg.style.height = '30px';
-      }
-    });
 
     /* ════════════════════════════════
        FILM DATA

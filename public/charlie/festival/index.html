@@ -52,6 +52,17 @@
       .ch-hero { padding: 2rem 1.5rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
       .ch-hero-right { display: none; }
     }
+
+    /* ── HEADER NAV — verde radioactivo ── */
+    #main-nav a { color: #5DA000 !important; transition: color 0.15s, text-shadow 0.15s; }
+    #main-nav a:hover,
+    #main-nav a.active {
+      color: #39FF14 !important;
+      text-shadow: 0 0 8px #39FF14, 0 0 20px #39FF14;
+      background: transparent !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+    }
   </style>
 </head>
 <body>

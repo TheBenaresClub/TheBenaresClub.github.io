@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charlie Chaves · Contact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    :root { --g: #5DA000; --neon: #39FF14; --ink: #f0f0f0; --ink2: #999; --ink3: #555; --border: rgba(255,255,255,0.08); }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #000; color: var(--ink); font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; min-height: 100vh; }
+    footer { background: #000 !important; border-top: 1px solid #1a1a1a !important; }
+    footer a { color: #444 !important; }
+    #main-nav a { color: var(--g) !important; transition: color 0.15s, text-shadow 0.15s; }
+    #main-nav a:hover, #main-nav a.active { color: var(--neon) !important; text-shadow: 0 0 8px var(--neon), 0 0 20px var(--neon); background: transparent !important; box-shadow: none !important; }
+
+    .ch-hero { padding: 3.5rem 2.5rem 2rem; display: flex; align-items: flex-end; justify-content: space-between; border-bottom: 2px solid var(--g); }
+    .ch-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem,8vw,6.5rem); line-height: 0.9; color: var(--g); letter-spacing: 0.01em; }
+    .ch-roles { font-size: 0.72rem; color: var(--ink2); margin-top: 0.55rem; }
+    .ch-hero-right { text-align: right; }
+    .ch-hero-year { font-size: 0.55rem; color: var(--ink3); letter-spacing: 0.1em; display: block; }
+
+    .ch-bar-nav { display: flex; align-items: center; padding: 0 2.5rem; background: #161616; border-bottom: 1px solid #333; overflow-x: auto; scrollbar-width: none; }
+    .ch-bar-nav::-webkit-scrollbar { display: none; }
+    .ch-bar-nav-item { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: #aaa; padding: 1rem 1.2rem; border-bottom: 3px solid transparent; margin-bottom: -1px; white-space: nowrap; transition: color 0.15s, border-color 0.15s; display: inline-flex; align-items: center; }
+    .ch-bar-nav-item:hover { color: #eee; }
+    .ch-bar-nav-item.active { color: var(--g); border-bottom-color: var(--g); font-weight: 600; }
+
+    /* ── CONTACT ── */
+    .ct-wrap { max-width: 700px; margin: 0 auto; padding: 4rem 2.5rem 6rem; }
+
+    .ct-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 6vw, 4.5rem); color: #f0f0f0; letter-spacing: 0.03em; line-height: 1; margin-bottom: 0.5rem; }
+    .ct-sub { font-size: 0.75rem; color: #555; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 3rem; }
+
+    .ct-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1px; background: #1a1a1a; margin-bottom: 3rem; }
+
+    .ct-card { background: #000; padding: 2rem 1.8rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.5rem; transition: background 0.15s; border-left: 3px solid transparent; }
+    .ct-card:hover { background: #0a0a0a; border-left-color: var(--g); }
+    .ct-card:hover .ct-value { color: var(--g); }
+
+    .ct-icon { color: #444; margin-bottom: 0.5rem; }
+    .ct-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #555; }
+    .ct-value { font-size: 1rem; color: #e0e0e0; transition: color 0.15s; }
+
+    .ct-divider { border: none; border-top: 1px solid #1a1a1a; margin: 3rem 0; }
+
+    .ct-note { font-size: 0.82rem; line-height: 1.8; color: #555; }
+    .ct-note a { color: var(--g); text-decoration: none; }
+    .ct-note a:hover { color: var(--neon); }
+
+    @media (max-width: 580px) {
+      .ch-hero { padding: 2rem 1.5rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+      .ch-hero-right { display: none; }
+      .ct-wrap { padding: 3rem 1.5rem 5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="grain"></div>
+  <div id="header-container"></div>
+
+  <main>
+    <section class="ch-hero">
+      <div>
+        <h1 class="ch-name">Charlie<br>Chaves</h1>
+        <p class="ch-roles">Director · Realizador · Lisboa</p>
+      </div>
+      <div class="ch-hero-right">
+        <span class="ch-hero-year">2019 — 2026</span>
+      </div>
+    </section>
+
+    <nav class="ch-bar-nav">
+      <a class="ch-bar-nav-item" href="/charlie/">Cinema</a>
+      <a class="ch-bar-nav-item" href="/charlie/cineclub/">Cine Club</a>
+      <a class="ch-bar-nav-item" href="/charlie/festival/">Film Festival</a>
+      <a class="ch-bar-nav-item" href="/charlie/photography/">Photography</a>
+      <a class="ch-bar-nav-item" href="/charlie/videography/">Videography</a>
+      <a class="ch-bar-nav-item" href="/charlie/daily/">Daily Life</a>
+    </nav>
+
+    <div class="ct-wrap">
+      <h2 class="ct-heading">Contacto</h2>
+      <p class="ct-sub">Get in touch</p>
+
+      <div class="ct-cards">
+
+        <a class="ct-card" href="mailto:charlie@thebenaresclub.com">
+          <span class="ct-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+          </span>
+          <span class="ct-label">Email</span>
+          <span class="ct-value">charlie@thebenaresclub.com</span>
+        </a>
+
+        <a class="ct-card" href="https://www.instagram.com/thebenaresclub" target="_blank" rel="noopener noreferrer">
+          <span class="ct-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </span>
+          <span class="ct-label">Instagram</span>
+          <span class="ct-value">@thebenaresclub</span>
+        </a>
+
+      </div>
+
+      <hr class="ct-divider">
+
+      <p class="ct-note">Colaborações, festivais, projetos ou apenas dizer olá —<br>escreve para <a href="mailto:charlie@thebenaresclub.com">charlie@thebenaresclub.com</a></p>
+    </div>
+  </main>
+
+  <div id="footer-container"></div>
+  <script src="/shared.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var logo = document.querySelector('#header-container img');
+      if (logo) {
+        logo.src = '/Imagenes/01 Banners/Club Benares - Charlie logo.png';
+        logo.alt = 'Charlie Chaves · Club Benares';
+        logo.style.height = '72px';
+      }
+      var nav = document.querySelector('#main-nav ul');
+      if (nav) {
+        nav.innerHTML = [
+          ['/charlie/',             'Filmografia'],
+          ['/charlie/videography/', 'Videografia'],
+          ['/charlie/photography/', 'Fotografia'],
+          ['/charlie/cineclub/',    'Cine Club'],
+          ['/charlie/festival/',    'Film Festival'],
+          ['/charlie/contact/',     'Contact'],
+        ].map(function(item) {
+          var active = window.location.pathname === item[0] ? 'active' : '';
+          return '<li><a href="' + item[0] + '" class="' + active + '">' + item[1] + '</a></li>';
+        }).join('');
+      }
+    });
+  </script>
+</body>
+</html>

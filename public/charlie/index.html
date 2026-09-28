@@ -15,26 +15,26 @@
 
     :root {
       --g:   #5DA000;
-      --ink: #111;
-      --ink2:#666;
-      --ink3:#aaa;
-      --bg-base:      #ffffff;
-      --text-primary: #111;
-      --text-secondary:#666;
-      --text-muted:   #aaa;
-      --border:       rgba(0,0,0,0.08);
+      --ink: #f0f0f0;
+      --ink2:#999;
+      --ink3:#555;
+      --bg-base:      #000;
+      --text-primary: #fff;
+      --text-secondary:#888;
+      --text-muted:   #555;
+      --border:       rgba(255,255,255,0.08);
     }
 
     *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { background: #fff; }
-    body { background: #fff; color: var(--ink); font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; min-height: 100vh; }
+    html { background: #000; }
+    body { background: #000; color: var(--ink); font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; min-height: 100vh; }
 
     header { display: none !important; }
     #grain { display: none; }
     #main-nav  { display: none !important; }
     #nav-toggle { display: none !important; }
-    footer { background: #fff !important; border-top: 1px solid #eee !important; }
-    footer a { color: #999 !important; }
+    footer { background: #000 !important; border-top: 1px solid #1a1a1a !important; }
+    footer a { color: #555 !important; }
 
     /* ── HERO ── */
     .ch-hero {
@@ -56,8 +56,8 @@
     .ch-bar {
       display: flex; align-items: center; justify-content: space-between;
       padding: 0.5rem 2.5rem;
-      border-top: 1px solid #eee;
-      border-bottom: 1px solid #eee;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
     }
     .ch-bar-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g); }
     .ch-bar-count { font-size: 0.58rem; color: var(--ink3); }
@@ -72,20 +72,20 @@
 
     /* ── FILM CARD ── */
     .film-card {
-      border-right: 1px solid #eee;
-      border-bottom: 1px solid #eee;
+      border-right: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
       cursor: pointer;
       counter-increment: film-counter;
       transition: background 0.15s;
     }
-    .film-card:nth-child(4n+1) { border-left: 1px solid #eee; }
-    .film-card:hover { background: #fafafa; }
+    .film-card:nth-child(4n+1) { border-left: 1px solid #1a1a1a; }
+    .film-card:hover { background: #111; }
     .film-card-placeholder { opacity: 0.38; cursor: default; }
-    .film-card-placeholder:hover { background: #fff; }
+    .film-card-placeholder:hover { background: #000; }
 
     .film-card-poster {
       aspect-ratio: 3/2; overflow: hidden; position: relative;
-      background: #f5f5f5;
+      background: #111;
     }
     .film-card-poster img {
       width: 100%; height: 100%; object-fit: cover; display: block;
@@ -115,7 +115,7 @@
     .film-card-placeholder .film-card-poster::after { display: none; }
 
     .film-card-info { padding: 0.65rem 0.75rem 0.75rem; }
-    .film-card-title { font-size: 0.78rem; font-weight: 600; color: var(--ink); margin-bottom: 0.12rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .film-card-title { font-size: 0.78rem; font-weight: 600; color: #f0f0f0; margin-bottom: 0.12rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .film-card-meta  { font-size: 0.6rem; color: var(--ink3); margin-bottom: 0.35rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .film-card-info::after { content: '→ ver mais'; display: block; font-size: 0.6rem; font-weight: 500; color: var(--g); }
     .film-card-placeholder .film-card-title { opacity: 0.3; font-weight: 400; }
@@ -124,25 +124,25 @@
 
     /* ── PHOTO SECTION ── */
     .ch-photo-section { padding: 0 2.5rem 3rem; }
-    .cs-roll { margin-bottom: 2rem; padding-top: 1.5rem; border-top: 1px solid #f0f0f0; }
+    .cs-roll { margin-bottom: 2rem; padding-top: 1.5rem; border-top: 1px solid #1a1a1a; }
     .cs-roll:first-child { border-top: none; }
     .cs-roll-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.6rem; }
     .cs-roll-name  { font-size: 0.68rem; font-weight: 600; color: var(--ink2); }
     .cs-roll-frames{ font-size: 0.58rem; color: var(--ink3); }
     .cs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 3px; }
-    .cs-frame { aspect-ratio: 3/2; overflow: hidden; background: #f0f0f0; cursor: pointer; transition: opacity 0.15s; }
+    .cs-frame { aspect-ratio: 3/2; overflow: hidden; background: #111; cursor: pointer; transition: opacity 0.15s; }
     .cs-frame:hover { opacity: 0.85; }
     .cs-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     /* ── MODAL ── */
     .fm-backdrop {
       display: none; position: fixed; inset: 0; z-index: 1000;
-      background: rgba(255,255,255,0.85); backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.92); backdrop-filter: blur(8px);
       align-items: center; justify-content: center; padding: 1.5rem;
     }
     .fm-backdrop.open { display: flex; }
     .fm-modal {
-      background: #fff; border: 1px solid #e0e0e0;
+      background: #0d0d0d; border: 1px solid #222;
       max-width: 640px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative;
     }
     .fm-close {
@@ -150,14 +150,14 @@
       background: none; border: none; cursor: pointer; font-size: 1rem; color: #aaa;
       transition: color 0.15s;
     }
-    .fm-close:hover { color: var(--ink); }
+    .fm-close:hover { color: #fff; }
     .fm-modal-inner { display: grid; grid-template-columns: 180px 1fr; }
-    #fm-poster-wrap { background: #f5f5f5; overflow: hidden; min-height: 180px; display: flex; align-items: stretch; }
+    #fm-poster-wrap { background: #111; overflow: hidden; min-height: 180px; display: flex; align-items: stretch; }
     .fm-poster { width: 100%; object-fit: cover; display: block; }
     .fm-poster-placeholder { display: flex; align-items: center; justify-content: center; font-size: 2rem; width: 100%; min-height: 180px; }
     .fm-body { padding: 1.75rem; }
     .fm-eyebrow { font-size: 0.52rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--g); margin-bottom: 0.3rem; }
-    .fm-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--ink); margin-bottom: 0.2rem; }
+    .fm-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: #f0f0f0; margin-bottom: 0.2rem; }
     .fm-meta  { font-size: 0.62rem; color: var(--ink3); margin-bottom: 0.7rem; }
     .fm-desc  { font-size: 0.74rem; color: var(--ink2); line-height: 1.65; margin-bottom: 0.85rem; }
     .fm-ficha { display: flex; flex-direction: column; gap: 0.22rem; margin-bottom: 1rem; }
@@ -174,10 +174,10 @@
     .fm-soon-note { font-size: 0.62rem; color: var(--ink3); }
 
     /* ── LIGHTBOX ── */
-    .lb { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(255,255,255,0.96); backdrop-filter: blur(16px); align-items: center; justify-content: center; }
+    .lb { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.96); backdrop-filter: blur(16px); align-items: center; justify-content: center; }
     .lb.open { display: flex; }
     .lb-img { max-width: 92vw; max-height: 88vh; display: block; box-shadow: 0 4px 30px rgba(0,0,0,0.12); }
-    .lb-btn { position: absolute; background: none; border: 1px solid #ddd; color: var(--ink2); cursor: pointer; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; transition: border-color 0.15s; }
+    .lb-btn { position: absolute; background: none; border: 1px solid #333; color: var(--ink2); cursor: pointer; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; transition: border-color 0.15s; }
     .lb-btn:hover { border-color: var(--g); color: var(--g); }
     .lb-close { top: 1.25rem; right: 1.25rem; font-size: 1rem; }
     .lb-prev  { left: 1.25rem; top: 50%; transform: translateY(-50%); font-size: 1.2rem; }
@@ -202,7 +202,7 @@
       display: flex; align-items: stretch; gap: 0;
       padding: 0 2rem;
       background: #fff;
-      border-bottom: 2px solid #eee;
+      border-bottom: 2px solid #1a1a1a;
       overflow-x: auto; -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
     }

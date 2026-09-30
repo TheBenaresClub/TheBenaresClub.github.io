@@ -603,6 +603,17 @@
   .pm-causes li { display:flex; gap:.9rem; align-items:flex-start; font-size:.88rem; line-height:1.55; color:var(--text-muted); }
   .pm-cause-icon { font-size:1.15rem; flex-shrink:0; padding-top:.05rem; }
   .pm-causes strong { display:block; color:var(--text-primary); font-weight:600; font-size:.9rem; margin-bottom:.15rem; }
+  /* Feedback form */
+  .fb-form { margin-top:1.25rem; display:flex; flex-direction:column; gap:.85rem; }
+  .fb-field { display:flex; flex-direction:column; gap:.3rem; }
+  .fb-label { font-size:.62rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:var(--text-muted); }
+  .fb-input { background:rgba(255,248,238,.05); border:1px solid var(--border); border-radius:4px; padding:.7rem .9rem; font-family:var(--font-family); font-size:.88rem; color:var(--text-primary); outline:none; transition:border-color .2s; resize:none; }
+  .fb-input::placeholder { color:var(--text-muted); opacity:.5; }
+  .fb-input:focus { border-color:var(--border-strong); }
+  .fb-textarea { min-height:110px; }
+  .fb-btn { align-self:flex-start; background:var(--text-primary); color:#000; border:none; border-radius:4px; padding:.7rem 1.5rem; font-family:var(--font-family); font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; transition:opacity .2s; }
+  .fb-btn:hover { opacity:.8; }
+  .fb-note { font-size:.72rem; color:var(--text-muted); opacity:.5; margin:0; }
   @media (max-width:600px) { .post-modal-content { padding:1.5rem 1.25rem 2rem; } }
 </style>
 
@@ -619,18 +630,12 @@
           es:'Tu proyecto, producido de forma indie'
         },
         body: {
-          pt: `<p>Tens um guião, uma ideia ou uma história que queres ver no ecrã? No Club Benares temos a gente, o equipamento e a energia para tornar o teu projeto real — sem grandes orçamentos, sem intermediários, sem burocracia.</p>
-               <p>Trabalhamos de forma <strong>low-cost e colaborativa</strong>: a equipa do clube contribui com direção, câmara, som, edição e produção. Tu trazes a visão. Juntos fazemos o filme.</p>
-               <p>Não precisas de experiência prévia — só de uma boa história e vontade de a contar. Desde curtas-metragens a documentários, projetos experimentais ou vídeo-arte.</p>`,
-          en: `<p>Got a script, an idea, or a story you want to see on screen? At Club Benares we have the people, the equipment and the energy to make your project real — no big budgets, no middlemen, no bureaucracy.</p>
-               <p>We work in a <strong>low-cost and collaborative</strong> way: the club team contributes direction, camera, sound, editing and production. You bring the vision. Together we make the film.</p>
-               <p>No previous experience needed — just a good story and the will to tell it. From short films to documentaries, experimental work or video art.</p>`,
-          es: `<p>¿Tienes un guión, una idea o una historia que quieres ver en pantalla? En Club Benares tenemos la gente, el equipo y la energía para hacer real tu proyecto — sin grandes presupuestos, sin intermediarios, sin burocracia.</p>
-               <p>Trabajamos de forma <strong>low-cost y colaborativa</strong>: el equipo del club contribuye con dirección, cámara, sonido, edición y producción. Tú traes la visión. Juntos hacemos la película.</p>
-               <p>No necesitas experiencia previa — solo una buena historia y ganas de contarla. Desde cortometrajes a documentales, proyectos experimentales o videoarte.</p>`
+          pt: `<p>🇵🇹 Através deste Open Call, podes enviar-nos uma ideia para uma curta-metragem, documentário, videoclipe ou outro projeto audiovisual. Se encontrarmos potencial na proposta, entraremos em contacto contigo para conversar, desenvolver a ideia em conjunto e explorar a possibilidade de a produzir através do Club Benares.</p>`,
+          en: `<p>Through this Open Call, you can send us an idea for a short film, documentary, music video or other audiovisual project. If we find potential in the proposal, we'll get in touch to talk, develop the idea together and explore the possibility of producing it through Club Benares.</p>`,
+          es: `<p>A través de este Open Call, puedes enviarnos una idea para un cortometraje, documental, videoclip u otro proyecto audiovisual. Si encontramos potencial en la propuesta, nos pondremos en contacto contigo para hablar, desarrollar la idea juntos y explorar la posibilidad de producirla a través del Club Benares.</p>`
         },
         html: true,
-        link:'/contactos/', linkLabel:{ pt:'Submeter guião →', en:'Submit script →', es:'Enviar guión →' }
+        link:'https://forms.gle/vkaw7RfY7TGzcLM59', linkLabel:{ pt:'Submeter proposta →', en:'Submit proposal →', es:'Enviar propuesta →' }
       },
       crowdfunding: {
         image: '/media/fototeca/full/jg-20.jpg',
@@ -642,30 +647,21 @@
           es:'Apoya lo que crees'
         },
         body: {
-          pt: `<p>O Club Benares funciona graças às pessoas que acreditam no cinema independente. Se queres contribuir, podes escolher a causa que mais te faz sentido.</p>
-               <ul class="pm-causes">
-                 <li><span class="pm-cause-icon">🎬</span><div><strong>Primeira Longa-metragem</strong><br>Ajuda-nos a produzir o nosso primeiro filme de longa duração, um projeto ambicioso que já está em desenvolvimento.</div></li>
-                 <li><span class="pm-cause-icon">🎥</span><div><strong>Produção de Curtas</strong><br>Financia a co-produção de curtas-metragens de membros da comunidade que precisam de apoio para avançar.</div></li>
-                 <li><span class="pm-cause-icon">🎪</span><div><strong>Eventos Abertos</strong><br>Night Lounges, MashUps, projeções e workshops abertos a toda a gente — sem entrada, ou com preço acessível.</div></li>
-                 <li><span class="pm-cause-icon">🏠</span><div><strong>Manter o Clube Vivo</strong><br>Custos operacionais do clube: equipamento, espaço, comunicação e tudo o que mantém a máquina a funcionar.</div></li>
-               </ul>`,
-          en: `<p>Club Benares runs thanks to people who believe in independent cinema. If you want to contribute, you can choose the cause that resonates most with you.</p>
-               <ul class="pm-causes">
-                 <li><span class="pm-cause-icon">🎬</span><div><strong>First Feature Film</strong><br>Help us produce our first feature-length film, an ambitious project already in development.</div></li>
-                 <li><span class="pm-cause-icon">🎥</span><div><strong>Short Film Production</strong><br>Fund the co-production of short films by community members who need support to move forward.</div></li>
-                 <li><span class="pm-cause-icon">🎪</span><div><strong>Open Events</strong><br>Night Lounges, MashUps, screenings and workshops open to everyone — free or low cost.</div></li>
-                 <li><span class="pm-cause-icon">🏠</span><div><strong>Keep the Club Running</strong><br>Club operating costs: equipment, space, communications and everything that keeps the machine going.</div></li>
-               </ul>`,
-          es: `<p>El Club Benares funciona gracias a las personas que creen en el cine independiente. Si quieres contribuir, puedes elegir la causa que más te resuene.</p>
-               <ul class="pm-causes">
-                 <li><span class="pm-cause-icon">🎬</span><div><strong>Primer Largometraje</strong><br>Ayúdanos a producir nuestro primer largometraje, un proyecto ambicioso que ya está en desarrollo.</div></li>
-                 <li><span class="pm-cause-icon">🎥</span><div><strong>Producción de Cortos</strong><br>Financia la co-producción de cortometrajes de miembros de la comunidad que necesitan apoyo para avanzar.</div></li>
-                 <li><span class="pm-cause-icon">🎪</span><div><strong>Eventos Abiertos</strong><br>Night Lounges, MashUps, proyecciones y talleres abiertos a todos — gratis o con precio accesible.</div></li>
-                 <li><span class="pm-cause-icon">🏠</span><div><strong>Mantener el Club Vivo</strong><br>Costes operativos del club: equipamiento, espacio, comunicación y todo lo que mantiene la máquina funcionando.</div></li>
-               </ul>`
+          pt: `<p>Quando abrimos as portas ao público, o Club cresceu e tornou-se uma comunidade aberta a todos, com sessões, debates, networking e novas produções, um espaço onde qualquer pessoa pode participar, conhecer outras pessoas, partilhar ideias e criar connosco.</p>
+               <p>Já produzimos 5 filmes e realizámos mais de 11 eventos. Agora queremos continuar a crescer: mais encontros, projetos, produções e oportunidades para as ideias da nossa comunidade ganharem vida.</p>
+               <p>Os fundos angariados serão utilizados para financiar as atividades e eventos da nossa comunidade, lançar o nosso festival de cinema e apoiar a produção de novos filmes e conteúdos desenvolvidos pelos membros do Club Benares.</p>
+               <p>Ajuda-nos a continuar a construir este espaço, onde novas pessoas podem encontrar uma comunidade, desenvolver as suas ideias e contar as suas histórias.</p>`,
+          en: `<p>When we opened our doors to the public, the Club grew and became an open community for everyone — screenings, debates, networking and new productions, a space where anyone can participate, meet people, share ideas and create with us.</p>
+               <p>We've already produced 5 films and held over 11 events. Now we want to keep growing: more meetups, projects, productions and opportunities for our community's ideas to come to life.</p>
+               <p>Funds raised will be used to finance community activities and events, launch our film festival and support the production of new films developed by Club Benares members.</p>
+               <p>Help us keep building this space, where new people can find a community, develop their ideas and tell their stories.</p>`,
+          es: `<p>Cuando abrimos las puertas al público, el Club creció y se convirtió en una comunidad abierta para todos, con sesiones, debates, networking y nuevas producciones, un espacio donde cualquier persona puede participar, conocer a otros, compartir ideas y crear con nosotros.</p>
+               <p>Ya hemos producido 5 películas y realizado más de 11 eventos. Ahora queremos seguir creciendo: más encuentros, proyectos, producciones y oportunidades para que las ideas de nuestra comunidad cobren vida.</p>
+               <p>Los fondos recaudados se utilizarán para financiar las actividades y eventos de nuestra comunidad, lanzar nuestro festival de cine y apoyar la producción de nuevas películas y contenidos desarrollados por los miembros del Club Benares.</p>
+               <p>Ayúdanos a seguir construyendo este espacio, donde nuevas personas puedan encontrar una comunidad, desarrollar sus ideas y contar sus historias.</p>`
         },
         html: true,
-        link:'/contactos/', linkLabel:{ pt:'Apoiar uma causa →', en:'Support a cause →', es:'Apoyar una causa →' }
+        link:'https://gofund.me/4d0cc5a16', linkLabel:{ pt:'Apoiar no GoFundMe →', en:'Support on GoFundMe →', es:'Apoyar en GoFundMe →' }
       },
       feedback: {
         image: '/media/fototeca/full/jg-18.jpg',
@@ -677,18 +673,48 @@
           es:'Tu voz construye el club'
         },
         body: {
-          pt: `<p>O Club Benares cresce a partir das pessoas que o compõem. Se tens ideias sobre eventos, formatos, projetos ou qualquer coisa que devêssemos fazer diferente — queremos ouvir-te.</p>
-               <p>Podes partilhar sugestões, críticas construtivas, propostas de colaboração ou simplesmente dizer o que sentes em relação ao que estamos a construir.</p>
-               <p>Toda a mensagem é lida. Toda a ideia é considerada. Estamos a construir isto juntos.</p>`,
-          en: `<p>Club Benares grows from the people who make it up. If you have ideas about events, formats, projects or anything we should do differently — we want to hear you.</p>
-               <p>You can share suggestions, constructive criticism, collaboration proposals, or simply tell us how you feel about what we're building.</p>
-               <p>Every message is read. Every idea is considered. We're building this together.</p>`,
-          es: `<p>El Club Benares crece a partir de las personas que lo componen. Si tienes ideas sobre eventos, formatos, proyectos o cualquier cosa que deberíamos hacer diferente — queremos escucharte.</p>
-               <p>Puedes compartir sugerencias, críticas constructivas, propuestas de colaboración o simplemente decirnos cómo te sientes con respecto a lo que estamos construyendo.</p>
-               <p>Cada mensaje es leído. Cada idea es considerada. Estamos construyendo esto juntos.</p>`
+          pt: `<p>O Club Benares cresce a partir das pessoas que o compõem. Tens ideias, sugestões ou algo que queiras partilhar? Queremos ouvir-te.</p>
+               <div class="fb-form">
+                 <div class="fb-field">
+                   <label class="fb-label">O teu email</label>
+                   <input class="fb-input" type="email" id="fb-email" placeholder="email@exemplo.com" />
+                 </div>
+                 <div class="fb-field">
+                   <label class="fb-label">Mensagem</label>
+                   <textarea class="fb-input fb-textarea" id="fb-msg" placeholder="Escreve aqui a tua sugestão, ideia ou crítica..."></textarea>
+                 </div>
+                 <button class="fb-btn" onclick="(function(){var e=document.getElementById('fb-email'),m=document.getElementById('fb-msg');if(!e.value||!m.value){return;}window.location.href='mailto:charlie@thebenaresclub.com?subject=Feedback - Club Benares&body='+encodeURIComponent(m.value)+'%0A%0A----%0ADe: '+encodeURIComponent(e.value);})()">Enviar mensagem →</button>
+                 <p class="fb-note">Toda a mensagem é lida. Toda a ideia é considerada.</p>
+               </div>`,
+          en: `<p>Club Benares grows from the people who make it up. Have ideas, suggestions or something to share? We want to hear you.</p>
+               <div class="fb-form">
+                 <div class="fb-field">
+                   <label class="fb-label">Your email</label>
+                   <input class="fb-input" type="email" id="fb-email" placeholder="email@example.com" />
+                 </div>
+                 <div class="fb-field">
+                   <label class="fb-label">Message</label>
+                   <textarea class="fb-input fb-textarea" id="fb-msg" placeholder="Write your suggestion, idea or feedback here..."></textarea>
+                 </div>
+                 <button class="fb-btn" onclick="(function(){var e=document.getElementById('fb-email'),m=document.getElementById('fb-msg');if(!e.value||!m.value){return;}window.location.href='mailto:charlie@thebenaresclub.com?subject=Feedback - Club Benares&body='+encodeURIComponent(m.value)+'%0A%0A----%0AFrom: '+encodeURIComponent(e.value);})()">Send message →</button>
+                 <p class="fb-note">Every message is read. Every idea is considered.</p>
+               </div>`,
+          es: `<p>El Club Benares crece a partir de las personas que lo componen. ¿Tienes ideas, sugerencias o algo que compartir? Queremos escucharte.</p>
+               <div class="fb-form">
+                 <div class="fb-field">
+                   <label class="fb-label">Tu email</label>
+                   <input class="fb-input" type="email" id="fb-email" placeholder="email@ejemplo.com" />
+                 </div>
+                 <div class="fb-field">
+                   <label class="fb-label">Mensaje</label>
+                   <textarea class="fb-input fb-textarea" id="fb-msg" placeholder="Escribe aquí tu sugerencia, idea o crítica..."></textarea>
+                 </div>
+                 <button class="fb-btn" onclick="(function(){var e=document.getElementById('fb-email'),m=document.getElementById('fb-msg');if(!e.value||!m.value){return;}window.location.href='mailto:charlie@thebenaresclub.com?subject=Feedback - Club Benares&body='+encodeURIComponent(m.value)+'%0A%0A----%0ADe: '+encodeURIComponent(e.value);})()">Enviar mensaje →</button>
+                 <p class="fb-note">Cada mensaje es leído. Cada idea es considerada.</p>
+               </div>`
         },
         html: true,
-        link:'/contactos/', linkLabel:{ pt:'Deixar feedback →', en:'Leave feedback →', es:'Dejar feedback →' }
+        link: null, linkLabel:{ pt:'', en:'', es:'' }
       }
     };
 
@@ -882,125 +908,42 @@
     </div>
     <div class="tm-body">
 
-      <h3 class="tm-section-title" data-lang="pt">O que é ser membro?</h3>
-      <h3 class="tm-section-title" data-lang="en">What does membership mean?</h3>
-      <h3 class="tm-section-title" data-lang="es">¿Qué significa ser miembro?</h3>
-      <p data-lang="pt">Ser membro do Club Benares é fazer parte de uma comunidade ativa de cineastas, fotógrafos e criadores independentes em Lisboa. É acesso antecipado a eventos, presença nos projetos e uma cartão de membro físico.</p>
-      <p data-lang="en">Being a Club Benares member means being part of an active community of filmmakers, photographers and independent creators in Lisbon. It means early access to events, presence in projects, and a physical member card.</p>
-      <p data-lang="es">Ser miembro del Club Benares es formar parte de una comunidad activa de cineastas, fotógrafos y creadores independientes en Lisboa. Es acceso anticipado a eventos, presencia en los proyectos y una tarjeta de miembro física.</p>
+      <p>🇵🇹 Torna-te membro do Club Benares!</p>
+      <p>O Club Benares é um clube independente dedicado ao cinema e à criação de uma comunidade em torno da cultura cinematográfica.</p>
+      <p>Desde 2023, reunimos estudantes, profissionais e amantes de cinema em Lisboa para ver, discutir e fazer cinema juntos.</p>
+      <p>Ao tornares-te membro, passas a fazer parte desta comunidade e a criar connosco: filmes, eventos, encontros e novos projetos.</p>
 
-      <h3 class="tm-section-title" data-lang="pt">Benefícios</h3>
-      <h3 class="tm-section-title" data-lang="en">Benefits</h3>
-      <h3 class="tm-section-title" data-lang="es">Beneficios</h3>
+      <h3 class="tm-section-title">Vantagens de Membro</h3>
       <ul class="tm-perks">
         <li>
           <span class="tm-perk-icon">✦</span>
-          <span>
-            <strong data-lang="pt">Cartão de membro físico</strong>
-            <strong data-lang="en">Physical member card</strong>
-            <strong data-lang="es">Tarjeta de miembro física</strong>
-            <span data-lang="pt"> — identificação oficial do clube, numerada e assinada.</span>
-            <span data-lang="en"> — official club ID, numbered and signed.</span>
-            <span data-lang="es"> — identificación oficial del club, numerada y firmada.</span>
-          </span>
+          <span>Descontos em todas as atividades pagas organizadas pelo Club Benares, incluindo descontos no Mercado, a nossa loja online.</span>
         </li>
         <li>
           <span class="tm-perk-icon">✦</span>
-          <span>
-            <strong data-lang="pt">Acesso prioritário a eventos</strong>
-            <strong data-lang="en">Priority event access</strong>
-            <strong data-lang="es">Acceso prioritario a eventos</strong>
-            <span data-lang="pt"> — entrada antecipada e preço reduzido.</span>
-            <span data-lang="en"> — early entry and reduced price.</span>
-            <span data-lang="es"> — entrada anticipada y precio reducido.</span>
-          </span>
+          <span>Acesso à equipa de produção do Club Benares, formada pelos membros mais ativos, com quem desenvolvemos e produzimos curtas-metragens ao longo do ano.</span>
         </li>
         <li>
           <span class="tm-perk-icon">✦</span>
-          <span>
-            <strong data-lang="pt">Participa nos filmes</strong>
-            <strong data-lang="en">Be part of the films</strong>
-            <strong data-lang="es">Participa en las películas</strong>
-            <span data-lang="pt"> — casting, equipa técnica, extras e workshops.</span>
-            <span data-lang="en"> — casting, crew, extras and workshops.</span>
-            <span data-lang="es"> — casting, equipo técnico, extras y talleres.</span>
-          </span>
-        </li>
-        <li>
-          <span class="tm-perk-icon">✦</span>
-          <span>
-            <strong data-lang="pt">Comunidade privada</strong>
-            <strong data-lang="en">Private community</strong>
-            <strong data-lang="es">Comunidad privada</strong>
-            <span data-lang="pt"> — grupo exclusivo para membros com novidades e projetos.</span>
-            <span data-lang="en"> — exclusive member group with news and projects.</span>
-            <span data-lang="es"> — grupo exclusivo para miembros con noticias y proyectos.</span>
-          </span>
-        </li>
-        <li>
-          <span class="tm-perk-icon">✦</span>
-          <span>
-            <strong data-lang="pt">Desconto no Mercado</strong>
-            <strong data-lang="en">Mercado discount</strong>
-            <strong data-lang="es">Descuento en el Mercado</strong>
-            <span data-lang="pt"> — 10% em todos os produtos da loja.</span>
-            <span data-lang="en"> — 10% off all shop products.</span>
-            <span data-lang="es"> — 10% en todos los productos de la tienda.</span>
-          </span>
+          <span>Participação nas reuniões mensais da equipa, onde partilhamos ideias, desenvolvemos novos projetos e planeamos as próximas produções.</span>
         </li>
       </ul>
 
-      <h3 class="tm-section-title" data-lang="pt">Preços</h3>
-      <h3 class="tm-section-title" data-lang="en">Pricing</h3>
-      <h3 class="tm-section-title" data-lang="es">Precios</h3>
-      <div class="tm-plans">
-        <div class="tm-plan">
-          <div class="tm-plan-name" data-lang="pt">Membro</div>
-          <div class="tm-plan-name" data-lang="en">Member</div>
-          <div class="tm-plan-name" data-lang="es">Miembro</div>
-          <div class="tm-plan-price">5€<span>/</span><span data-lang="pt">mês</span><span data-lang="en">mo</span><span data-lang="es">mes</span></div>
-          <ul class="tm-plan-features">
-            <li data-lang="pt">Cartão de membro</li><li data-lang="en">Member card</li><li data-lang="es">Tarjeta de miembro</li>
-            <li data-lang="pt">Acesso prioritário a eventos</li><li data-lang="en">Priority event access</li><li data-lang="es">Acceso prioritario</li>
-            <li data-lang="pt">Comunidade privada</li><li data-lang="en">Private community</li><li data-lang="es">Comunidad privada</li>
-          </ul>
-        </div>
-        <div class="tm-plan tm-plan--featured">
-          <div class="tm-plan-badge">✦ Pro</div>
-          <div class="tm-plan-name" data-lang="pt">Membro Pro</div>
-          <div class="tm-plan-name" data-lang="en">Pro Member</div>
-          <div class="tm-plan-name" data-lang="es">Miembro Pro</div>
-          <div class="tm-plan-price">12€<span>/</span><span data-lang="pt">mês</span><span data-lang="en">mo</span><span data-lang="es">mes</span></div>
-          <ul class="tm-plan-features">
-            <li data-lang="pt">Tudo do plano Membro</li><li data-lang="en">Everything in Member</li><li data-lang="es">Todo del plan Miembro</li>
-            <li data-lang="pt">Participa nos filmes</li><li data-lang="en">Be part of films</li><li data-lang="es">Participa en las películas</li>
-            <li data-lang="pt">Desconto 10% Mercado</li><li data-lang="en">10% Mercado discount</li><li data-lang="es">10% Descuento Mercado</li>
-            <li data-lang="pt">Workshops exclusivos</li><li data-lang="en">Exclusive workshops</li><li data-lang="es">Talleres exclusivos</li>
-          </ul>
-        </div>
-        <div class="tm-plan">
-          <div class="tm-plan-name" data-lang="pt">Anual</div>
-          <div class="tm-plan-name" data-lang="en">Annual</div>
-          <div class="tm-plan-name" data-lang="es">Anual</div>
-          <div class="tm-plan-price">100€<span>/</span><span data-lang="pt">ano</span><span data-lang="en">yr</span><span data-lang="es">año</span></div>
-          <ul class="tm-plan-features">
-            <li data-lang="pt">Tudo do plano Pro</li><li data-lang="en">Everything in Pro</li><li data-lang="es">Todo del plan Pro</li>
-            <li data-lang="pt">2 meses grátis</li><li data-lang="en">2 months free</li><li data-lang="es">2 meses gratis</li>
-            <li data-lang="pt">Nome nos créditos</li><li data-lang="en">Name in credits</li><li data-lang="es">Nombre en créditos</li>
-          </ul>
-        </div>
-      </div>
+      <h3 class="tm-section-title">Quota Anual</h3>
+      <p>Quota anual de membro: <strong style="color:var(--text-primary)">20 €</strong></p>
+      <p>A quota contribui para a manutenção e desenvolvimento das atividades do clube, permitindo-nos continuar a criar e a fazer cinema juntos.</p>
 
-      <div class="tm-cta-row tm-cta-row--center">
-        <a href="/contactos/" class="tm-cta-btn tm-cta-btn--large">
-          <span data-lang="pt">Preencher formulário e receber cartão →</span>
-          <span data-lang="en">Fill in the form and receive your card →</span>
-          <span data-lang="es">Rellenar formulario y recibir tu tarjeta →</span>
+      <h3 class="tm-section-title">Pagamento e Confirmação</h3>
+      <p>Para concluir a tua candidatura a membro, deves efetuar o pagamento da quota anual de 20 € através de transferência bancária:</p>
+      <p style="font-family:monospace;color:var(--text-primary);background:rgba(255,255,255,0.05);padding:0.6rem 0.9rem;border-radius:4px;letter-spacing:0.05em;margin:0.5rem 0;">IBAN: PT50 0018 0003 5907 2983 0206 3</p>
+      <p>Depois de efetuares o pagamento, envia o comprovativo para <a href="mailto:charlie@thebenaresclub.com" style="color:var(--text-primary)">charlie@thebenaresclub.com</a></p>
+      <p>A candidatura será confirmada após a receção e verificação do comprovativo de pagamento.</p>
+
+      <div class="tm-cta-row tm-cta-row--center" style="margin-top:1.5rem;">
+        <a href="https://forms.gle/K13f8FvYyTLNqVY49" target="_blank" rel="noopener noreferrer" class="tm-cta-btn tm-cta-btn--large">
+          Preencher formulário de candidatura →
         </a>
       </div>
-      <p class="tm-note" data-lang="pt">O cartão é enviado por correio para a tua morada após confirmação.</p>
-      <p class="tm-note" data-lang="en">The card is mailed to your address after confirmation.</p>
-      <p class="tm-note" data-lang="es">La tarjeta se envía por correo a tu dirección tras confirmación.</p>
     </div>
   </div>
 </div>

@@ -630,9 +630,9 @@
           es:'Tu proyecto, producido de forma indie'
         },
         body: {
-          pt: `<p>🇵🇹 Através deste Open Call, podes enviar-nos uma ideia para uma curta-metragem, documentário, videoclipe ou outro projeto audiovisual. Se encontrarmos potencial na proposta, entraremos em contacto contigo para conversar, desenvolver a ideia em conjunto e explorar a possibilidade de a produzir através do Club Benares.</p>`,
-          en: `<p>Through this Open Call, you can send us an idea for a short film, documentary, music video or other audiovisual project. If we find potential in the proposal, we'll get in touch to talk, develop the idea together and explore the possibility of producing it through Club Benares.</p>`,
-          es: `<p>A través de este Open Call, puedes enviarnos una idea para un cortometraje, documental, videoclip u otro proyecto audiovisual. Si encontramos potencial en la propuesta, nos pondremos en contacto contigo para hablar, desarrollar la idea juntos y explorar la posibilidad de producirla a través del Club Benares.</p>`
+          pt: `<p>Tens uma ideia para uma curta, documentário, videoclipe ou outro projeto audiovisual? Envia-nos a proposta. Se virmos potencial, entramos em contacto para desenvolver e produzir juntos.</p>`,
+          en: `<p>Have an idea for a short film, documentary, music video or other audiovisual project? Send us your proposal. If we see potential, we'll reach out to develop and produce it together.</p>`,
+          es: `<p>¿Tienes una idea para un cortometraje, documental, videoclip u otro proyecto audiovisual? Envíanos la propuesta. Si vemos potencial, nos ponemos en contacto para desarrollarla y producirla juntos.</p>`
         },
         html: true,
         link:'https://forms.gle/vkaw7RfY7TGzcLM59', linkLabel:{ pt:'Submeter proposta →', en:'Submit proposal →', es:'Enviar propuesta →' }
@@ -647,18 +647,12 @@
           es:'Apoya lo que crees'
         },
         body: {
-          pt: `<p>Quando abrimos as portas ao público, o Club cresceu e tornou-se uma comunidade aberta a todos, com sessões, debates, networking e novas produções, um espaço onde qualquer pessoa pode participar, conhecer outras pessoas, partilhar ideias e criar connosco.</p>
-               <p>Já produzimos 5 filmes e realizámos mais de 11 eventos. Agora queremos continuar a crescer: mais encontros, projetos, produções e oportunidades para as ideias da nossa comunidade ganharem vida.</p>
-               <p>Os fundos angariados serão utilizados para financiar as atividades e eventos da nossa comunidade, lançar o nosso festival de cinema e apoiar a produção de novos filmes e conteúdos desenvolvidos pelos membros do Club Benares.</p>
-               <p>Ajuda-nos a continuar a construir este espaço, onde novas pessoas podem encontrar uma comunidade, desenvolver as suas ideias e contar as suas histórias.</p>`,
-          en: `<p>When we opened our doors to the public, the Club grew and became an open community for everyone — screenings, debates, networking and new productions, a space where anyone can participate, meet people, share ideas and create with us.</p>
-               <p>We've already produced 5 films and held over 11 events. Now we want to keep growing: more meetups, projects, productions and opportunities for our community's ideas to come to life.</p>
-               <p>Funds raised will be used to finance community activities and events, launch our film festival and support the production of new films developed by Club Benares members.</p>
-               <p>Help us keep building this space, where new people can find a community, develop their ideas and tell their stories.</p>`,
-          es: `<p>Cuando abrimos las puertas al público, el Club creció y se convirtió en una comunidad abierta para todos, con sesiones, debates, networking y nuevas producciones, un espacio donde cualquier persona puede participar, conocer a otros, compartir ideas y crear con nosotros.</p>
-               <p>Ya hemos producido 5 películas y realizado más de 11 eventos. Ahora queremos seguir creciendo: más encuentros, proyectos, producciones y oportunidades para que las ideas de nuestra comunidad cobren vida.</p>
-               <p>Los fondos recaudados se utilizarán para financiar las actividades y eventos de nuestra comunidad, lanzar nuestro festival de cine y apoyar la producción de nuevas películas y contenidos desarrollados por los miembros del Club Benares.</p>
-               <p>Ayúdanos a seguir construyendo este espacio, donde nuevas personas puedan encontrar una comunidad, desarrollar sus ideas y contar sus historias.</p>`
+          pt: `<p>5 filmes produzidos. Mais de 11 eventos. Uma comunidade que cresce.</p>
+               <p>Os fundos vão financiar as nossas atividades, lançar o nosso festival de cinema e apoiar novos projetos desenvolvidos pelos membros. Ajuda-nos a continuar.</p>`,
+          en: `<p>5 films produced. Over 11 events. A growing community.</p>
+               <p>Funds will go towards our activities, launching our film festival and supporting new projects by members. Help us keep going.</p>`,
+          es: `<p>5 películas producidas. Más de 11 eventos. Una comunidad en crecimiento.</p>
+               <p>Los fondos irán a nuestras actividades, al lanzamiento de nuestro festival de cine y a apoyar nuevos proyectos de los miembros. Ayúdanos a continuar.</p>`
         },
         html: true,
         link:'https://gofund.me/4d0cc5a16', linkLabel:{ pt:'Apoiar no GoFundMe →', en:'Support on GoFundMe →', es:'Apoyar en GoFundMe →' }
@@ -731,7 +725,7 @@
       if (p.html) { bodyEl.innerHTML = p.body[lang]||p.body.pt; }
       else        { bodyEl.textContent = p.body[lang]||p.body.pt; }
       const lk = document.getElementById('post-modal-link');
-      if (p.link) { lk.href=p.link; lk.textContent=p.linkLabel[lang]||p.linkLabel.pt; lk.removeAttribute('hidden'); }
+      if (p.link) { lk.href=p.link; lk.textContent=p.linkLabel[lang]||p.linkLabel.pt; lk.target='_blank'; lk.rel='noopener noreferrer'; lk.removeAttribute('hidden'); }
       else lk.setAttribute('hidden','');
       m._postId=id; m.removeAttribute('hidden'); document.body.style.overflow='hidden';
     }
@@ -908,36 +902,19 @@
     </div>
     <div class="tm-body">
 
-      <p>🇵🇹 Torna-te membro do Club Benares!</p>
-      <p>O Club Benares é um clube independente dedicado ao cinema e à criação de uma comunidade em torno da cultura cinematográfica.</p>
-      <p>Desde 2023, reunimos estudantes, profissionais e amantes de cinema em Lisboa para ver, discutir e fazer cinema juntos.</p>
-      <p>Ao tornares-te membro, passas a fazer parte desta comunidade e a criar connosco: filmes, eventos, encontros e novos projetos.</p>
+      <p>Desde 2023 reunimos estudantes, profissionais e amantes de cinema em Lisboa para ver, discutir e fazer cinema juntos. Ao tornares-te membro, fazes parte disto.</p>
 
-      <h3 class="tm-section-title">Vantagens de Membro</h3>
+      <h3 class="tm-section-title">O que inclui</h3>
       <ul class="tm-perks">
-        <li>
-          <span class="tm-perk-icon">✦</span>
-          <span>Descontos em todas as atividades pagas organizadas pelo Club Benares, incluindo descontos no Mercado, a nossa loja online.</span>
-        </li>
-        <li>
-          <span class="tm-perk-icon">✦</span>
-          <span>Acesso à equipa de produção do Club Benares, formada pelos membros mais ativos, com quem desenvolvemos e produzimos curtas-metragens ao longo do ano.</span>
-        </li>
-        <li>
-          <span class="tm-perk-icon">✦</span>
-          <span>Participação nas reuniões mensais da equipa, onde partilhamos ideias, desenvolvemos novos projetos e planeamos as próximas produções.</span>
-        </li>
+        <li><span class="tm-perk-icon">✦</span><span>Descontos em atividades e na loja online (Mercado)</span></li>
+        <li><span class="tm-perk-icon">✦</span><span>Acesso à equipa de produção — fazemos curtas juntos</span></li>
+        <li><span class="tm-perk-icon">✦</span><span>Reuniões mensais para desenvolver projetos e novas ideias</span></li>
       </ul>
 
-      <h3 class="tm-section-title">Quota Anual</h3>
-      <p>Quota anual de membro: <strong style="color:var(--text-primary)">20 €</strong></p>
-      <p>A quota contribui para a manutenção e desenvolvimento das atividades do clube, permitindo-nos continuar a criar e a fazer cinema juntos.</p>
-
-      <h3 class="tm-section-title">Pagamento e Confirmação</h3>
-      <p>Para concluir a tua candidatura a membro, deves efetuar o pagamento da quota anual de 20 € através de transferência bancária:</p>
-      <p style="font-family:monospace;color:var(--text-primary);background:rgba(255,255,255,0.05);padding:0.6rem 0.9rem;border-radius:4px;letter-spacing:0.05em;margin:0.5rem 0;">IBAN: PT50 0018 0003 5907 2983 0206 3</p>
-      <p>Depois de efetuares o pagamento, envia o comprovativo para <a href="mailto:charlie@thebenaresclub.com" style="color:var(--text-primary)">charlie@thebenaresclub.com</a></p>
-      <p>A candidatura será confirmada após a receção e verificação do comprovativo de pagamento.</p>
+      <h3 class="tm-section-title">Quota · 20 € / ano</h3>
+      <p>Transferência bancária para:<br>
+      <span style="font-family:monospace;color:var(--text-primary);letter-spacing:0.05em;">IBAN: PT50 0018 0003 5907 2983 0206 3</span></p>
+      <p>Envia o comprovativo para <a href="mailto:charlie@thebenaresclub.com" style="color:var(--text-primary)">charlie@thebenaresclub.com</a> — confirmamos em seguida.</p>
 
       <div class="tm-cta-row tm-cta-row--center" style="margin-top:1.5rem;">
         <a href="https://forms.gle/K13f8FvYyTLNqVY49" target="_blank" rel="noopener noreferrer" class="tm-cta-btn tm-cta-btn--large">

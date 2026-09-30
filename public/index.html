@@ -584,7 +584,7 @@
   .post-modal { position:fixed; inset:0; z-index:9000; display:flex; align-items:center; justify-content:center; padding:1.5rem; }
   .post-modal[hidden] { display:none; }
   .post-modal-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.82); }
-  .post-modal-panel { position:relative; background:#1a1714; border:1px solid var(--border); border-radius:10px; width:100%; max-width:760px; max-height:90vh; overflow-y:auto; display:flex; flex-direction:column; }
+  .post-modal-panel { position:relative; background:#1a1a1a; border:1px solid rgba(255,255,255,0.10); border-radius:10px; width:100%; max-width:760px; max-height:90vh; overflow-y:auto; display:flex; flex-direction:column; }
   .post-modal-close { position:absolute; top:.75rem; right:.85rem; background:transparent; border:none; color:var(--text-muted); font-size:1.6rem; line-height:1; cursor:pointer; z-index:1; padding:.2rem .4rem; transition:color .2s; }
   .post-modal-close:hover { color:var(--text-primary); }
   .post-modal-img-wrap { width:100%; aspect-ratio:16/9; overflow:hidden; border-radius:10px 10px 0 0; }
@@ -607,7 +607,7 @@
   .fb-form { margin-top:1.25rem; display:flex; flex-direction:column; gap:.85rem; }
   .fb-field { display:flex; flex-direction:column; gap:.3rem; }
   .fb-label { font-size:.62rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:var(--text-muted); }
-  .fb-input { background:rgba(255,248,238,.05); border:1px solid var(--border); border-radius:4px; padding:.7rem .9rem; font-family:var(--font-family); font-size:.88rem; color:var(--text-primary); outline:none; transition:border-color .2s; resize:none; }
+  .fb-input { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,0.10); border-radius:4px; padding:.7rem .9rem; font-family:var(--font-family); font-size:.88rem; color:var(--text-primary); outline:none; transition:border-color .2s; resize:none; }
   .fb-input::placeholder { color:var(--text-muted); opacity:.5; }
   .fb-input:focus { border-color:var(--border-strong); }
   .fb-textarea { min-height:110px; }
@@ -923,6 +923,16 @@
 </div>
 
 <style>
+  /* ═══ MODAL NEUTRAL OVERRIDES (grayscale, no warm tones) ═══ */
+  .tm-panel, .post-modal-panel {
+    --text-primary: #f0f0f0;
+    --text-secondary: rgba(255,255,255,0.58);
+    --text-muted: rgba(255,255,255,0.32);
+    --border: rgba(255,255,255,0.10);
+    --border-strong: rgba(255,255,255,0.22);
+    --bg-surface: rgba(255,255,255,0.05);
+  }
+
   /* ═══════════════════ TILE MODAL BASE ═══════════════════ */
   .tile-modal { position:fixed; inset:0; z-index:9100; display:flex; align-items:center; justify-content:center; padding:1.25rem; }
   .tile-modal[hidden] { display:none; }
@@ -930,8 +940,8 @@
 
   .tm-panel {
     position:relative; z-index:1;
-    background:#141210;
-    border:1px solid var(--border);
+    background:#141414;
+    border:1px solid rgba(255,255,255,0.10);
     border-radius:10px;
     width:100%; max-width:600px; max-height:92vh;
     overflow-y:auto;

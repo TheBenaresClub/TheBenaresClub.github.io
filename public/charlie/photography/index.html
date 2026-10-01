@@ -18,14 +18,8 @@
     nav { background-color: #f5f5f5 !important; border-bottom: 1px solid #e0e0e0 !important; }
     .nav-toggle { background: rgba(0,0,0,0.06) !important; border-color: rgba(0,0,0,0.15) !important; color: #111 !important; }
     .lang-btn { color: rgba(0,0,0,0.45) !important; border-color: rgba(0,0,0,0.18) !important; }
-    #main-nav a { color: var(--g) !important; transition: color 0.15s, text-shadow 0.15s; }
+    #main-nav a { color: var(--g) !important; transition: color 0.15s; }
     #main-nav a:hover, #main-nav a.active { color: #2d5a00 !important; text-shadow: none !important; background: transparent !important; box-shadow: none !important; text-decoration: underline; text-underline-offset: 3px; }
-
-    .ch-hero { padding: 3.5rem 2.5rem 2rem; display: flex; align-items: flex-end; justify-content: space-between; border-bottom: 2px solid var(--g); }
-    .ch-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem,8vw,6.5rem); line-height: 0.9; color: var(--g); letter-spacing: 0.01em; }
-    .ch-roles { font-size: 0.72rem; color: var(--ink2); margin-top: 0.55rem; }
-    .ch-hero-right { text-align: right; }
-    .ch-hero-year { font-size: 0.55rem; color: var(--ink3); letter-spacing: 0.1em; display: block; margin-bottom: 0.15rem; }
 
     .ch-bar-nav { display: flex; align-items: center; padding: 0 2.5rem; background: #f5f5f5; border-bottom: 1px solid #e0e0e0; overflow-x: auto; scrollbar-width: none; }
     .ch-bar-nav::-webkit-scrollbar { display: none; }
@@ -33,25 +27,122 @@
     .ch-bar-nav-item:hover { color: #111; }
     .ch-bar-nav-item.active { color: var(--g); border-bottom-color: var(--g); font-weight: 600; }
 
-    .sec-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--g); }
-    .placeholder { opacity: 0.18; pointer-events: none; }
-
-    .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; padding: 3px; }
-    .photo-cell { position: relative; overflow: hidden; background: #f0f0f0; cursor: pointer; }
-    .photo-cell.tall { grid-row: span 2; }
-    .photo-cell.wide { grid-column: span 2; }
-    .photo-cell .photo-img { width: 100%; height: 100%; min-height: 220px; object-fit: cover; display: block; filter: grayscale(20%); transition: filter 0.3s, transform 0.4s; }
-    .photo-cell:hover .photo-img { filter: grayscale(0); transform: scale(1.03); }
-    .photo-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.2rem; background: linear-gradient(transparent, rgba(0,0,0,0.9)); opacity: 0; transition: opacity 0.25s; }
-    .photo-cell:hover .photo-overlay { opacity: 1; }
-    .photo-series { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: #f0f0f0; letter-spacing: 0.05em; }
-    .photo-year { font-size: 0.6rem; color: var(--g); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 0.2rem; }
-    .photo-placeholder { width: 100%; height: 100%; min-height: 220px; display: flex; align-items: center; justify-content: center; }
-    .photo-placeholder svg { opacity: 0.25; }
+    /* ── SECTION BAR ── */
     .photo-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 2.5rem; border-bottom: 1px solid #e0e0e0; }
-    @media (max-width: 580px) {
-      .ch-hero { padding: 2rem 1.5rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-      .ch-hero-right { display: none; }
+    .sec-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--g); }
+    .sec-count { font-size: 0.6rem; color: #999; letter-spacing: 0.08em; }
+
+    /* ── COLLECTION GRID ── */
+    .col-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      padding: 4px;
+      background: #e8e8e8;
+    }
+
+    /* ── COLLECTION CARD ── */
+    .col-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: #ebebeb;
+      min-height: 260px;
+    }
+    .col-card.tall  { grid-row: span 2; min-height: 524px; }
+    .col-card.wide  { grid-column: span 2; }
+
+    /* cover image — fills card */
+    .col-cover {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease, filter 0.3s;
+      filter: grayscale(10%);
+    }
+    .col-card:hover .col-cover { transform: scale(1.04); filter: grayscale(0); }
+
+    /* placeholder shown when no image */
+    .col-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ebebeb 0%, #e0e0e0 100%);
+    }
+    .col-placeholder svg { opacity: 0.2; }
+
+    /* always-visible bottom info */
+    .col-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 2.5rem 1.4rem 1.3rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75) 60%);
+      transition: padding 0.25s;
+    }
+    .col-card:hover .col-info { padding-bottom: 1.8rem; }
+
+    .col-cat {
+      font-size: 0.52rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--g);
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+    .col-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: 0.04em;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 0.35rem;
+    }
+    .col-meta {
+      font-size: 0.58rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.08em;
+    }
+
+    /* hover: "ver coleção" chip */
+    .col-cta {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--g);
+      border: 1px solid var(--g);
+      padding: 0.3rem 0.7rem;
+      border-radius: 2px;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 0.2s, transform 0.2s;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+    }
+    .col-card:hover .col-cta { opacity: 1; transform: translateY(0); }
+
+    /* placeholder state: muted overlay */
+    .col-card.placeholder-card .col-info { background: linear-gradient(transparent, rgba(0,0,0,0.45) 60%); }
+    .col-card.placeholder-card .col-title,
+    .col-card.placeholder-card .col-cat,
+    .col-card.placeholder-card .col-meta { opacity: 0.4; }
+
+    @media (max-width: 700px) {
+      .col-grid { grid-template-columns: repeat(2, 1fr); }
+      .col-card.tall { grid-row: span 1; min-height: 220px; }
+      .col-card.wide { grid-column: span 2; }
+    }
+    @media (max-width: 420px) {
+      .col-grid { grid-template-columns: 1fr; }
+      .col-card.wide { grid-column: span 1; }
     }
   </style>
 </head>
@@ -61,73 +152,86 @@
   <main>
 
     <nav class="ch-bar-nav">
-        <a class="ch-bar-nav-item" href="/charlie/">Cinema</a>
-        <a class="ch-bar-nav-item" href="/charlie/cineclub/">Cine Club</a>
-        <a class="ch-bar-nav-item" href="/charlie/festival/">Film Festival</a>
-        <a class="ch-bar-nav-item active" href="/charlie/photography/">Photography</a>
-        <a class="ch-bar-nav-item" href="/charlie/videography/">Videography</a>
-        <a class="ch-bar-nav-item" href="/charlie/daily/">Daily Life</a>
+      <a class="ch-bar-nav-item" href="/charlie/">Cinema</a>
+      <a class="ch-bar-nav-item" href="/charlie/cineclub/">Cine Club</a>
+      <a class="ch-bar-nav-item" href="/charlie/festival/">Film Festival</a>
+      <a class="ch-bar-nav-item active" href="/charlie/photography/">Photography</a>
+      <a class="ch-bar-nav-item" href="/charlie/videography/">Videography</a>
+      <a class="ch-bar-nav-item" href="/charlie/daily/">Daily Life</a>
     </nav>
 
     <div class="photo-bar">
-      <span class="sec-label">Fotografia</span>
+      <span class="sec-label">Coleções</span>
+      <span class="sec-count" id="col-count"></span>
     </div>
 
-    <div class="photo-grid">
-      <div class="photo-cell tall">
-        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="#555"/></svg></div>
-        <div class="photo-overlay">
-          <p class="photo-series placeholder">SÉRIE 01</p>
-          <p class="photo-year placeholder">Ano</p>
-        </div>
-      </div>
-      <div class="photo-cell ">
-        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="#555"/></svg></div>
-        <div class="photo-overlay">
-          <p class="photo-series placeholder">SÉRIE 02</p>
-          <p class="photo-year placeholder">Ano</p>
-        </div>
-      </div>
-      <div class="photo-cell ">
-        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="#555"/></svg></div>
-        <div class="photo-overlay">
-          <p class="photo-series placeholder">SÉRIE 03</p>
-          <p class="photo-year placeholder">Ano</p>
-        </div>
-      </div>
-      <div class="photo-cell wide">
-        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="#555"/></svg></div>
-        <div class="photo-overlay">
-          <p class="photo-series placeholder">SÉRIE 04</p>
-          <p class="photo-year placeholder">Ano</p>
-        </div>
-      </div>
-      <div class="photo-cell ">
-        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="#555"/></svg></div>
-        <div class="photo-overlay">
-          <p class="photo-series placeholder">SÉRIE 05</p>
-          <p class="photo-year placeholder">Ano</p>
-        </div>
-      </div>
-      <div class="photo-cell tall">
-        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="#555"/></svg></div>
-        <div class="photo-overlay">
-          <p class="photo-series placeholder">SÉRIE 06</p>
-          <p class="photo-year placeholder">Ano</p>
-        </div>
-      </div>
-      <div class="photo-cell ">
-        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="#555"/></svg></div>
-        <div class="photo-overlay">
-          <p class="photo-series placeholder">SÉRIE 07</p>
-          <p class="photo-year placeholder">Ano</p>
-        </div>
-      </div>
-    </div>
+    <div class="col-grid" id="col-grid"></div>
+
   </main>
   <div id="footer-container"></div>
   <script src="/shared.js"></script>
   <script>
+    /* ── COLLECTIONS DATA ──────────────────────────────────────────
+       Para adicionar uma coleção real:
+         cover: '/Imagenes/Fotografia/nome-do-ficheiro.jpg'
+       Deixar cover: null mostra o placeholder.
+    ─────────────────────────────────────────────────────────────── */
+    var COLLECTIONS = [
+      { title: 'Nome do Cliente',   cat: 'Casamento',   year: '2025', count: null, cover: null, span: 'tall' },
+      { title: 'Nome do Cliente',   cat: 'Retrato',     year: '2025', count: null, cover: null, span: '' },
+      { title: 'Nome do Cliente',   cat: 'Editorial',   year: '2025', count: null, cover: null, span: '' },
+      { title: 'Nome do Cliente',   cat: 'Corporativo', year: '2025', count: null, cover: null, span: 'wide' },
+      { title: 'Nome do Cliente',   cat: 'Moda',        year: '2025', count: null, cover: null, span: '' },
+      { title: 'Nome do Cliente',   cat: 'Eventos',     year: '2025', count: null, cover: null, span: 'tall' },
+      { title: 'Nome do Cliente',   cat: 'Retrato',     year: '2025', count: null, cover: null, span: '' },
+    ];
+
+    function buildGrid() {
+      var grid = document.getElementById('col-grid');
+      var counter = document.getElementById('col-count');
+      if (!grid) return;
+
+      var total = COLLECTIONS.length;
+      if (counter) counter.textContent = total + ' coleções';
+
+      COLLECTIONS.forEach(function(col) {
+        var card = document.createElement('div');
+        card.className = 'col-card placeholder-card' + (col.span ? ' ' + col.span : '');
+
+        var meta = col.year + (col.count ? ' · ' + col.count + ' fotos' : '');
+
+        if (col.cover) {
+          card.classList.remove('placeholder-card');
+          var img = document.createElement('img');
+          img.className = 'col-cover';
+          img.src = col.cover;
+          img.alt = col.title;
+          img.loading = 'lazy';
+          card.appendChild(img);
+        } else {
+          var ph = document.createElement('div');
+          ph.className = 'col-placeholder';
+          ph.innerHTML = '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="7.5" r="0.8" fill="#555"/></svg>';
+          card.appendChild(ph);
+        }
+
+        var info = document.createElement('div');
+        info.className = 'col-info';
+        info.innerHTML =
+          '<span class="col-cat">' + col.cat + '</span>' +
+          '<p class="col-title">' + col.title + '</p>' +
+          '<p class="col-meta">' + meta + '</p>';
+        card.appendChild(info);
+
+        var cta = document.createElement('span');
+        cta.className = 'col-cta';
+        cta.textContent = 'Ver coleção';
+        card.appendChild(cta);
+
+        grid.appendChild(card);
+      });
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
       var logo = document.querySelector('#header-container img');
       if (logo) {
@@ -149,6 +253,7 @@
           return '<li><a href="' + item[0] + '" class="' + active + '">' + item[1] + '</a></li>';
         }).join('');
       }
+      buildGrid();
     });
   </script>
 </body>

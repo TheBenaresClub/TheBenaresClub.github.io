@@ -329,22 +329,62 @@
     /* ═══════════════════════════════════════
        RESPONSIVE
     ═══════════════════════════════════════ */
+
+    /* ── TABLET (≤900px) — 2 colunas ── */
     @media (max-width: 900px) {
-      .desktop { grid-template-columns:repeat(6,1fr); padding-bottom:7rem; }
-      .w-bio       { grid-column:1/7; grid-row:auto; }
-      .w-filmog    { grid-column:1/4; grid-row:auto; }
-      .w-cineclub  { grid-column:4/7; grid-row:auto; }
-      .w-foto      { grid-column:1/4; grid-row:auto; }
-      .w-video     { grid-column:4/7; grid-row:auto; }
-      .w-blog      { grid-column:1/4; grid-row:auto; }
-      .w-contacto  { grid-column:4/7; grid-row:auto; }
-      .w-interesses{ grid-column:1/7; grid-row:auto; }
-      .col-grid { grid-template-columns:repeat(2,1fr); }
-      .col-card.tall { grid-row:span 1; min-height:220px; }
+      .desktop {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: auto;
+        padding: 1rem .9rem 7rem;
+        gap: 9px;
+      }
+      /* full-width */
+      .w-bio, .w-interesses { grid-column: 1 / 3; grid-row: auto; }
+      /* 2-col auto-flow */
+      .w-filmog, .w-cineclub, .w-foto, .w-video, .w-blog, .w-contacto {
+        grid-column: auto; grid-row: auto;
+      }
+      .col-grid { grid-template-columns: repeat(2, 1fr); }
+      .col-card.tall { grid-row: span 1; min-height: 220px; }
+      .col-card.wide { grid-column: span 2; }
     }
+
+    /* ── MOBILE (≤520px) — 1 coluna ── */
     @media (max-width: 520px) {
-      .desktop { grid-template-columns:1fr 1fr; gap:8px; padding:1rem .8rem 8rem; }
-      .w-bio, .w-interesses { grid-column:1/3; }
+      .desktop {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: .8rem .8rem 7rem;
+      }
+      .w-bio, .w-filmog, .w-cineclub, .w-foto,
+      .w-video, .w-blog, .w-contacto, .w-interesses {
+        grid-column: 1; grid-row: auto;
+      }
+
+      /* tighter win-body on narrow cards */
+      .win-body { padding: 1rem 1.1rem 1.2rem; }
+      .sec-desc { font-size: .73rem; }
+      .bio-name { font-size: clamp(2rem, 12vw, 3rem); }
+
+      /* dock: compact */
+      .dock { padding: .35rem .4rem; gap: 0; }
+      .dock-item { min-width: 38px; padding: .25rem .45rem; }
+      .dock-label { font-size: .42rem; }
+
+      /* panel inner padding: reduce 2.5rem → 1rem on mobile */
+      .p-section-bar { padding: .35rem 1rem; }
+      .p-desc        { padding: 1.2rem 1rem 1.4rem; }
+      .cc-intro      { padding: 1.4rem 1rem; }
+      .cb-hero-body  { padding: 1.8rem 1rem 1.6rem; }
+      .ct-heading-wrap { padding: 1.6rem 1rem 1rem; }
+      .ct-item       { padding: 1.2rem 1rem; gap: 1rem; }
+      .blog-soon     { padding: 2.5rem 1rem; }
+      .film-card     { padding: 1.4rem 1.2rem; }
+      .film-grid     { grid-template-columns: 1fr; }
+      .vid-grid      { grid-template-columns: 1fr; }
+      .col-grid      { grid-template-columns: 1fr 1fr; }
+      .col-card.wide { grid-column: span 2; }
+      .col-card.tall { grid-row: span 1; min-height: 200px; }
     }
   </style>
 </head>
@@ -758,7 +798,7 @@
       panel.style.top    = '0';
       panel.style.left   = '0';
       panel.style.width  = '100vw';
-      panel.style.height = '100vh';
+      panel.style.height = (window.innerHeight) + 'px';
       panel.style.borderRadius = '0';
 
       currentPanel = panel;

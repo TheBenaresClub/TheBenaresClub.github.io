@@ -88,7 +88,7 @@
     .film-card:nth-child(4n+1) { border-left: 1px solid #e0e0e0; }
     .film-card:hover { background: #f5f5f5; }
     .film-card-placeholder { opacity: 0.38; cursor: default; }
-    .film-card-placeholder:hover { background: #000; }
+    .film-card-placeholder:hover { background: transparent; }
 
     .film-card-poster {
       aspect-ratio: 3/2; overflow: hidden; position: relative;
@@ -283,11 +283,13 @@
     #main-nav a { color: #5DA000 !important; transition: color 0.15s, text-shadow 0.15s; }
     #main-nav a:hover,
     #main-nav a.active {
-      color: #39FF14 !important;
-      text-shadow: 0 0 8px #39FF14, 0 0 20px #39FF14;
+      color: #2d5a00 !important;
+      text-shadow: none !important;
       background: transparent !important;
       box-shadow: none !important;
       backdrop-filter: none !important;
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
   </style>
 </head>

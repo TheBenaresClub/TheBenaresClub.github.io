@@ -19,7 +19,7 @@
     .nav-toggle { background: rgba(0,0,0,0.06) !important; border-color: rgba(0,0,0,0.15) !important; color: #111 !important; }
     .lang-btn { color: rgba(0,0,0,0.45) !important; border-color: rgba(0,0,0,0.18) !important; }
     #main-nav a { color: var(--g) !important; transition: color 0.15s, text-shadow 0.15s; }
-    #main-nav a:hover, #main-nav a.active { color: var(--neon) !important; text-shadow: 0 0 8px var(--neon), 0 0 20px var(--neon); background: transparent !important; box-shadow: none !important; }
+    #main-nav a:hover, #main-nav a.active { color: #2d5a00 !important; text-shadow: none !important; background: transparent !important; box-shadow: none !important; text-decoration: underline; text-underline-offset: 3px; }
 
     .ch-hero { padding: 3.5rem 2.5rem 2rem; display: flex; align-items: flex-end; justify-content: space-between; border-bottom: 2px solid var(--g); }
     .ch-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem,8vw,6.5rem); line-height: 0.9; color: var(--g); letter-spacing: 0.01em; }
@@ -37,7 +37,7 @@
     .placeholder { opacity: 0.18; pointer-events: none; }
 
     .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; padding: 3px; }
-    .photo-cell { position: relative; overflow: hidden; background: #0d0d0d; cursor: pointer; }
+    .photo-cell { position: relative; overflow: hidden; background: #f0f0f0; cursor: pointer; }
     .photo-cell.tall { grid-row: span 2; }
     .photo-cell.wide { grid-column: span 2; }
     .photo-cell .photo-img { width: 100%; height: 100%; min-height: 220px; object-fit: cover; display: block; filter: grayscale(20%); transition: filter 0.3s, transform 0.4s; }
@@ -47,8 +47,8 @@
     .photo-series { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: #f0f0f0; letter-spacing: 0.05em; }
     .photo-year { font-size: 0.6rem; color: var(--g); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 0.2rem; }
     .photo-placeholder { width: 100%; height: 100%; min-height: 220px; display: flex; align-items: center; justify-content: center; }
-    .photo-placeholder svg { opacity: 0.08; }
-    .photo-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 2.5rem; border-bottom: 1px solid #1a1a1a; }
+    .photo-placeholder svg { opacity: 0.25; }
+    .photo-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 2.5rem; border-bottom: 1px solid #e0e0e0; }
     @media (max-width: 580px) {
       .ch-hero { padding: 2rem 1.5rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
       .ch-hero-right { display: none; }
@@ -75,49 +75,49 @@
 
     <div class="photo-grid">
       <div class="photo-cell tall">
-        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="white"/></svg></div>
+        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="#555"/></svg></div>
         <div class="photo-overlay">
           <p class="photo-series placeholder">SÉRIE 01</p>
           <p class="photo-year placeholder">Ano</p>
         </div>
       </div>
       <div class="photo-cell ">
-        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="white"/></svg></div>
+        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="#555"/></svg></div>
         <div class="photo-overlay">
           <p class="photo-series placeholder">SÉRIE 02</p>
           <p class="photo-year placeholder">Ano</p>
         </div>
       </div>
       <div class="photo-cell ">
-        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="white"/></svg></div>
+        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="#555"/></svg></div>
         <div class="photo-overlay">
           <p class="photo-series placeholder">SÉRIE 03</p>
           <p class="photo-year placeholder">Ano</p>
         </div>
       </div>
       <div class="photo-cell wide">
-        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="white"/></svg></div>
+        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="#555"/></svg></div>
         <div class="photo-overlay">
           <p class="photo-series placeholder">SÉRIE 04</p>
           <p class="photo-year placeholder">Ano</p>
         </div>
       </div>
       <div class="photo-cell ">
-        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="white"/></svg></div>
+        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="#555"/></svg></div>
         <div class="photo-overlay">
           <p class="photo-series placeholder">SÉRIE 05</p>
           <p class="photo-year placeholder">Ano</p>
         </div>
       </div>
       <div class="photo-cell tall">
-        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="white"/></svg></div>
+        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="#555"/></svg></div>
         <div class="photo-overlay">
           <p class="photo-series placeholder">SÉRIE 06</p>
           <p class="photo-year placeholder">Ano</p>
         </div>
       </div>
       <div class="photo-cell ">
-        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="white"/></svg></div>
+        <div class="photo-placeholder placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="7.5" r="1" fill="#555"/></svg></div>
         <div class="photo-overlay">
           <p class="photo-series placeholder">SÉRIE 07</p>
           <p class="photo-year placeholder">Ano</p>

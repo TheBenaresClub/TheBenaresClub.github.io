@@ -19,7 +19,7 @@
     .nav-toggle { background: rgba(0,0,0,0.06) !important; border-color: rgba(0,0,0,0.15) !important; color: #111 !important; }
     .lang-btn { color: rgba(0,0,0,0.45) !important; border-color: rgba(0,0,0,0.18) !important; }
     #main-nav a { color: var(--g) !important; transition: color 0.15s, text-shadow 0.15s; }
-    #main-nav a:hover, #main-nav a.active { color: var(--neon) !important; text-shadow: 0 0 8px var(--neon), 0 0 20px var(--neon); background: transparent !important; box-shadow: none !important; }
+    #main-nav a:hover, #main-nav a.active { color: #2d5a00 !important; text-shadow: none !important; background: transparent !important; box-shadow: none !important; text-decoration: underline; text-underline-offset: 3px; }
 
     .ch-hero { padding: 3.5rem 2.5rem 2rem; display: flex; align-items: flex-end; justify-content: space-between; border-bottom: 2px solid var(--g); }
     .ch-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem,8vw,6.5rem); line-height: 0.9; color: var(--g); letter-spacing: 0.01em; }
@@ -36,18 +36,18 @@
     .sec-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--g); }
     .placeholder { opacity: 0.18; pointer-events: none; }
 
-    .vid-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1px; background: #111; }
-    .vid-card { background: #000; position: relative; overflow: hidden; cursor: pointer; }
-    .vid-thumb { width: 100%; aspect-ratio: 16/9; background: #0d0d0d; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-    .vid-thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.85)); }
-    .vid-play { width: 48px; height: 48px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, transform 0.2s; }
+    .vid-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1px; background: #e0e0e0; }
+    .vid-card { background: #fff; position: relative; overflow: hidden; cursor: pointer; }
+    .vid-thumb { width: 100%; aspect-ratio: 16/9; background: #f0f0f0; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .vid-thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.08)); }
+    .vid-play { width: 48px; height: 48px; border: 2px solid rgba(0,0,0,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, transform 0.2s; }
     .vid-play svg { margin-left: 3px; }
     .vid-card:hover .vid-play { border-color: var(--g); transform: scale(1.1); }
     .vid-card:hover .vid-play svg path { fill: var(--g); }
     .vid-info { padding: 1rem 1.2rem 1.4rem; }
-    .vid-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: #f0f0f0; letter-spacing: 0.02em; margin-bottom: 0.3rem; }
-    .vid-meta { font-size: 0.65rem; color: #666; letter-spacing: 0.08em; text-transform: uppercase; }
-    .vid-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 2.5rem; border-bottom: 1px solid #1a1a1a; }
+    .vid-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: #111; letter-spacing: 0.02em; margin-bottom: 0.3rem; }
+    .vid-meta { font-size: 0.65rem; color: #555; letter-spacing: 0.08em; text-transform: uppercase; }
+    .vid-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 2.5rem; border-bottom: 1px solid #e0e0e0; }
     @media (max-width: 580px) {
       .ch-hero { padding: 2rem 1.5rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
       .ch-hero-right { display: none; }
@@ -76,7 +76,7 @@
       <div class="vid-card">
         <div class="vid-thumb placeholder">
           <div class="vid-play">
-            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M1 1L13 8L1 15V1Z" fill="white" stroke="white" stroke-width="1.5"/></svg>
+            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M1 1L13 8L1 15V1Z" fill="#555" stroke="#555" stroke-width="1.5"/></svg>
           </div>
         </div>
         <div class="vid-info">
@@ -87,7 +87,7 @@
       <div class="vid-card">
         <div class="vid-thumb placeholder">
           <div class="vid-play">
-            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M1 1L13 8L1 15V1Z" fill="white" stroke="white" stroke-width="1.5"/></svg>
+            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M1 1L13 8L1 15V1Z" fill="#555" stroke="#555" stroke-width="1.5"/></svg>
           </div>
         </div>
         <div class="vid-info">
@@ -98,7 +98,7 @@
       <div class="vid-card">
         <div class="vid-thumb placeholder">
           <div class="vid-play">
-            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M1 1L13 8L1 15V1Z" fill="white" stroke="white" stroke-width="1.5"/></svg>
+            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M1 1L13 8L1 15V1Z" fill="#555" stroke="#555" stroke-width="1.5"/></svg>
           </div>
         </div>
         <div class="vid-info">
@@ -109,7 +109,7 @@
       <div class="vid-card">
         <div class="vid-thumb placeholder">
           <div class="vid-play">
-            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M1 1L13 8L1 15V1Z" fill="white" stroke="white" stroke-width="1.5"/></svg>
+            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M1 1L13 8L1 15V1Z" fill="#555" stroke="#555" stroke-width="1.5"/></svg>
           </div>
         </div>
         <div class="vid-info">
@@ -120,7 +120,7 @@
       <div class="vid-card">
         <div class="vid-thumb placeholder">
           <div class="vid-play">
-            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M1 1L13 8L1 15V1Z" fill="white" stroke="white" stroke-width="1.5"/></svg>
+            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M1 1L13 8L1 15V1Z" fill="#555" stroke="#555" stroke-width="1.5"/></svg>
           </div>
         </div>
         <div class="vid-info">
@@ -131,7 +131,7 @@
       <div class="vid-card">
         <div class="vid-thumb placeholder">
           <div class="vid-play">
-            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M1 1L13 8L1 15V1Z" fill="white" stroke="white" stroke-width="1.5"/></svg>
+            <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M1 1L13 8L1 15V1Z" fill="#555" stroke="#555" stroke-width="1.5"/></svg>
           </div>
         </div>
         <div class="vid-info">

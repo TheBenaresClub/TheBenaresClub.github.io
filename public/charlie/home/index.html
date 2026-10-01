@@ -131,11 +131,55 @@
     .w-contacto  { grid-column: 1 / 5;  grid-row: 4 / 5; }
     .w-interesses{ grid-column: 1 / 5;  grid-row: 5 / 6; }
 
-    /* bio */
-    .bio-name { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.4rem,4vw,4.5rem); color:var(--g); line-height:.92; letter-spacing:.01em; margin-bottom:.8rem; }
-    .bio-role  { font-size:.68rem; color:#888; letter-spacing:.12em; text-transform:uppercase; margin-bottom:1.2rem; }
-    .bio-text  { font-size:.78rem; line-height:1.85; color:#444; flex:1; }
-    .bio-year  { font-size:.58rem; color:#ccc; letter-spacing:.1em; margin-top:1rem; }
+    /* bio card */
+    .bio-photo { width:100%; aspect-ratio:3/2; object-fit:cover; object-position:center top; display:block; flex-shrink:0; }
+    .bio-card-body { padding:1.1rem 1.3rem 1.3rem; display:flex; flex-direction:column; flex:1; }
+    .bio-name { font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,3.5vw,3.8rem); color:var(--g); line-height:.92; letter-spacing:.01em; margin-bottom:.5rem; }
+    .bio-role  { font-size:.62rem; color:#aaa; letter-spacing:.12em; text-transform:uppercase; margin-bottom:.9rem; }
+    .bio-text  { font-size:.75rem; line-height:1.8; color:#555; flex:1; }
+    .bio-year  { font-size:.55rem; color:#ccc; letter-spacing:.1em; margin-top:.9rem; }
+    .bio-open  { font-size:.55rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--g); margin-top:.8rem; opacity:.6; }
+    .win.clickable:hover .bio-open { opacity:1; }
+
+    /* bio panel */
+    .bio-panel-top { display:grid; grid-template-columns:280px 1fr; gap:0; border-bottom:1px solid #e8e8e8; }
+    .bio-panel-photo { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; max-height:460px; }
+    .bio-panel-text  { padding:2.5rem 2.5rem 2rem; display:flex; flex-direction:column; justify-content:center; }
+    .bio-panel-name  { font-family:'Bebas Neue',sans-serif; font-size:clamp(3rem,6vw,5.5rem); color:var(--g); line-height:.9; letter-spacing:.01em; margin-bottom:.8rem; }
+    .bio-panel-role  { font-size:.65rem; color:#aaa; letter-spacing:.14em; text-transform:uppercase; margin-bottom:1.4rem; }
+    .bio-panel-body  { font-size:.82rem; line-height:1.85; color:#444; }
+    .bio-panel-year  { font-size:.58rem; color:#ccc; letter-spacing:.1em; margin-top:1.4rem; }
+
+    /* widgets grid */
+    .widgets-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; padding:1.4rem 1.4rem 2rem; background:#f0f0f0; }
+    .widget { background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+    .widget-bar { display:flex; align-items:center; gap:.4rem; padding:.45rem .75rem; background:#f7f7f7; border-bottom:1px solid #eee; }
+    .widget-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+    .widget-dot.r { background:#ff5f56; } .widget-dot.y { background:#ffbd2e; } .widget-dot.g { background:#27c93f; }
+    .widget-title { font-size:.58rem; font-weight:500; color:#999; letter-spacing:.08em; flex:1; text-align:center; }
+    .widget-body  { padding:.9rem 1rem 1rem; }
+
+    /* widget: top filmes */
+    .film-list { display:flex; flex-direction:column; gap:.55rem; }
+    .film-row  { display:flex; align-items:baseline; gap:.6rem; }
+    .film-num  { font-size:.55rem; font-weight:600; color:#ccc; width:14px; flex-shrink:0; }
+    .film-info { flex:1; }
+    .film-wtitle { font-size:.72rem; font-weight:500; color:#111; line-height:1.2; }
+    .film-wdir   { font-size:.58rem; color:#aaa; margin-top:.1rem; }
+    .film-wyr    { font-size:.55rem; color:#ccc; margin-left:auto; flex-shrink:0; }
+
+    /* widget: citação */
+    .quote-text { font-size:.75rem; line-height:1.75; color:#333; font-style:italic; }
+    .quote-from { font-size:.58rem; color:var(--g); font-weight:600; letter-spacing:.08em; margin-top:.7rem; }
+
+    /* widget: agora */
+    .now-item { display:flex; align-items:center; gap:.7rem; padding:.45rem 0; border-bottom:1px solid #f0f0f0; }
+    .now-item:last-child { border-bottom:none; }
+    .now-thumb { width:34px; height:50px; background:#e8e8e8; border-radius:3px; flex-shrink:0; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+    .now-thumb svg { opacity:.25; }
+    .now-label { font-size:.5rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--g); margin-bottom:.15rem; }
+    .now-name  { font-size:.68rem; color:#111; font-weight:500; line-height:1.2; }
+    .now-sub   { font-size:.56rem; color:#aaa; margin-top:.1rem; }
 
     /* section windows */
     .sec-name  { font-family:'Bebas Neue',sans-serif; font-size:1.2rem; color:#111; letter-spacing:.04em; margin-bottom:.55rem; }
@@ -363,8 +407,16 @@
 
       /* tighter win-body on narrow cards */
       .win-body { padding: 1rem 1.1rem 1.2rem; }
+      .bio-card-body { padding: .9rem 1rem 1rem; }
       .sec-desc { font-size: .73rem; }
       .bio-name { font-size: clamp(2rem, 12vw, 3rem); }
+
+      /* bio panel mobile */
+      .bio-panel-top { grid-template-columns: 1fr; }
+      .bio-panel-photo { max-height: 260px; width:100%; }
+      .bio-panel-text { padding: 1.4rem 1rem 1.2rem; }
+      .bio-panel-name { font-size: clamp(2.4rem, 10vw, 3.5rem); }
+      .widgets-grid { grid-template-columns: 1fr; padding: 1rem .8rem 1.5rem; gap: 8px; }
 
       /* dock: compact */
       .dock { padding: .35rem .4rem; gap: 0; }
@@ -402,17 +454,19 @@
   <!-- DESKTOP -->
   <div class="desktop" id="desktop">
 
-    <!-- BIO (static) -->
-    <div class="win w-bio">
+    <!-- BIO -->
+    <div class="win w-bio clickable" data-section="bio" onclick="openSection(this)">
       <div class="win-bar">
         <span class="win-dot r"></span><span class="win-dot y"></span><span class="win-dot g"></span>
         <span class="win-title">Bio</span>
       </div>
-      <div class="win-body">
+      <img class="bio-photo" src="/Imagenes/Charlie%20Portfolio/Charlie%20Portrait%20%231.jpg" alt="Charlie Chaves">
+      <div class="bio-card-body">
         <p class="bio-name">Charlie<br>Chaves</p>
         <p class="bio-role">Realizador · Produtor · Club Benares</p>
-        <p class="bio-text">Cresci a ver filmes e a imaginar que os estava a fazer. Algures em 2023 parei de imaginar e comecei mesmo. Fundei o Club Benares com a ideia de criar um espaço onde a malta pudesse fazer cinema de verdade, em Lisboa, sem grandes orçamentos mas com muita vontade. Tenho passado por todos os departamentos, mas escrever e realizar é onde me sinto em casa.</p>
+        <p class="bio-text">Cresci a ver filmes e a imaginar que os estava a fazer. Algures em 2023 parei de imaginar e comecei mesmo. Fundei o Club Benares com a ideia de criar um espaço onde a malta pudesse fazer cinema de verdade, em Lisboa, sem grandes orçamentos mas com muita vontade.</p>
         <p class="bio-year">Lisboa · 2023 —</p>
+        <span class="bio-open">Abrir →</span>
       </div>
     </div>
 
@@ -542,6 +596,122 @@
   <!-- ═══════════════════════════════════════
        SECTION PANELS
   ═══════════════════════════════════════ -->
+
+  <!-- BIO PANEL -->
+  <div class="section-panel" id="panel-bio">
+    <div class="panel-chrome">
+      <button class="panel-close" onclick="closeSection()" title="Fechar"></button>
+      <span class="panel-dot y"></span><span class="panel-dot g"></span>
+      <span class="panel-title-bar">Bio</span>
+    </div>
+    <div class="panel-scroll">
+
+      <!-- portrait + texto -->
+      <div class="bio-panel-top">
+        <img class="bio-panel-photo" src="/Imagenes/Charlie%20Portfolio/Charlie%20Portrait%20%231.jpg" alt="Charlie Chaves">
+        <div class="bio-panel-text">
+          <p class="bio-panel-name">Charlie<br>Chaves</p>
+          <p class="bio-panel-role">Realizador · Produtor · Fundador · Club Benares</p>
+          <p class="bio-panel-body">Cresci a ver filmes e a imaginar que os estava a fazer. Algures em 2023 parei de imaginar e comecei mesmo. Fundei o Club Benares com a ideia de criar um espaço onde a malta pudesse fazer cinema de verdade, em Lisboa, sem grandes orçamentos mas com muita vontade. Tenho passado por todos os departamentos, mas escrever e realizar é onde me sinto em casa.</p>
+          <p class="bio-panel-year">Lisboa · 2023 —</p>
+        </div>
+      </div>
+
+      <!-- widgets -->
+      <div class="widgets-grid">
+
+        <!-- Top filmes -->
+        <div class="widget">
+          <div class="widget-bar">
+            <span class="widget-dot r"></span><span class="widget-dot y"></span><span class="widget-dot g"></span>
+            <span class="widget-title">Top Filmes</span>
+          </div>
+          <div class="widget-body">
+            <div class="film-list">
+              <div class="film-row">
+                <span class="film-num">1</span>
+                <div class="film-info"><p class="film-wtitle">Blow-Up</p><p class="film-wdir">Michelangelo Antonioni</p></div>
+                <span class="film-wyr">1966</span>
+              </div>
+              <div class="film-row">
+                <span class="film-num">2</span>
+                <div class="film-info"><p class="film-wtitle">2001: A Space Odyssey</p><p class="film-wdir">Stanley Kubrick</p></div>
+                <span class="film-wyr">1968</span>
+              </div>
+              <div class="film-row">
+                <span class="film-num">3</span>
+                <div class="film-info"><p class="film-wtitle">Mulholland Drive</p><p class="film-wdir">David Lynch</p></div>
+                <span class="film-wyr">2001</span>
+              </div>
+              <div class="film-row">
+                <span class="film-num">4</span>
+                <div class="film-info"><p class="film-wtitle">Cidade de Deus</p><p class="film-wdir">Fernando Meirelles</p></div>
+                <span class="film-wyr">2002</span>
+              </div>
+              <div class="film-row">
+                <span class="film-num">5</span>
+                <div class="film-info"><p class="film-wtitle">Apocalypse Now</p><p class="film-wdir">Francis Ford Coppola</p></div>
+                <span class="film-wyr">1979</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Agora -->
+        <div class="widget">
+          <div class="widget-bar">
+            <span class="widget-dot r"></span><span class="widget-dot y"></span><span class="widget-dot g"></span>
+            <span class="widget-title">Em Rotação</span>
+          </div>
+          <div class="widget-body">
+            <div class="now-item">
+              <div class="now-thumb">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.5"><path d="M7 4v16M17 4v16M3 8h4M17 8h4M3 16h4M17 16h4"/></svg>
+              </div>
+              <div>
+                <p class="now-label">A ver</p>
+                <p class="now-name">Em actualização</p>
+                <p class="now-sub">— · —</p>
+              </div>
+            </div>
+            <div class="now-item">
+              <div class="now-thumb">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              </div>
+              <div>
+                <p class="now-label">A ler</p>
+                <p class="now-name">Em actualização</p>
+                <p class="now-sub">— · —</p>
+              </div>
+            </div>
+            <div class="now-item">
+              <div class="now-thumb">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
+              </div>
+              <div>
+                <p class="now-label">A ouvir</p>
+                <p class="now-name">Em actualização</p>
+                <p class="now-sub">— · —</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Citação -->
+        <div class="widget">
+          <div class="widget-bar">
+            <span class="widget-dot r"></span><span class="widget-dot y"></span><span class="widget-dot g"></span>
+            <span class="widget-title">Uma Frase</span>
+          </div>
+          <div class="widget-body">
+            <p class="quote-text">"A camera is a machine that records the visible world. But the photographer is an artist who interprets it."</p>
+            <p class="quote-from">— Michelangelo Antonioni</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <!-- FILMOGRAFIA PANEL -->
   <div class="section-panel" id="panel-filmografia">

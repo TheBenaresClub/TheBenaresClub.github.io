@@ -9,11 +9,15 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="/styles.css" />
   <style>
-    :root { --g: #5DA000; --neon: #39FF14; --ink: #f0f0f0; --ink2: #999; --ink3: #555; --border: rgba(255,255,255,0.08); }
+    :root { --g: #5DA000; --neon: #39FF14; --ink: #111; --ink2: #555; --ink3: #999; --border: rgba(0,0,0,0.08); }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { background: #000; color: var(--ink); font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; min-height: 100vh; }
-    footer { background: #000 !important; border-top: 1px solid #1a1a1a !important; }
-    footer a { color: #444 !important; }
+    html, body { background: #fff; color: var(--ink); font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; min-height: 100vh; }
+    footer { background: #fff !important; border-top: 1px solid #e0e0e0 !important; }
+    footer a { color: #aaa !important; }
+    header { background-color: #fff !important; border-bottom: 1px solid #e0e0e0 !important; }
+    nav { background-color: #f5f5f5 !important; border-bottom: 1px solid #e0e0e0 !important; }
+    .nav-toggle { background: rgba(0,0,0,0.06) !important; border-color: rgba(0,0,0,0.15) !important; color: #111 !important; }
+    .lang-btn { color: rgba(0,0,0,0.45) !important; border-color: rgba(0,0,0,0.18) !important; }
     #main-nav a { color: var(--g) !important; transition: color 0.15s, text-shadow 0.15s; }
     #main-nav a:hover, #main-nav a.active { color: var(--neon) !important; text-shadow: 0 0 8px var(--neon), 0 0 20px var(--neon); background: transparent !important; box-shadow: none !important; }
 
@@ -23,10 +27,10 @@
     .ch-hero-right { text-align: right; }
     .ch-hero-year { font-size: 0.55rem; color: var(--ink3); letter-spacing: 0.1em; display: block; }
 
-    .ch-bar-nav { display: flex; align-items: center; padding: 0 2.5rem; background: #161616; border-bottom: 1px solid #333; overflow-x: auto; scrollbar-width: none; }
+    .ch-bar-nav { display: flex; align-items: center; padding: 0 2.5rem; background: #f5f5f5; border-bottom: 1px solid #e0e0e0; overflow-x: auto; scrollbar-width: none; }
     .ch-bar-nav::-webkit-scrollbar { display: none; }
-    .ch-bar-nav-item { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: #aaa; padding: 1rem 1.2rem; border-bottom: 3px solid transparent; margin-bottom: -1px; white-space: nowrap; transition: color 0.15s, border-color 0.15s; display: inline-flex; align-items: center; }
-    .ch-bar-nav-item:hover { color: #eee; }
+    .ch-bar-nav-item { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: #777; padding: 1rem 1.2rem; border-bottom: 3px solid transparent; margin-bottom: -1px; white-space: nowrap; transition: color 0.15s, border-color 0.15s; display: inline-flex; align-items: center; }
+    .ch-bar-nav-item:hover { color: #111; }
     .ch-bar-nav-item.active { color: var(--g); border-bottom-color: var(--g); font-weight: 600; }
 
     /* ── CONTACT ── */

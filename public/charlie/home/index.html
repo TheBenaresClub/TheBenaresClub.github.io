@@ -7,41 +7,78 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap">
-  <link rel="stylesheet" href="/styles.css" />
   <style>
-    :root { --g: #5DA000; }
+    :root { --g: #5DA000; --g2: #2d5a00; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    /* ── DESKTOP ── */
-    html, body { height: 100%; }
+    html { height: 100%; }
     body {
-      background: #e8e8e8;
+      background: #dfe3e8;
       font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
     }
+    body.panel-open { overflow: hidden; }
 
-    header { background-color: #fff !important; border-bottom: 1px solid #d0d0d0 !important; }
-    nav { background-color: #f5f5f5 !important; border-bottom: 1px solid #e0e0e0 !important; }
-    .nav-toggle { background: rgba(0,0,0,0.06) !important; border-color: rgba(0,0,0,0.15) !important; color: #111 !important; }
-    .lang-btn { color: rgba(0,0,0,0.45) !important; border-color: rgba(0,0,0,0.18) !important; }
-    #main-nav a { color: var(--g) !important; }
-    #main-nav a:hover, #main-nav a.active { color: #2d5a00 !important; text-shadow: none !important; background: transparent !important; box-shadow: none !important; text-decoration: underline; text-underline-offset: 3px; }
-    footer { display: none; }
+    /* ═══════════════════════════════════════
+       MENUBAR
+    ═══════════════════════════════════════ */
+    .menubar {
+      height: 28px;
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.10);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      flex-shrink: 0;
+    }
+    .menubar-name {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: #111;
+      letter-spacing: 0.04em;
+    }
+    .menubar-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .menubar-time {
+      font-size: 0.62rem;
+      color: #555;
+    }
+    .menubar-back {
+      font-size: 0.58rem;
+      color: #888;
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: color 0.15s;
+    }
+    .menubar-back:hover { color: var(--g); }
 
-    /* ── DESKTOP GRID ── */
+    /* ═══════════════════════════════════════
+       DESKTOP GRID
+    ═══════════════════════════════════════ */
     .desktop {
       flex: 1;
-      padding: 2rem 1.5rem 6rem;
+      padding: 1.4rem 1.2rem 6rem;
       display: grid;
       grid-template-columns: repeat(12, 1fr);
       grid-auto-rows: minmax(60px, auto);
-      gap: 12px;
+      gap: 10px;
       align-content: start;
     }
 
-    /* ── WINDOW ── */
+    /* ═══════════════════════════════════════
+       WINDOW CARDS
+    ═══════════════════════════════════════ */
     .win {
       background: #fff;
       border-radius: 10px;
@@ -49,14 +86,16 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      text-decoration: none;
-      color: inherit;
-      transition: box-shadow 0.2s, transform 0.2s;
     }
-    a.win:hover {
+    .win.clickable {
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.18s;
+    }
+    .win.clickable:hover {
       box-shadow: 0 8px 24px rgba(0,0,0,0.14), 0 0 0 1px rgba(0,0,0,0.08);
       transform: translateY(-2px);
     }
+    .win.clickable:active { transform: translateY(0) scale(0.98); }
 
     /* title bar */
     .win-bar {
@@ -67,215 +106,263 @@
       background: #f5f5f5;
       border-bottom: 1px solid #e8e8e8;
       flex-shrink: 0;
+      user-select: none;
     }
-    .win-dot {
-      width: 11px; height: 11px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
+    .win-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
     .win-dot.r { background: #ff5f56; }
     .win-dot.y { background: #ffbd2e; }
     .win-dot.g { background: #27c93f; }
     .win-title {
-      font-size: 0.65rem;
-      font-weight: 500;
-      color: #888;
-      letter-spacing: 0.06em;
-      margin-left: 0.3rem;
-      flex: 1;
-      text-align: center;
+      font-size: 0.65rem; font-weight: 500; color: #888;
+      letter-spacing: 0.06em; margin-left: 0.3rem;
+      flex: 1; text-align: center;
     }
 
     /* window content */
-    .win-body {
-      padding: 1.2rem 1.4rem 1.4rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
+    .win-body { padding: 1.2rem 1.4rem 1.4rem; flex: 1; display: flex; flex-direction: column; }
 
     /* ── GRID POSITIONS ── */
-    .w-bio       { grid-column: 1 / 6;  grid-row: 1 / 4; }
-    .w-filmog    { grid-column: 6 / 9;  grid-row: 1 / 3; }
-    .w-cineclub  { grid-column: 9 / 13; grid-row: 1 / 3; }
-    .w-foto      { grid-column: 6 / 9;  grid-row: 3 / 5; }
+    .w-bio       { grid-column: 1 / 5;  grid-row: 1 / 4; }
+    .w-filmog    { grid-column: 5 / 8;  grid-row: 1 / 3; }
+    .w-cineclub  { grid-column: 8 / 13; grid-row: 1 / 3; }
+    .w-foto      { grid-column: 5 / 9;  grid-row: 3 / 5; }
     .w-video     { grid-column: 9 / 11; grid-row: 3 / 5; }
-    .w-blog      { grid-column: 11 / 13; grid-row: 3 / 5; }
-    .w-interesses{ grid-column: 1 / 6;  grid-row: 4 / 6; }
+    .w-blog      { grid-column: 11/ 13; grid-row: 3 / 5; }
+    .w-contacto  { grid-column: 1 / 5;  grid-row: 4 / 5; }
+    .w-interesses{ grid-column: 1 / 5;  grid-row: 5 / 6; }
 
-    /* ── BIO ── */
-    .bio-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.8rem, 5vw, 5rem);
-      color: var(--g);
-      line-height: 0.92;
-      letter-spacing: 0.01em;
-      margin-bottom: 1rem;
-    }
-    .bio-role {
-      font-size: 0.7rem;
-      color: #888;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 1.4rem;
-    }
-    .bio-text {
-      font-size: 0.8rem;
-      line-height: 1.8;
-      color: #444;
-      flex: 1;
-    }
-    .bio-year {
-      font-size: 0.6rem;
-      color: #bbb;
-      letter-spacing: 0.1em;
-      margin-top: 1.2rem;
-    }
+    /* bio */
+    .bio-name { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.4rem,4vw,4.5rem); color:var(--g); line-height:.92; letter-spacing:.01em; margin-bottom:.8rem; }
+    .bio-role  { font-size:.68rem; color:#888; letter-spacing:.12em; text-transform:uppercase; margin-bottom:1.2rem; }
+    .bio-text  { font-size:.78rem; line-height:1.85; color:#444; flex:1; }
+    .bio-year  { font-size:.58rem; color:#ccc; letter-spacing:.1em; margin-top:1rem; }
 
-    /* ── SECTION WINDOWS ── */
-    .sec-icon {
-      font-size: 1.6rem;
-      margin-bottom: 0.6rem;
-    }
-    .sec-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem;
-      color: #111;
-      letter-spacing: 0.04em;
-      margin-bottom: 0.3rem;
-    }
-    .sec-desc {
-      font-size: 0.7rem;
-      color: #888;
-      line-height: 1.6;
-      flex: 1;
-    }
-    .sec-link {
-      font-size: 0.6rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--g);
-      margin-top: 1rem;
-    }
-    a.win:hover .sec-link { color: #2d5a00; }
+    /* section windows */
+    .sec-name  { font-family:'Bebas Neue',sans-serif; font-size:1.4rem; color:#111; letter-spacing:.04em; margin-bottom:.3rem; }
+    .sec-desc  { font-size:.7rem; color:#888; line-height:1.6; flex:1; }
+    .sec-link  { font-size:.58rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--g); margin-top:.9rem; }
+    .win.clickable:hover .sec-link { color:var(--g2); }
 
-    /* ── BLOG / COMING SOON ── */
-    .soon-label {
-      font-size: 0.58rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #ccc;
-    }
-    .soon-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem;
-      color: #ddd;
-      letter-spacing: 0.04em;
-      margin-top: 0.3rem;
-    }
+    /* blog / soon */
+    .soon-label { font-size:.58rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:#ccc; }
+    .soon-title { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; color:#ddd; letter-spacing:.04em; margin-top:.3rem; }
 
-    /* ── INTERESSES ── */
-    .int-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-    .int-tag {
-      font-size: 0.62rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      color: #555;
-      background: #f5f5f5;
-      border: 1px solid #e0e0e0;
-      padding: 0.3rem 0.75rem;
-      border-radius: 99px;
-    }
-    .int-heading {
-      font-size: 0.6rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #bbb;
-      margin-bottom: 0.6rem;
-    }
+    /* interesses */
+    .int-heading { font-size:.58rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:#ccc; margin-bottom:.6rem; }
+    .int-list { display:flex; flex-wrap:wrap; gap:.4rem; }
+    .int-tag  { font-size:.62rem; font-weight:500; color:#555; background:#f5f5f5; border:1px solid #e0e0e0; padding:.28rem .65rem; border-radius:99px; }
 
-    /* ── DOCK ── */
+    /* ═══════════════════════════════════════
+       DOCK
+    ═══════════════════════════════════════ */
     .dock-wrap {
-      position: fixed;
-      bottom: 1.2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 100;
+      position: fixed; bottom:1.1rem; left:50%; transform:translateX(-50%); z-index:20;
     }
     .dock {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      background: rgba(255,255,255,0.72);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(0,0,0,0.10);
-      border-radius: 16px;
-      padding: 0.5rem 0.8rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      display:flex; align-items:center; gap:3px;
+      background:rgba(255,255,255,0.72);
+      backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+      border:1px solid rgba(0,0,0,0.10); border-radius:16px;
+      padding:.45rem .7rem;
+      box-shadow:0 4px 20px rgba(0,0,0,0.12);
     }
     .dock-item {
+      display:flex; flex-direction:column; align-items:center; gap:.18rem;
+      padding:.28rem .65rem; text-decoration:none; border-radius:8px;
+      cursor:pointer; background:none; border:none;
+      transition:background .15s;
+      min-width:48px;
+    }
+    .dock-item:hover { background:rgba(0,0,0,0.06); }
+    .dock-label { font-size:.48rem; font-weight:500; letter-spacing:.08em; color:#888; text-transform:uppercase; }
+    .dock-sep { width:1px; height:30px; background:rgba(0,0,0,0.12); margin:0 .15rem; }
+
+    /* ═══════════════════════════════════════
+       SECTION PANELS  (expand from card)
+    ═══════════════════════════════════════ */
+    .section-panel {
+      position: fixed;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      z-index: 500;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 0.2rem;
-      padding: 0.3rem 0.7rem;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: background 0.15s;
-      min-width: 52px;
+      opacity: 0;
+      pointer-events: none;
+      overflow: hidden;
     }
-    .dock-item:hover { background: rgba(0,0,0,0.06); }
-    .dock-item svg { opacity: 0.5; transition: opacity 0.15s; }
-    .dock-item:hover svg { opacity: 1; }
-    .dock-label {
-      font-size: 0.5rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      color: #888;
-      text-transform: uppercase;
-    }
-    .dock-sep {
-      width: 1px; height: 32px;
-      background: rgba(0,0,0,0.12);
-      margin: 0 0.2rem;
+    .section-panel.open {
+      opacity: 1;
+      pointer-events: all;
     }
 
+    /* panel chrome (title bar) */
+    .panel-chrome {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1rem;
+      background: #f5f5f5;
+      border-bottom: 1px solid #e0e0e0;
+      flex-shrink: 0;
+      user-select: none;
+    }
+    .panel-close {
+      width: 11px; height: 11px; border-radius: 50%;
+      background: #ff5f56; flex-shrink:0;
+      cursor: pointer; border:none; padding:0;
+      transition: filter .15s;
+    }
+    .panel-close:hover { filter: brightness(0.8); }
+    .panel-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+    .panel-dot.y { background:#ffbd2e; }
+    .panel-dot.g { background:#27c93f; }
+    .panel-title-bar {
+      font-size: .65rem; font-weight:500; color:#888;
+      letter-spacing:.06em; flex:1; text-align:center;
+    }
+    .panel-nav-links {
+      display:flex; gap:1rem; align-items:center;
+    }
+    .panel-nav-links a {
+      font-size:.6rem; font-weight:500; letter-spacing:.1em;
+      text-transform:uppercase; text-decoration:none; color:#aaa;
+      transition:color .15s;
+    }
+    .panel-nav-links a:hover { color:var(--g); }
+
+    /* panel scrollable body */
+    .panel-scroll {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* ── PANEL CONTENT: SHARED ── */
+    .p-section-bar {
+      display:flex; align-items:center; padding:.35rem 2.5rem;
+      border-bottom:1px solid #e0e0e0;
+    }
+    .p-sec-label {
+      font-size:.6rem; font-weight:600; letter-spacing:.2em;
+      text-transform:uppercase; color:var(--g);
+    }
+    .p-desc {
+      padding:1.4rem 2.5rem 1.6rem; border-bottom:1px solid #e0e0e0;
+      max-width:760px;
+    }
+    .p-desc p { font-size:.82rem; line-height:1.85; color:var(--g); font-style:italic; }
+    .placeholder { opacity:.18; pointer-events:none; }
+
+    /* ── PANEL: FILMOGRAFIA ── */
+    .film-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1px; background:#e0e0e0; }
+    .film-card { background:#fff; padding:1.8rem 1.6rem; border-left:3px solid transparent; transition:background .15s, border-color .15s; }
+    .film-card:hover { background:#f5f5f5; border-left-color:var(--g); }
+    .film-year { font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--g); margin-bottom:.5rem; }
+    .film-title { font-family:'Bebas Neue',sans-serif; font-size:1.7rem; color:#111; line-height:1.05; letter-spacing:.03em; margin-bottom:.4rem; }
+    .film-role { font-size:.68rem; color:#555; letter-spacing:.08em; margin-bottom:.8rem; font-style:italic; }
+    .film-tags { display:flex; flex-wrap:wrap; gap:.3rem; }
+    .film-tag { font-size:.55rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#555; border:1px solid #ddd; padding:.2rem .55rem; border-radius:2px; }
+
+    /* ── PANEL: VIDEOGRAFIA ── */
+    .vid-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1px; background:#e0e0e0; }
+    .vid-card { background:#fff; position:relative; overflow:hidden; cursor:pointer; }
+    .vid-thumb { width:100%; aspect-ratio:16/9; background:#f0f0f0; display:flex; align-items:center; justify-content:center; }
+    .vid-play { width:44px; height:44px; border:1.5px solid rgba(0,0,0,0.2); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:border-color .2s; }
+    .vid-card:hover .vid-play { border-color:var(--g); }
+    .vid-info { padding:.9rem 1.1rem 1.2rem; }
+    .vid-title { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; color:#111; letter-spacing:.02em; margin-bottom:.25rem; }
+    .vid-meta  { font-size:.62rem; color:#888; letter-spacing:.08em; text-transform:uppercase; }
+
+    /* ── PANEL: FOTOGRAFIA ── */
+    .col-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:4px; padding:4px; background:#e0e0e0; }
+    .col-card { position:relative; overflow:hidden; cursor:pointer; background:#ebebeb; min-height:240px; }
+    .col-card.tall  { grid-row:span 2; min-height:484px; }
+    .col-card.wide  { grid-column:span 2; }
+    .col-cover { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .5s; }
+    .col-card:hover .col-cover { transform:scale(1.04); }
+    .col-placeholder { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#ebebeb,#e0e0e0); }
+    .col-info { position:absolute; bottom:0; left:0; right:0; padding:2.5rem 1.2rem 1.1rem; background:linear-gradient(transparent,rgba(0,0,0,0.72) 60%); }
+    .col-card.placeholder-card .col-info { background:linear-gradient(transparent,rgba(0,0,0,0.40) 60%); }
+    .col-cat   { font-size:.52rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--g); margin-bottom:.3rem; display:block; }
+    .col-title { font-family:'Bebas Neue',sans-serif; font-size:1.25rem; letter-spacing:.04em; color:#fff; line-height:1.1; }
+    .col-meta  { font-size:.55rem; color:rgba(255,255,255,.5); letter-spacing:.08em; }
+    .col-card.placeholder-card .col-title,
+    .col-card.placeholder-card .col-cat,
+    .col-card.placeholder-card .col-meta { opacity:.4; }
+    .col-cta { position:absolute; top:.8rem; right:.8rem; font-size:.52rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--g); border:1px solid var(--g); padding:.25rem .6rem; border-radius:2px; opacity:0; transform:translateY(-4px); transition:opacity .2s, transform .2s; background:rgba(0,0,0,0.45); backdrop-filter:blur(4px); }
+    .col-card:hover .col-cta { opacity:1; transform:translateY(0); }
+
+    /* ── PANEL: CINE CLUB ── */
+    .cc-intro { padding:1.8rem 2.5rem; border-bottom:1px solid #e0e0e0; max-width:680px; }
+    .cc-intro-text { font-size:.82rem; line-height:1.85; color:var(--g); font-style:italic; }
+    .cb-hero { position:relative; min-height:500px; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; text-decoration:none; }
+    .cb-hero-bg { position:absolute; inset:0; background-image:url('/Imagenes/03%20Fototeca/MashUp%20%233%20-%203%20-%2005.12.25.jpg.png'); background-size:cover; background-position:center; background-color:rgba(93,160,0,.35); background-blend-mode:multiply; transition:transform .6s; }
+    .cb-hero:hover .cb-hero-bg { transform:scale(1.03); }
+    .cb-hero-grad { position:absolute; inset:0; background:linear-gradient(to bottom,rgba(0,0,0,.1),rgba(0,0,0,.82)); }
+    .cb-hero-body { position:relative; padding:2.5rem 2.5rem 2rem; }
+    .cb-hero-label { font-size:.58rem; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--g); margin-bottom:.8rem; display:block; }
+    .cb-hero-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,5vw,4rem); line-height:1; color:#fff; letter-spacing:.02em; margin-bottom:1.4rem; }
+    .cb-stats { display:flex; gap:2rem; margin-bottom:1.8rem; flex-wrap:wrap; }
+    .cb-stat strong { display:block; font-family:'Bebas Neue',sans-serif; font-size:1.8rem; line-height:1; color:#fff; }
+    .cb-stat span { font-size:.56rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.45); display:block; }
+    .cb-cta { display:inline-flex; align-items:center; font-size:.7rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#fff; border:1px solid rgba(255,255,255,.35); padding:.65rem 1.3rem; transition:border-color .2s, background .2s; }
+    .cb-cta:hover { border-color:var(--g); background:rgba(93,160,0,.15); color:var(--g); }
+
+    /* ── PANEL: CONTACTO ── */
+    .ct-heading-wrap { padding:2rem 2.5rem 1.2rem; }
+    .ct-heading { font-family:'Bebas Neue',sans-serif; font-size:clamp(1.8rem,5vw,3rem); color:var(--g); letter-spacing:.02em; line-height:1; }
+    .ct-list {}
+    .ct-item { display:flex; align-items:center; gap:1.4rem; padding:1.5rem 2.5rem; border-bottom:1px solid #e0e0e0; text-decoration:none; transition:background .15s; }
+    .ct-item:hover { background:#f5f5f5; }
+    .ct-icon { width:38px; height:38px; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; border:1px solid #e0e0e0; }
+    .ct-label { font-size:.68rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#111; margin-bottom:.15rem; }
+    .ct-value { font-size:.82rem; color:#555; }
+
+    /* ── PANEL: BLOG ── */
+    .blog-soon { padding:4rem 2.5rem; display:flex; flex-direction:column; gap:.8rem; }
+    .blog-soon-label { font-size:.6rem; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:#ccc; }
+    .blog-soon-title { font-family:'Bebas Neue',sans-serif; font-size:3rem; color:#e0e0e0; letter-spacing:.04em; }
+    .blog-soon-text { font-size:.8rem; color:#bbb; line-height:1.7; max-width:420px; margin-top:.5rem; }
+
+    /* ═══════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════ */
     @media (max-width: 900px) {
-      .desktop {
-        grid-template-columns: repeat(6, 1fr);
-        padding-bottom: 8rem;
-      }
-      .w-bio       { grid-column: 1 / 7; grid-row: auto; }
-      .w-filmog    { grid-column: 1 / 4; grid-row: auto; }
-      .w-cineclub  { grid-column: 4 / 7; grid-row: auto; }
-      .w-foto      { grid-column: 1 / 4; grid-row: auto; }
-      .w-video     { grid-column: 4 / 7; grid-row: auto; }
-      .w-blog      { grid-column: 1 / 4; grid-row: auto; }
-      .w-interesses{ grid-column: 4 / 7; grid-row: auto; }
+      .desktop { grid-template-columns:repeat(6,1fr); padding-bottom:7rem; }
+      .w-bio       { grid-column:1/7; grid-row:auto; }
+      .w-filmog    { grid-column:1/4; grid-row:auto; }
+      .w-cineclub  { grid-column:4/7; grid-row:auto; }
+      .w-foto      { grid-column:1/4; grid-row:auto; }
+      .w-video     { grid-column:4/7; grid-row:auto; }
+      .w-blog      { grid-column:1/4; grid-row:auto; }
+      .w-contacto  { grid-column:4/7; grid-row:auto; }
+      .w-interesses{ grid-column:1/7; grid-row:auto; }
+      .col-grid { grid-template-columns:repeat(2,1fr); }
+      .col-card.tall { grid-row:span 1; min-height:220px; }
     }
     @media (max-width: 520px) {
-      .desktop { grid-template-columns: 1fr 1fr; gap: 8px; padding: 1rem 0.8rem 8rem; }
-      .w-bio { grid-column: 1 / 3; }
-      .w-interesses { grid-column: 1 / 3; }
+      .desktop { grid-template-columns:1fr 1fr; gap:8px; padding:1rem .8rem 8rem; }
+      .w-bio, .w-interesses { grid-column:1/3; }
     }
   </style>
 </head>
 <body>
-  <div id="grain"></div>
-  <div id="header-container"></div>
 
-  <div class="desktop">
+  <!-- MENUBAR -->
+  <div class="menubar">
+    <span class="menubar-name">Charlie Chaves</span>
+    <div class="menubar-right">
+      <a class="menubar-back" href="/">Club Benares ↗</a>
+      <span class="menubar-time" id="menubar-time"></span>
+    </div>
+  </div>
 
-    <!-- BIO -->
+  <!-- DESKTOP -->
+  <div class="desktop" id="desktop">
+
+    <!-- BIO (static) -->
     <div class="win w-bio">
       <div class="win-bar">
         <span class="win-dot r"></span><span class="win-dot y"></span><span class="win-dot g"></span>
@@ -290,33 +377,33 @@
     </div>
 
     <!-- FILMOGRAFIA -->
-    <a class="win w-filmog" href="/charlie/">
+    <div class="win w-filmog clickable" data-section="filmografia" onclick="openSection(this)">
       <div class="win-bar">
         <span class="win-dot r"></span><span class="win-dot y"></span><span class="win-dot g"></span>
         <span class="win-title">Filmografia</span>
       </div>
       <div class="win-body">
         <p class="sec-name">Cinema</p>
-        <p class="sec-desc">Os filmes em que participei — como realizador, produtor, argumentista ou o que fosse preciso.</p>
-        <span class="sec-link">Ver filmografia →</span>
+        <p class="sec-desc">Os filmes em que participei — realizador, produtor, argumentista.</p>
+        <span class="sec-link">Abrir →</span>
       </div>
-    </a>
+    </div>
 
     <!-- CINE CLUB -->
-    <a class="win w-cineclub" href="/charlie/cineclub/">
+    <div class="win w-cineclub clickable" data-section="cineclub" onclick="openSection(this)">
       <div class="win-bar">
         <span class="win-dot r"></span><span class="win-dot y"></span><span class="win-dot g"></span>
         <span class="win-title">Cine Club</span>
       </div>
       <div class="win-body">
         <p class="sec-name">Club Benares</p>
-        <p class="sec-desc">O espaço que criei em 2023. Fazemos cinema, organizamos sessões e construímos comunidade.</p>
-        <span class="sec-link">Visitar →</span>
+        <p class="sec-desc">O espaço que criei em 2023. Fazemos cinema em Lisboa.</p>
+        <span class="sec-link">Abrir →</span>
       </div>
-    </a>
+    </div>
 
     <!-- FOTOGRAFIA -->
-    <a class="win w-foto" href="/charlie/photography/">
+    <div class="win w-foto clickable" data-section="fotografia" onclick="openSection(this)">
       <div class="win-bar">
         <span class="win-dot r"></span><span class="win-dot y"></span><span class="win-dot g"></span>
         <span class="win-title">Fotografia</span>
@@ -324,12 +411,12 @@
       <div class="win-body">
         <p class="sec-name">Fotografia</p>
         <p class="sec-desc">Coleções de clientes e projetos pessoais.</p>
-        <span class="sec-link">Ver coleções →</span>
+        <span class="sec-link">Abrir →</span>
       </div>
-    </a>
+    </div>
 
     <!-- VIDEOGRAFIA -->
-    <a class="win w-video" href="/charlie/videography/">
+    <div class="win w-video clickable" data-section="videografia" onclick="openSection(this)">
       <div class="win-bar">
         <span class="win-dot r"></span><span class="win-dot y"></span><span class="win-dot g"></span>
         <span class="win-title">Videografia</span>
@@ -337,12 +424,12 @@
       <div class="win-body">
         <p class="sec-name">Vídeo</p>
         <p class="sec-desc">Trabalhos para clientes.</p>
-        <span class="sec-link">Ver →</span>
+        <span class="sec-link">Abrir →</span>
       </div>
-    </a>
+    </div>
 
     <!-- BLOG -->
-    <div class="win w-blog">
+    <div class="win w-blog clickable" data-section="blog" onclick="openSection(this)">
       <div class="win-bar">
         <span class="win-dot r"></span><span class="win-dot y"></span><span class="win-dot g"></span>
         <span class="win-title">Blog</span>
@@ -353,7 +440,20 @@
       </div>
     </div>
 
-    <!-- INTERESSES -->
+    <!-- CONTACTO -->
+    <div class="win w-contacto clickable" data-section="contacto" onclick="openSection(this)">
+      <div class="win-bar">
+        <span class="win-dot r"></span><span class="win-dot y"></span><span class="win-dot g"></span>
+        <span class="win-title">Contacto</span>
+      </div>
+      <div class="win-body">
+        <p class="sec-name">Contacto</p>
+        <p class="sec-desc">Email · Instagram</p>
+        <span class="sec-link">Abrir →</span>
+      </div>
+    </div>
+
+    <!-- INTERESSES (static) -->
     <div class="win w-interesses">
       <div class="win-bar">
         <span class="win-dot r"></span><span class="win-dot y"></span><span class="win-dot g"></span>
@@ -362,74 +462,352 @@
       <div class="win-body">
         <p class="int-heading">Outros interesses</p>
         <div class="int-list">
-          <span class="int-tag">Cinema</span>
-          <span class="int-tag">Música</span>
-          <span class="int-tag">Fotografia analógica</span>
-          <span class="int-tag">Emulação de película</span>
-          <span class="int-tag">Filosofia</span>
-          <span class="int-tag">Desporto</span>
-          <span class="int-tag">Viagens</span>
-          <span class="int-tag">Literatura</span>
+          <span class="int-tag">Cinema</span><span class="int-tag">Música</span>
+          <span class="int-tag">Fotografia analógica</span><span class="int-tag">Emulação de película</span>
+          <span class="int-tag">Filosofia</span><span class="int-tag">Desporto</span>
+          <span class="int-tag">Viagens</span><span class="int-tag">Literatura</span>
         </div>
       </div>
     </div>
 
-  </div>
+  </div><!-- /desktop -->
 
   <!-- DOCK -->
   <div class="dock-wrap">
     <nav class="dock">
-      <a class="dock-item" href="/charlie/">
+      <button class="dock-item" onclick="openSectionById('filmografia')">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16M17 4v16M3 8h4M17 8h4M3 16h4M17 16h4M7 4H3M17 4h4M7 20H3M17 20h4"/></svg>
         <span class="dock-label">Cinema</span>
-      </a>
-      <a class="dock-item" href="/charlie/cineclub/">
+      </button>
+      <button class="dock-item" onclick="openSectionById('cineclub')">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
         <span class="dock-label">Cine Club</span>
-      </a>
-      <a class="dock-item" href="/charlie/photography/">
+      </button>
+      <button class="dock-item" onclick="openSectionById('fotografia')">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="3.5"/></svg>
         <span class="dock-label">Foto</span>
-      </a>
-      <a class="dock-item" href="/charlie/videography/">
+      </button>
+      <button class="dock-item" onclick="openSectionById('videografia')">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="23,7 16,12 23,17"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
         <span class="dock-label">Vídeo</span>
-      </a>
+      </button>
       <div class="dock-sep"></div>
-      <a class="dock-item" href="/charlie/contact/">
+      <button class="dock-item" onclick="openSectionById('contacto')">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
         <span class="dock-label">Contacto</span>
-      </a>
+      </button>
     </nav>
   </div>
 
-  <div id="footer-container"></div>
-  <script src="/shared.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var logoLink = document.querySelector('#header-container a[href="/"]');
-      if (logoLink) logoLink.href = '/charlie/home/';
+  <!-- ═══════════════════════════════════════
+       SECTION PANELS
+  ═══════════════════════════════════════ -->
 
-      var logo = document.querySelector('#header-container img');
-      if (logo) {
-        logo.src = '/Imagenes/01 Banners/Club Benares - Charlie logo.png';
-        logo.alt = 'Charlie Chaves';
-        logo.style.height = '30px';
-      }
-      var nav = document.querySelector('#main-nav ul');
-      if (nav) {
-        nav.innerHTML = [
-          ['/charlie/',             'Filmografia'],
-          ['/charlie/videography/', 'Videografia'],
-          ['/charlie/photography/', 'Fotografia'],
-          ['/charlie/cineclub/',    'Cine Club'],
-          ['/charlie/contact/',     'Contacto'],
-        ].map(function(item) {
-          var active = window.location.pathname === item[0] ? 'active' : '';
-          return '<li><a href="' + item[0] + '" class="' + active + '">' + item[1] + '</a></li>';
-        }).join('');
-      }
-    });
+  <!-- FILMOGRAFIA PANEL -->
+  <div class="section-panel" id="panel-filmografia">
+    <div class="panel-chrome">
+      <button class="panel-close" onclick="closeSection()" title="Fechar"></button>
+      <span class="panel-dot y"></span><span class="panel-dot g"></span>
+      <span class="panel-title-bar">Filmografia</span>
+    </div>
+    <div class="panel-scroll">
+      <div class="p-section-bar"><span class="p-sec-label">Filmografia</span></div>
+      <div class="p-desc"><p>Estes são os filmes em que participei. Desempenhei várias funções ao longo do meu percurso e diria até que já passei por todos os departamentos. Apaixona-me a criação audiovisual em qualquer função, mas escrever e realizar é, sem dúvida, a minha maior paixão. -Charlie</p></div>
+      <div class="film-grid">
+        <div class="film-card placeholder">
+          <p class="film-year">Ano</p>
+          <p class="film-title">Título do Filme</p>
+          <p class="film-role">Função desempenhada</p>
+          <div class="film-tags"><span class="film-tag">Curta</span><span class="film-tag">Realizador</span></div>
+        </div>
+        <div class="film-card placeholder">
+          <p class="film-year">Ano</p>
+          <p class="film-title">Título do Filme</p>
+          <p class="film-role">Função desempenhada</p>
+          <div class="film-tags"><span class="film-tag">Longa</span><span class="film-tag">Produtor</span></div>
+        </div>
+        <div class="film-card placeholder">
+          <p class="film-year">Ano</p>
+          <p class="film-title">Título do Filme</p>
+          <p class="film-role">Função desempenhada</p>
+          <div class="film-tags"><span class="film-tag">Curta</span><span class="film-tag">Argumento</span></div>
+        </div>
+        <div class="film-card placeholder">
+          <p class="film-year">Ano</p>
+          <p class="film-title">Título do Filme</p>
+          <p class="film-role">Função desempenhada</p>
+          <div class="film-tags"><span class="film-tag">Série</span><span class="film-tag">Realizador</span></div>
+        </div>
+        <div class="film-card placeholder">
+          <p class="film-year">Ano</p>
+          <p class="film-title">Título do Filme</p>
+          <p class="film-role">Função desempenhada</p>
+          <div class="film-tags"><span class="film-tag">Curta</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CINE CLUB PANEL -->
+  <div class="section-panel" id="panel-cineclub">
+    <div class="panel-chrome">
+      <button class="panel-close" onclick="closeSection()" title="Fechar"></button>
+      <span class="panel-dot y"></span><span class="panel-dot g"></span>
+      <span class="panel-title-bar">Cine Club</span>
+    </div>
+    <div class="panel-scroll">
+      <div class="p-section-bar"><span class="p-sec-label">Cine Club</span></div>
+      <div class="cc-intro"><p class="cc-intro-text">Um dia acordei com a ideia de criar um espaço. Tinha vários objetivos e sonhos em mente, mas o fundamental foi sempre fazer filmes. Hoje esse espaço em que acordei a pensar numa manhã de 2023 chama-se Club Benares. Convido-te a descobrir de que se trata. -Charlie</p></div>
+      <a class="cb-hero" href="/" target="_blank">
+        <div class="cb-hero-bg"></div>
+        <div class="cb-hero-grad"></div>
+        <div class="cb-hero-body">
+          <span class="cb-hero-label">Club Benares · Lisboa, desde 2023</span>
+          <h2 class="cb-hero-title">Fazemos cinema.<br>Em Lisboa.</h2>
+          <div class="cb-stats">
+            <div class="cb-stat"><strong>5</strong><span>Filmes</span></div>
+            <div class="cb-stat"><strong>11+</strong><span>Eventos</span></div>
+            <div class="cb-stat"><strong>∞</strong><span>Comunidade</span></div>
+          </div>
+          <span class="cb-cta">Visitar o Club →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- FOTOGRAFIA PANEL -->
+  <div class="section-panel" id="panel-fotografia">
+    <div class="panel-chrome">
+      <button class="panel-close" onclick="closeSection()" title="Fechar"></button>
+      <span class="panel-dot y"></span><span class="panel-dot g"></span>
+      <span class="panel-title-bar">Fotografia</span>
+    </div>
+    <div class="panel-scroll">
+      <div class="p-section-bar"><span class="p-sec-label">Coleções</span><span style="font-size:.6rem;color:#aaa;margin-left:auto;" id="col-count"></span></div>
+      <div class="p-desc"><p>O Blow-Up do Antonioni é um filme genial. E temos de admitir que o estilo de vida do fotógrafo era o paraíso. Então, bem, também gosto de tirar fotografias... capaz que um dia chego lá haha. -Charlie</p></div>
+      <div class="col-grid" id="col-grid"></div>
+    </div>
+  </div>
+
+  <!-- VIDEOGRAFIA PANEL -->
+  <div class="section-panel" id="panel-videografia">
+    <div class="panel-chrome">
+      <button class="panel-close" onclick="closeSection()" title="Fechar"></button>
+      <span class="panel-dot y"></span><span class="panel-dot g"></span>
+      <span class="panel-title-bar">Videografia</span>
+    </div>
+    <div class="panel-scroll">
+      <div class="p-section-bar"><span class="p-sec-label">Videografia</span></div>
+      <div class="p-desc"><p>Conheci o vício quando comprei a minha primeira câmara. Desde então tornei-me viciado no equipamento de vídeo, na luz, na imagem e na busca interminável da emulação de película em digital. Ao longo dessa jornada dispendiosa, fiz alguns trabalhos para clientes. Espreita. -Charlie</p></div>
+      <div class="vid-grid">
+        <div class="vid-card placeholder"><div class="vid-thumb"><div class="vid-play"><svg width="13" height="15" viewBox="0 0 14 16" fill="none"><path d="M1 1L13 8L1 15V1Z" fill="#555" stroke="#555" stroke-width="1.5"/></svg></div></div><div class="vid-info"><p class="vid-title">Título do Vídeo</p><p class="vid-meta">Ano · Género · Cliente</p></div></div>
+        <div class="vid-card placeholder"><div class="vid-thumb"><div class="vid-play"><svg width="13" height="15" viewBox="0 0 14 16" fill="none"><path d="M1 1L13 8L1 15V1Z" fill="#555" stroke="#555" stroke-width="1.5"/></svg></div></div><div class="vid-info"><p class="vid-title">Título do Vídeo</p><p class="vid-meta">Ano · Género · Cliente</p></div></div>
+        <div class="vid-card placeholder"><div class="vid-thumb"><div class="vid-play"><svg width="13" height="15" viewBox="0 0 14 16" fill="none"><path d="M1 1L13 8L1 15V1Z" fill="#555" stroke="#555" stroke-width="1.5"/></svg></div></div><div class="vid-info"><p class="vid-title">Título do Vídeo</p><p class="vid-meta">Ano · Género · Cliente</p></div></div>
+        <div class="vid-card placeholder"><div class="vid-thumb"><div class="vid-play"><svg width="13" height="15" viewBox="0 0 14 16" fill="none"><path d="M1 1L13 8L1 15V1Z" fill="#555" stroke="#555" stroke-width="1.5"/></svg></div></div><div class="vid-info"><p class="vid-title">Título do Vídeo</p><p class="vid-meta">Ano · Género · Cliente</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOG PANEL -->
+  <div class="section-panel" id="panel-blog">
+    <div class="panel-chrome">
+      <button class="panel-close" onclick="closeSection()" title="Fechar"></button>
+      <span class="panel-dot y"></span><span class="panel-dot g"></span>
+      <span class="panel-title-bar">Blog</span>
+    </div>
+    <div class="panel-scroll">
+      <div class="blog-soon">
+        <p class="blog-soon-label">Em breve</p>
+        <p class="blog-soon-title">Blog</p>
+        <p class="blog-soon-text">Aqui vou escrever sobre cinema, sobre o processo criativo, sobre o que ando a ver, a ler e a ouvir. Ainda não está pronto, mas já está a acontecer.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACTO PANEL -->
+  <div class="section-panel" id="panel-contacto">
+    <div class="panel-chrome">
+      <button class="panel-close" onclick="closeSection()" title="Fechar"></button>
+      <span class="panel-dot y"></span><span class="panel-dot g"></span>
+      <span class="panel-title-bar">Contacto</span>
+    </div>
+    <div class="panel-scroll">
+      <div class="ct-heading-wrap">
+        <h2 class="ct-heading">Vamos trabalhar juntos.</h2>
+      </div>
+      <div class="ct-list">
+        <a class="ct-item" href="mailto:charlie@thebenaresclub.com">
+          <div class="ct-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div>
+            <p class="ct-label">Email</p>
+            <p class="ct-value">charlie@thebenaresclub.com</p>
+          </div>
+        </a>
+        <a class="ct-item" href="https://www.instagram.com/CharlieChaves14" target="_blank" rel="noopener">
+          <div class="ct-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="#555"/></svg>
+          </div>
+          <div>
+            <p class="ct-label">Instagram</p>
+            <p class="ct-value">@CharlieChaves14</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ── CLOCK ── */
+    function updateTime() {
+      var el = document.getElementById('menubar-time');
+      if (!el) return;
+      var now = new Date();
+      el.textContent = now.toLocaleTimeString('pt-PT', {hour:'2-digit', minute:'2-digit'});
+    }
+    updateTime();
+    setInterval(updateTime, 10000);
+
+    /* ── PHOTO COLLECTIONS ── */
+    var COLLECTIONS = [
+      { title:'Nome do Cliente', cat:'Casamento',   year:'2025', cover:null, span:'tall' },
+      { title:'Nome do Cliente', cat:'Retrato',     year:'2025', cover:null, span:'' },
+      { title:'Nome do Cliente', cat:'Editorial',   year:'2025', cover:null, span:'' },
+      { title:'Nome do Cliente', cat:'Corporativo', year:'2025', cover:null, span:'wide' },
+      { title:'Nome do Cliente', cat:'Moda',        year:'2025', cover:null, span:'' },
+      { title:'Nome do Cliente', cat:'Eventos',     year:'2025', cover:null, span:'tall' },
+      { title:'Nome do Cliente', cat:'Retrato',     year:'2025', cover:null, span:'' },
+    ];
+    (function buildGrid() {
+      var grid = document.getElementById('col-grid');
+      var counter = document.getElementById('col-count');
+      if (!grid) return;
+      if (counter) counter.textContent = COLLECTIONS.length + ' coleções';
+      COLLECTIONS.forEach(function(col) {
+        var card = document.createElement('div');
+        card.className = 'col-card placeholder-card' + (col.span ? ' '+col.span : '');
+        if (col.cover) {
+          card.classList.remove('placeholder-card');
+          var img = document.createElement('img');
+          img.className = 'col-cover'; img.src = col.cover; img.alt = col.title; img.loading = 'lazy';
+          card.appendChild(img);
+        } else {
+          var ph = document.createElement('div');
+          ph.className = 'col-placeholder';
+          ph.innerHTML = '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="3.5"/></svg>';
+          card.appendChild(ph);
+        }
+        var info = document.createElement('div');
+        info.className = 'col-info';
+        info.innerHTML = '<span class="col-cat">'+col.cat+'</span><p class="col-title">'+col.title+'</p><p class="col-meta">'+col.year+'</p>';
+        card.appendChild(info);
+        var cta = document.createElement('span');
+        cta.className = 'col-cta'; cta.textContent = 'Ver coleção';
+        card.appendChild(cta);
+        grid.appendChild(card);
+      });
+    })();
+
+    /* ── EXPAND / COLLAPSE ── */
+    var currentPanel = null;
+    var currentCard  = null;
+    var cardRectCache = null;
+
+    function openSection(card) {
+      var sectionId = card.dataset.section;
+      openSectionById(sectionId, card);
+    }
+
+    function openSectionById(sectionId, card) {
+      var panel = document.getElementById('panel-' + sectionId);
+      if (!panel) return;
+
+      // Find the card if not passed
+      if (!card) card = document.querySelector('[data-section="'+sectionId+'"]');
+
+      var rect = card ? card.getBoundingClientRect() : {top:window.innerHeight/2-100, left:window.innerWidth/2-150, width:300, height:200};
+      cardRectCache = rect;
+
+      // Place panel at card's position instantly (no transition)
+      panel.style.transition = 'none';
+      panel.style.top    = rect.top + 'px';
+      panel.style.left   = rect.left + 'px';
+      panel.style.width  = rect.width + 'px';
+      panel.style.height = rect.height + 'px';
+      panel.style.borderRadius = '10px';
+
+      panel.classList.add('open');
+      panel.querySelector('.panel-scroll').scrollTop = 0;
+
+      // Force reflow so initial state registers
+      panel.getBoundingClientRect();
+
+      // Animate to fullscreen
+      var dur = '0.42s';
+      var ease = 'cubic-bezier(0.4, 0, 0.2, 1)';
+      panel.style.transition = [
+        'top '+dur+' '+ease,
+        'left '+dur+' '+ease,
+        'width '+dur+' '+ease,
+        'height '+dur+' '+ease,
+        'border-radius '+dur+' '+ease,
+        'opacity 0.2s'
+      ].join(', ');
+
+      panel.style.top    = '0';
+      panel.style.left   = '0';
+      panel.style.width  = '100vw';
+      panel.style.height = '100vh';
+      panel.style.borderRadius = '0';
+
+      currentPanel = panel;
+      currentCard  = card;
+      document.body.classList.add('panel-open');
+
+      // Keyboard close
+      document.addEventListener('keydown', onEscKey);
+    }
+
+    function closeSection() {
+      if (!currentPanel) return;
+      var panel = currentPanel;
+      var rect  = cardRectCache || {top:window.innerHeight/2-100, left:window.innerWidth/2-150, width:300, height:200};
+
+      var dur = '0.38s';
+      var ease = 'cubic-bezier(0.4, 0, 0.2, 1)';
+      panel.style.transition = [
+        'top '+dur+' '+ease,
+        'left '+dur+' '+ease,
+        'width '+dur+' '+ease,
+        'height '+dur+' '+ease,
+        'border-radius '+dur+' '+ease,
+        'opacity 0.25s 0.15s'
+      ].join(', ');
+
+      panel.style.top    = rect.top + 'px';
+      panel.style.left   = rect.left + 'px';
+      panel.style.width  = rect.width + 'px';
+      panel.style.height = rect.height + 'px';
+      panel.style.borderRadius = '10px';
+      panel.style.opacity = '0';
+
+      setTimeout(function() {
+        panel.classList.remove('open');
+        panel.style.transition = 'none';
+        panel.style.opacity = '';
+      }, 420);
+
+      currentPanel = null;
+      currentCard  = null;
+      cardRectCache = null;
+      document.body.classList.remove('panel-open');
+      document.removeEventListener('keydown', onEscKey);
+    }
+
+    function onEscKey(e) {
+      if (e.key === 'Escape') closeSection();
+    }
   </script>
 </body>
 </html>

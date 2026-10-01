@@ -243,6 +243,35 @@
       font-size: 0.72rem; color: var(--ink3); margin-top: 0.5rem;
     }
 
+    /* ── SECTION BAR ── */
+    .ch-section-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 2.5rem;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .ch-section-label {
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--g);
+    }
+    .ch-section-count {
+      font-size: 0.58rem; color: #555; letter-spacing: 0.08em;
+    }
+
+    /* ── PHOTO SECTION HEADER ── */
+    .ch-photos-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 2rem 2.5rem 0;
+      border-top: 2px solid #1a1a1a;
+      margin-top: 2rem;
+    }
+    .ch-photos-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem; letter-spacing: 0.06em; color: #f0f0f0;
+    }
+    .ch-photos-count {
+      font-size: 0.6rem; color: #555; letter-spacing: 0.1em;
+    }
+
     /* ── HEADER NAV — verde radioactivo ── */
     #main-nav a { color: #5DA000 !important; transition: color 0.15s, text-shadow 0.15s; }
     #main-nav a:hover,
@@ -275,14 +304,15 @@
         <a class="ch-bar-nav-item" href="/charlie/daily/">Daily Life</a>
         <span class="ch-bar-nav-count">01 — 05</span>
       </nav>
+      <div class="ch-section-bar">
+        <span class="ch-section-label">Filmografia</span>
+        <span class="ch-section-count" id="film-count"></span>
+      </div>
       <div class="filmography" id="filmography"></div>
 
-
-
-
-      <div class="ch-bar">
-        <span class="ch-bar-label">Fotografia</span>
-        <span class="ch-bar-count">178 frames</span>
+      <div class="ch-photos-header">
+        <span class="ch-photos-title">Fotografia de Set</span>
+        <span class="ch-photos-count">178 frames</span>
       </div>
       <div class="ch-photo-section">
 
@@ -539,7 +569,7 @@
       var grid  = document.getElementById('filmography');
       var count = document.getElementById('film-count');
       var real  = FILMS.filter(function (f) { return !f.placeholder; }).length;
-      count.textContent = real + ' filmes';
+      if (count) count.textContent = real + ' filmes';
 
       FILMS.forEach(function (film, i) {
         var card = document.createElement('div');
@@ -600,7 +630,7 @@
       var ficha = document.getElementById('fm-ficha');
       ficha.innerHTML = Object.entries(film.tecnica || {}).map(function (kv) {
         return '<div class="fm-ficha-row">' +
-          '<span class="fm-ficha-key">' + kv[0] + '</span>' +
+          '<span class="fm-ficha-label">' + kv[0] + '</span>' +
           '<span class="fm-ficha-val">' + kv[1] + '</span>' +
           '</div>';
       }).join('');

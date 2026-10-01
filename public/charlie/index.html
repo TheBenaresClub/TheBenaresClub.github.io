@@ -310,101 +310,6 @@
       </div>
       <div class="filmography" id="filmography"></div>
 
-      <div class="ch-photos-header">
-        <span class="ch-photos-title">Fotografia de Set</span>
-        <span class="ch-photos-count">178 frames</span>
-      </div>
-      <div class="ch-photo-section">
-
-      <section class="cs-roll">
-        <div class="cs-roll-header">
-          <span class="cs-roll-name">El Artista Comprendido</span>
-          <span class="cs-roll-frames">30 frames · Abril 2024</span>
-        </div>
-        <div class="cs-grid" id="roll-eac"></div>
-      </section>
-
-      <section class="cs-roll">
-        <div class="cs-roll-header">
-          <span class="cs-roll-name">Inexistente</span>
-          <span class="cs-roll-frames">22 frames</span>
-        </div>
-        <div class="cs-grid" id="roll-inx"></div>
-      </section>
-
-      <section class="cs-roll">
-        <div class="cs-roll-header">
-          <span class="cs-roll-name">Jay Gupta</span>
-          <span class="cs-roll-frames">21 frames · Junio 2025</span>
-        </div>
-        <div class="cs-grid" id="roll-jg"></div>
-      </section>
-
-      <section class="cs-roll">
-        <div class="cs-roll-header">
-          <span class="cs-roll-name">MashUp — Roll #1</span>
-          <span class="cs-roll-frames">14 frames</span>
-        </div>
-        <div class="cs-grid" id="roll-mu1"></div>
-      </section>
-
-      <section class="cs-roll">
-        <div class="cs-roll-header">
-          <span class="cs-roll-name">MashUp — Roll #2</span>
-          <span class="cs-roll-frames">24 frames</span>
-        </div>
-        <div class="cs-grid" id="roll-mu2"></div>
-      </section>
-
-      <section class="cs-roll">
-        <div class="cs-roll-header">
-          <span class="cs-roll-name">MashUp — Roll #3</span>
-          <span class="cs-roll-frames">8 frames · 05.12.25</span>
-        </div>
-        <div class="cs-grid" id="roll-mu3"></div>
-      </section>
-
-      <section class="cs-roll">
-        <div class="cs-roll-header">
-          <span class="cs-roll-name">MashUp — Roll #4</span>
-          <span class="cs-roll-frames">13 frames</span>
-        </div>
-        <div class="cs-grid" id="roll-mu4"></div>
-      </section>
-
-      <section class="cs-roll">
-        <div class="cs-roll-header">
-          <span class="cs-roll-name">MashUp — Roll #5</span>
-          <span class="cs-roll-frames">9 frames · 07.05.2026</span>
-        </div>
-        <div class="cs-grid" id="roll-mu5"></div>
-      </section>
-
-      <section class="cs-roll">
-        <div class="cs-roll-header">
-          <span class="cs-roll-name">Night Lounge — Roll #1</span>
-          <span class="cs-roll-frames">13 frames · 11.12.24</span>
-        </div>
-        <div class="cs-grid" id="roll-nl1"></div>
-      </section>
-
-      <section class="cs-roll">
-        <div class="cs-roll-header">
-          <span class="cs-roll-name">Night Lounge — Roll #2</span>
-          <span class="cs-roll-frames">9 frames</span>
-        </div>
-        <div class="cs-grid" id="roll-nl2"></div>
-      </section>
-
-      <section class="cs-roll">
-        <div class="cs-roll-header">
-          <span class="cs-roll-name">Night Lounge — Roll #3</span>
-          <span class="cs-roll-frames">15 frames</span>
-        </div>
-        <div class="cs-grid" id="roll-nl3"></div>
-      </section>
-
-      </div>
 
 
 
@@ -427,15 +332,6 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- ── PHOTO LIGHTBOX ── -->
-  <div class="lb" id="lb">
-    <button class="lb-btn lb-close" id="lb-close">✕</button>
-    <button class="lb-btn lb-prev"  id="lb-prev">‹</button>
-    <img class="lb-img" id="lb-img" src="" alt="" />
-    <button class="lb-btn lb-next"  id="lb-next">›</button>
-    <span class="lb-counter" id="lb-counter"></span>
   </div>
 
   <div id="footer-container"></div>
@@ -661,99 +557,9 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
         if (fmBackdrop.classList.contains('open')) closeFilmModal();
-        if (lb.classList.contains('open')) closeLightbox();
       }
     });
 
-    /* ── CONTACT SHEET ── */
-    var allPhotos = [];
-
-    function pad(n) { return n < 10 ? '0' + n : String(n); }
-
-    function buildRoll(prefix, count, containerId) {
-      var container = document.getElementById(containerId);
-      if (!container) return;
-      for (var i = 1; i <= count; i++) {
-        var src   = '/media/fototeca/full/' + prefix + '-' + pad(i) + '.jpg';
-        var label = prefix.toUpperCase() + '-' + pad(i);
-        var idx   = allPhotos.length;
-        allPhotos.push(src);
-
-        var frame = document.createElement('div');
-        frame.className = 'cs-frame';
-        frame.setAttribute('data-frame', label);
-
-        var img = document.createElement('img');
-        img.src = src;
-        img.alt = label;
-        img.loading = 'lazy';
-        img.decoding = 'async';
-
-        frame.appendChild(img);
-        frame.addEventListener('click', (function (i2) {
-          return function () { openLightbox(i2); };
-        }(idx)));
-        container.appendChild(frame);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      buildRoll('eac', 30, 'roll-eac');
-      buildRoll('inx', 22, 'roll-inx');
-      buildRoll('jg',  21, 'roll-jg');
-      buildRoll('mu1', 14, 'roll-mu1');
-      buildRoll('mu2', 24, 'roll-mu2');
-      buildRoll('mu3',  8, 'roll-mu3');
-      buildRoll('mu4', 13, 'roll-mu4');
-      buildRoll('mu5',  9, 'roll-mu5');
-      buildRoll('nl1', 13, 'roll-nl1');
-      buildRoll('nl2',  9, 'roll-nl2');
-      buildRoll('nl3', 15, 'roll-nl3');
-    });
-
-    /* ── LIGHTBOX ── */
-    var lb        = document.getElementById('lb');
-    var lbImg     = document.getElementById('lb-img');
-    var lbCounter = document.getElementById('lb-counter');
-    var lbCurrent = 0;
-    var touchX    = 0;
-
-    function openLightbox(idx) {
-      lbCurrent = idx;
-      lbImg.src = allPhotos[idx];
-      lbCounter.textContent = (idx + 1) + ' / ' + allPhotos.length;
-      lb.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-      lb.classList.remove('open');
-      document.body.style.overflow = '';
-      lbImg.src = '';
-    }
-
-    function lbGo(dir) {
-      lbCurrent = (lbCurrent + dir + allPhotos.length) % allPhotos.length;
-      lbImg.src = allPhotos[lbCurrent];
-      lbCounter.textContent = (lbCurrent + 1) + ' / ' + allPhotos.length;
-    }
-
-    document.getElementById('lb-close').addEventListener('click', closeLightbox);
-    document.getElementById('lb-prev').addEventListener('click', function () { lbGo(-1); });
-    document.getElementById('lb-next').addEventListener('click', function () { lbGo(1); });
-
-    lb.addEventListener('click', function (e) {
-      if (e.target === lb) closeLightbox();
-    });
-
-    lb.addEventListener('touchstart', function (e) {
-      touchX = e.touches[0].clientX;
-    }, { passive: true });
-
-    lb.addEventListener('touchend', function (e) {
-      var dx = e.changedTouches[0].clientX - touchX;
-      if (Math.abs(dx) > 50) lbGo(dx < 0 ? 1 : -1);
-    }, { passive: true });
   </script>
 </body>
 </html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charlie Chaves</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    :root { --g: #5DA000; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── DESKTOP ── */
+    html, body { height: 100%; }
+    body {
+      background: #e8e8e8;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header { background-color: #fff !important; border-bottom: 1px solid #d0d0d0 !important; }
+    nav { background-color: #f5f5f5 !important; border-bottom: 1px solid #e0e0e0 !important; }
+    .nav-toggle { background: rgba(0,0,0,0.06) !important; border-color: rgba(0,0,0,0.15) !important; color: #111 !important; }
+    .lang-btn { color: rgba(0,0,0,0.45) !important; border-color: rgba(0,0,0,0.18) !important; }
+    #main-nav a { color: var(--g) !important; }
+    #main-nav a:hover, #main-nav a.active { color: #2d5a00 !important; text-shadow: none !important; background: transparent !important; box-shadow: none !important; text-decoration: underline; text-underline-offset: 3px; }
+    footer { display: none; }
+
+    /* ── DESKTOP GRID ── */
+    .desktop {
+      flex: 1;
+      padding: 2rem 1.5rem 6rem;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: minmax(60px, auto);
+      gap: 12px;
+      align-content: start;
+    }
+
+    /* ── WINDOW ── */
+    .win {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.06);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    a.win:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.14), 0 0 0 1px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+
+    /* title bar */
+    .win-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 0.9rem;
+      background: #f5f5f5;
+      border-bottom: 1px solid #e8e8e8;
+      flex-shrink: 0;
+    }
+    .win-dot {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .win-dot.r { background: #ff5f56; }
+    .win-dot.y { background: #ffbd2e; }
+    .win-dot.g { background: #27c93f; }
+    .win-title {
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: #888;
+      letter-spacing: 0.06em;
+      margin-left: 0.3rem;
+      flex: 1;
+      text-align: center;
+    }
+
+    /* window content */
+    .win-body {
+      padding: 1.2rem 1.4rem 1.4rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── GRID POSITIONS ── */
+    .w-bio       { grid-column: 1 / 6;  grid-row: 1 / 4; }
+    .w-filmog    { grid-column: 6 / 9;  grid-row: 1 / 3; }
+    .w-cineclub  { grid-column: 9 / 13; grid-row: 1 / 3; }
+    .w-foto      { grid-column: 6 / 9;  grid-row: 3 / 5; }
+    .w-video     { grid-column: 9 / 11; grid-row: 3 / 5; }
+    .w-blog      { grid-column: 11 / 13; grid-row: 3 / 5; }
+    .w-interesses{ grid-column: 1 / 6;  grid-row: 4 / 6; }
+
+    /* ── BIO ── */
+    .bio-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      color: var(--g);
+      line-height: 0.92;
+      letter-spacing: 0.01em;
+      margin-bottom: 1rem;
+    }
+    .bio-role {
+      font-size: 0.7rem;
+      color: #888;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1.4rem;
+    }
+    .bio-text {
+      font-size: 0.8rem;
+      line-height: 1.8;
+      color: #444;
+      flex: 1;
+    }
+    .bio-year {
+      font-size: 0.6rem;
+      color: #bbb;
+      letter-spacing: 0.1em;
+      margin-top: 1.2rem;
+    }
+
+    /* ── SECTION WINDOWS ── */
+    .sec-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.6rem;
+    }
+    .sec-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: #111;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.3rem;
+    }
+    .sec-desc {
+      font-size: 0.7rem;
+      color: #888;
+      line-height: 1.6;
+      flex: 1;
+    }
+    .sec-link {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--g);
+      margin-top: 1rem;
+    }
+    a.win:hover .sec-link { color: #2d5a00; }
+
+    /* ── BLOG / COMING SOON ── */
+    .soon-label {
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #ccc;
+    }
+    .soon-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: #ddd;
+      letter-spacing: 0.04em;
+      margin-top: 0.3rem;
+    }
+
+    /* ── INTERESSES ── */
+    .int-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .int-tag {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: #555;
+      background: #f5f5f5;
+      border: 1px solid #e0e0e0;
+      padding: 0.3rem 0.75rem;
+      border-radius: 99px;
+    }
+    .int-heading {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #bbb;
+      margin-bottom: 0.6rem;
+    }
+
+    /* ── DOCK ── */
+    .dock-wrap {
+      position: fixed;
+      bottom: 1.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+    }
+    .dock {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(0,0,0,0.10);
+      border-radius: 16px;
+      padding: 0.5rem 0.8rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    }
+    .dock-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      padding: 0.3rem 0.7rem;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.15s;
+      min-width: 52px;
+    }
+    .dock-item:hover { background: rgba(0,0,0,0.06); }
+    .dock-item svg { opacity: 0.5; transition: opacity 0.15s; }
+    .dock-item:hover svg { opacity: 1; }
+    .dock-label {
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: #888;
+      text-transform: uppercase;
+    }
+    .dock-sep {
+      width: 1px; height: 32px;
+      background: rgba(0,0,0,0.12);
+      margin: 0 0.2rem;
+    }
+
+    @media (max-width: 900px) {
+      .desktop {
+        grid-template-columns: repeat(6, 1fr);
+        padding-bottom: 8rem;
+      }
+      .w-bio       { grid-column: 1 / 7; grid-row: auto; }
+      .w-filmog    { grid-column: 1 / 4; grid-row: auto; }
+      .w-cineclub  { grid-column: 4 / 7; grid-row: auto; }
+      .w-foto      { grid-column: 1 / 4; grid-row: auto; }
+      .w-video     { grid-column: 4 / 7; grid-row: auto; }
+      .w-blog      { grid-column: 1 / 4; grid-row: auto; }
+      .w-interesses{ grid-column: 4 / 7; grid-row: auto; }
+    }
+    @media (max-width: 520px) {
+      .desktop { grid-template-columns: 1fr 1fr; gap: 8px; padding: 1rem 0.8rem 8rem; }
+      .w-bio { grid-column: 1 / 3; }
+      .w-interesses { grid-column: 1 / 3; }
+    }
+  </style>
+</head>
+<body>
+  <div id="grain"></div>
+  <div id="header-container"></div>
+
+  <div class="desktop">
+
+    <!-- BIO -->
+    <div class="win w-bio">
+      <div class="win-bar">
+        <span class="win-dot r"></span><span class="win-dot y"></span><span class="win-dot g"></span>
+        <span class="win-title">Bio</span>
+      </div>
+      <div class="win-body">
+        <p class="bio-name">Charlie<br>Chaves</p>
+        <p class="bio-role">Realizador · Produtor · Club Benares</p>
+        <p class="bio-text">Cresci a ver filmes e a imaginar que os estava a fazer. Algures em 2023 parei de imaginar e comecei mesmo. Fundei o Club Benares com a ideia de criar um espaço onde a malta pudesse fazer cinema de verdade, em Lisboa, sem grandes orçamentos mas com muita vontade. Tenho passado por todos os departamentos, mas escrever e realizar é onde me sinto em casa.</p>
+        <p class="bio-year">Lisboa · 2023 —</p>
+      </div>
+    </div>
+
+    <!-- FILMOGRAFIA -->
+    <a class="win w-filmog" href="/charlie/">
+      <div class="win-bar">
+        <span class="win-dot r"></span><span class="win-dot y"></span><span class="win-dot g"></span>
+        <span class="win-title">Filmografia</span>
+      </div>
+      <div class="win-body">
+        <p class="sec-name">Cinema</p>
+        <p class="sec-desc">Os filmes em que participei — como realizador, produtor, argumentista ou o que fosse preciso.</p>
+        <span class="sec-link">Ver filmografia →</span>
+      </div>
+    </a>
+
+    <!-- CINE CLUB -->
+    <a class="win w-cineclub" href="/charlie/cineclub/">
+      <div class="win-bar">
+        <span class="win-dot r"></span><span class="win-dot y"></span><span class="win-dot g"></span>
+        <span class="win-title">Cine Club</span>
+      </div>
+      <div class="win-body">
+        <p class="sec-name">Club Benares</p>
+        <p class="sec-desc">O espaço que criei em 2023. Fazemos cinema, organizamos sessões e construímos comunidade.</p>
+        <span class="sec-link">Visitar →</span>
+      </div>
+    </a>
+
+    <!-- FOTOGRAFIA -->
+    <a class="win w-foto" href="/charlie/photography/">
+      <div class="win-bar">
+        <span class="win-dot r"></span><span class="win-dot y"></span><span class="win-dot g"></span>
+        <span class="win-title">Fotografia</span>
+      </div>
+      <div class="win-body">
+        <p class="sec-name">Fotografia</p>
+        <p class="sec-desc">Coleções de clientes e projetos pessoais.</p>
+        <span class="sec-link">Ver coleções →</span>
+      </div>
+    </a>
+
+    <!-- VIDEOGRAFIA -->
+    <a class="win w-video" href="/charlie/videography/">
+      <div class="win-bar">
+        <span class="win-dot r"></span><span class="win-dot y"></span><span class="win-dot g"></span>
+        <span class="win-title">Videografia</span>
+      </div>
+      <div class="win-body">
+        <p class="sec-name">Vídeo</p>
+        <p class="sec-desc">Trabalhos para clientes.</p>
+        <span class="sec-link">Ver →</span>
+      </div>
+    </a>
+
+    <!-- BLOG -->
+    <div class="win w-blog">
+      <div class="win-bar">
+        <span class="win-dot r"></span><span class="win-dot y"></span><span class="win-dot g"></span>
+        <span class="win-title">Blog</span>
+      </div>
+      <div class="win-body">
+        <p class="soon-label">Em breve</p>
+        <p class="soon-title">Blog</p>
+      </div>
+    </div>
+
+    <!-- INTERESSES -->
+    <div class="win w-interesses">
+      <div class="win-bar">
+        <span class="win-dot r"></span><span class="win-dot y"></span><span class="win-dot g"></span>
+        <span class="win-title">Interesses</span>
+      </div>
+      <div class="win-body">
+        <p class="int-heading">Outros interesses</p>
+        <div class="int-list">
+          <span class="int-tag">Cinema</span>
+          <span class="int-tag">Música</span>
+          <span class="int-tag">Fotografia analógica</span>
+          <span class="int-tag">Emulação de película</span>
+          <span class="int-tag">Filosofia</span>
+          <span class="int-tag">Desporto</span>
+          <span class="int-tag">Viagens</span>
+          <span class="int-tag">Literatura</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DOCK -->
+  <div class="dock-wrap">
+    <nav class="dock">
+      <a class="dock-item" href="/charlie/">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16M17 4v16M3 8h4M17 8h4M3 16h4M17 16h4M7 4H3M17 4h4M7 20H3M17 20h4"/></svg>
+        <span class="dock-label">Cinema</span>
+      </a>
+      <a class="dock-item" href="/charlie/cineclub/">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
+        <span class="dock-label">Cine Club</span>
+      </a>
+      <a class="dock-item" href="/charlie/photography/">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="3.5"/></svg>
+        <span class="dock-label">Foto</span>
+      </a>
+      <a class="dock-item" href="/charlie/videography/">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="23,7 16,12 23,17"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        <span class="dock-label">Vídeo</span>
+      </a>
+      <div class="dock-sep"></div>
+      <a class="dock-item" href="/charlie/contact/">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <span class="dock-label">Contacto</span>
+      </a>
+    </nav>
+  </div>
+
+  <div id="footer-container"></div>
+  <script src="/shared.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var logoLink = document.querySelector('#header-container a[href="/"]');
+      if (logoLink) logoLink.href = '/charlie/home/';
+
+      var logo = document.querySelector('#header-container img');
+      if (logo) {
+        logo.src = '/Imagenes/01 Banners/Club Benares - Charlie logo.png';
+        logo.alt = 'Charlie Chaves';
+        logo.style.height = '30px';
+      }
+      var nav = document.querySelector('#main-nav ul');
+      if (nav) {
+        nav.innerHTML = [
+          ['/charlie/',             'Filmografia'],
+          ['/charlie/videography/', 'Videografia'],
+          ['/charlie/photography/', 'Fotografia'],
+          ['/charlie/cineclub/',    'Cine Club'],
+          ['/charlie/contact/',     'Contacto'],
+        ].map(function(item) {
+          var active = window.location.pathname === item[0] ? 'active' : '';
+          return '<li><a href="' + item[0] + '" class="' + active + '">' + item[1] + '</a></li>';
+        }).join('');
+      }
+    });
+  </script>
+</body>
+</html>

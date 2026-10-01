@@ -358,7 +358,10 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var img = document.querySelector('#header-container img');
-      if (img) img.src = '/Imagenes/01 Banners/Club Benares - Charlie logo.png';
+      if (img) {
+        img.src = '/Imagenes/01 Banners/Club Benares - Charlie logo.png';
+        img.parentElement.href = '/charlie/home/';
+      }
 
       var nav = document.querySelector('#main-nav ul');
       if (nav) {

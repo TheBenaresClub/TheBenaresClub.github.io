@@ -56,10 +56,11 @@
       background-image: url('/Imagenes/03%20Fototeca/MashUp%20%233%20-%203%20-%2005.12.25.jpg.png');
       background-size: cover;
       background-position: center;
-      filter: grayscale(30%);
-      transition: transform 0.6s ease, filter 0.4s;
+      background-color: rgba(93,160,0,0.35);
+      background-blend-mode: multiply;
+      transition: transform 0.6s ease;
     }
-    .cb-hero:hover .cb-hero-bg { transform: scale(1.03); filter: grayscale(0); }
+    .cb-hero:hover .cb-hero-bg { transform: scale(1.03); }
     .cb-hero-grad {
       position: absolute; inset: 0;
       background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.82) 100%);
@@ -114,10 +115,11 @@
     .cb-tile-bg {
       position: absolute; inset: 0;
       background-size: cover; background-position: center;
-      filter: grayscale(25%);
-      transition: transform 0.4s ease, filter 0.3s;
+      background-color: rgba(93,160,0,0.3);
+      background-blend-mode: multiply;
+      transition: transform 0.4s ease;
     }
-    .cb-tile:hover .cb-tile-bg { transform: scale(1.06); filter: grayscale(0); }
+    .cb-tile:hover .cb-tile-bg { transform: scale(1.06); }
     .cb-tile-grad {
       position: absolute; inset: 0;
       background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.78) 100%);

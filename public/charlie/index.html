@@ -247,7 +247,7 @@
     .ch-section-bar {
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.1rem 2.5rem;
-      border-bottom: 1px solid #1a1a1a;
+      border-bottom: 1px solid #e0e0e0;
     }
     .ch-section-label {
       font-size: 0.6rem; font-weight: 600; letter-spacing: 0.22em;
@@ -255,6 +255,14 @@
     }
     .ch-section-count {
       font-size: 0.58rem; color: #555; letter-spacing: 0.08em;
+    }
+    .ch-desc {
+      padding: 1.4rem 2.5rem 1.6rem;
+      border-bottom: 1px solid #e0e0e0;
+      max-width: 760px;
+    }
+    .ch-desc p {
+      font-size: 0.82rem; line-height: 1.85; color: #555;
     }
 
     /* ── PHOTO SECTION HEADER ── */
@@ -316,6 +324,9 @@
       <div class="ch-section-bar">
         <span class="ch-section-label">Filmografia</span>
         <span class="ch-section-count" id="film-count"></span>
+      </div>
+      <div class="ch-desc">
+        <p>Estas son las películas en las que he participado. He desempeñado múltiples funciones a lo largo de mi recorrido — diría incluso que he pasado por cada departamento. Me apasiona la creación audiovisual en cualquier rol, pero escribir y dirigir es, sin duda, mi mayor pasión.</p>
       </div>
       <div class="filmography" id="filmography"></div>
 

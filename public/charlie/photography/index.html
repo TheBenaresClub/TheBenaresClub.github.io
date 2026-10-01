@@ -30,6 +30,8 @@
     /* ── SECTION BAR ── */
     .photo-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 2.5rem; border-bottom: 1px solid #e0e0e0; }
     .sec-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--g); }
+    .sec-desc { padding: 1.4rem 2.5rem 1.6rem; border-bottom: 1px solid #e0e0e0; max-width: 760px; }
+    .sec-desc p { font-size: 0.82rem; line-height: 1.85; color: var(--g); font-style: italic; }
     .sec-count { font-size: 0.6rem; color: #999; letter-spacing: 0.08em; }
 
     /* ── COLLECTION GRID ── */
@@ -163,6 +165,10 @@
     <div class="photo-bar">
       <span class="sec-label">Coleções</span>
       <span class="sec-count" id="col-count"></span>
+    </div>
+
+    <div class="sec-desc">
+      <p>Um amigo muito próximo recomendou-me há algum tempo que visse o Blow-Up do Antonioni, que, diga-se de passagem, é um filme genial. Mas temos de admitir que o estilo de vida do fotógrafo era o paraíso. Então, bem, também gosto de tirar fotografias e imaginar que sou um fotógrafo super cool. -Charlie</p>
     </div>
 
     <div class="col-grid" id="col-grid"></div>

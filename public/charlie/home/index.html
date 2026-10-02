@@ -337,6 +337,36 @@
     .col-cta { position:absolute; top:.8rem; right:.8rem; font-size:.52rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--g); border:1px solid var(--g); padding:.25rem .6rem; border-radius:2px; opacity:0; transform:translateY(-4px); transition:opacity .2s, transform .2s; background:rgba(0,0,0,0.45); backdrop-filter:blur(4px); }
     .col-card:hover .col-cta { opacity:1; transform:translateY(0); }
 
+    /* ── GALLERY VIEW (per-collection, within foto panel) ── */
+    .gallery-view { display:none; flex-direction:column; position:absolute; inset:0; background:#fff; z-index:2; }
+    .gallery-view.active { display:flex; }
+    .gallery-header { display:flex; align-items:center; padding:.45rem .7rem; background:#f5f5f5; border-bottom:1px solid #e0e0e0; flex-shrink:0; }
+    .gallery-back { background:none; border:none; cursor:pointer; display:flex; align-items:center; gap:.35rem; font-size:.6rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#888; padding:.35rem .55rem; border-radius:4px; transition:color .15s, background .15s; }
+    .gallery-back:hover { color:var(--g); background:rgba(93,160,0,.07); }
+    .gallery-title-bar { font-size:.64rem; font-weight:500; color:#888; letter-spacing:.06em; flex:1; text-align:center; }
+    .gallery-scroll { flex:1; overflow-y:auto; overflow-x:hidden; }
+    .gallery-meta { padding:1rem 1.6rem .9rem; border-bottom:1px solid #e8e8e8; display:flex; align-items:baseline; gap:.8rem; flex-wrap:wrap; }
+    .gallery-meta-title { font-family:'Bebas Neue',sans-serif; font-size:2rem; color:#111; letter-spacing:.03em; }
+    .gallery-meta-cat { font-size:.6rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--g); }
+    .gallery-meta-loc { font-size:.62rem; color:#aaa; margin-left:auto; }
+    .gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; padding:3px; }
+    .gallery-img-wrap { position:relative; overflow:hidden; cursor:pointer; background:#f0f0f0; aspect-ratio:3/2; }
+    .gallery-img { width:100%; height:100%; object-fit:cover; transition:transform .45s; display:block; }
+    .gallery-img-wrap:hover .gallery-img { transform:scale(1.04); }
+    .gallery-img-num { position:absolute; bottom:.5rem; right:.6rem; font-size:.5rem; font-weight:600; color:rgba(255,255,255,.55); letter-spacing:.08em; pointer-events:none; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox { position:fixed; inset:0; background:rgba(0,0,0,.96); z-index:2000; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .2s; }
+    .lightbox.open { opacity:1; pointer-events:all; }
+    .lightbox-img { max-width:calc(100vw - 8rem); max-height:calc(100vh - 4rem); object-fit:contain; display:block; border-radius:1px; }
+    .lb-close { position:absolute; top:1rem; right:1rem; width:36px; height:36px; background:rgba(255,255,255,.12); border:none; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s; }
+    .lb-close:hover { background:rgba(255,255,255,.25); }
+    .lb-arrow { position:absolute; top:50%; transform:translateY(-50%); width:44px; height:44px; background:rgba(255,255,255,.10); border:none; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s; }
+    .lb-arrow:hover { background:rgba(255,255,255,.22); }
+    .lb-prev { left:1rem; }
+    .lb-next { right:1rem; }
+    .lb-counter { position:absolute; bottom:1.2rem; left:50%; transform:translateX(-50%); font-size:.6rem; color:rgba(255,255,255,.45); letter-spacing:.12em; }
+
     /* ── PANEL: CINE CLUB ── */
     .cc-intro { padding:1.8rem 2.5rem; border-bottom:1px solid #e0e0e0; max-width:680px; }
     .cc-intro-text { font-size:.82rem; line-height:1.85; color:var(--g); font-style:italic; }
@@ -436,6 +466,11 @@
       .col-grid      { grid-template-columns: 1fr 1fr; }
       .col-card.wide { grid-column: span 2; }
       .col-card.tall { grid-row: span 1; min-height: 200px; }
+      .gallery-grid  { grid-template-columns: repeat(2,1fr); }
+      .lightbox-img  { max-width:calc(100vw - 1rem); max-height:calc(100vh - 6rem); }
+      .lb-arrow { width:36px; height:36px; }
+      .lb-prev { left:.4rem; }
+      .lb-next { right:.4rem; }
     }
   </style>
 </head>
@@ -768,10 +803,29 @@
       <span class="panel-dot y"></span><span class="panel-dot g"></span>
       <span class="panel-title-bar">Fotografia</span>
     </div>
-    <div class="panel-scroll">
-      <div class="p-section-bar"><span class="p-sec-label">Coleções</span><span style="font-size:.6rem;color:#aaa;margin-left:auto;" id="col-count"></span></div>
-      <div class="p-desc"><p>O Blow-Up do Antonioni é um filme genial. E temos de admitir que o estilo de vida do fotógrafo era o paraíso. Então, bem, também gosto de tirar fotografias... capaz que um dia chego lá haha. -Charlie</p></div>
-      <div class="col-grid" id="col-grid"></div>
+    <!-- inner wrapper: fills below chrome, positioning context for gallery-view -->
+    <div style="flex:1; position:relative; overflow:hidden; display:flex; flex-direction:column;">
+      <!-- Collections list -->
+      <div class="panel-scroll" id="foto-scroll">
+        <div class="p-section-bar"><span class="p-sec-label">Coleções</span><span style="font-size:.6rem;color:#aaa;margin-left:auto;" id="col-count"></span></div>
+        <div class="p-desc"><p>O Blow-Up do Antonioni é um filme genial. E temos de admitir que o estilo de vida do fotógrafo era o paraíso. Então, bem, também gosto de tirar fotografias... capaz que um dia chego lá haha. -Charlie</p></div>
+        <div class="col-grid" id="col-grid"></div>
+      </div>
+      <!-- Gallery view (single collection) -->
+      <div class="gallery-view" id="gallery-view">
+        <div class="gallery-header">
+          <button class="gallery-back" onclick="closeGallery()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            Coleções
+          </button>
+          <span class="gallery-title-bar" id="gallery-title-bar"></span>
+          <span style="min-width:80px;"></span>
+        </div>
+        <div class="gallery-scroll">
+          <div class="gallery-meta" id="gallery-meta"></div>
+          <div class="gallery-grid" id="gallery-grid"></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -844,6 +898,21 @@
     </div>
   </div>
 
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lb-close" onclick="event.stopPropagation();closeLightbox()" title="Fechar">
+      <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M1 1L13 13M13 1L1 13"/></svg>
+    </button>
+    <button class="lb-arrow lb-prev" onclick="event.stopPropagation();lbStep(-1)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+    <button class="lb-arrow lb-next" onclick="event.stopPropagation();lbStep(1)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <span class="lb-counter" id="lb-counter"></span>
+  </div>
+
   <script>
     /* ── CLOCK ── */
     function updateTime() {
@@ -856,25 +925,33 @@
     setInterval(updateTime, 10000);
 
     /* ── PHOTO COLLECTIONS ── */
+    var _base = '/Imagenes/Charlie%20Portfolio/Fotografias/Madalena%20M./Madalena%20-%20Terreiro%20do%20Pa%C3%A7o%20%2821.09.26%29-';
     var COLLECTIONS = [
-      { title:'Nome do Cliente', cat:'Casamento',   year:'2025', cover:null, span:'tall' },
-      { title:'Nome do Cliente', cat:'Retrato',     year:'2025', cover:null, span:'' },
-      { title:'Nome do Cliente', cat:'Editorial',   year:'2025', cover:null, span:'' },
-      { title:'Nome do Cliente', cat:'Corporativo', year:'2025', cover:null, span:'wide' },
-      { title:'Nome do Cliente', cat:'Moda',        year:'2025', cover:null, span:'' },
-      { title:'Nome do Cliente', cat:'Eventos',     year:'2025', cover:null, span:'tall' },
-      { title:'Nome do Cliente', cat:'Retrato',     year:'2025', cover:null, span:'' },
+      {
+        id: 'madalena-m',
+        title: 'Madalena M.',
+        cat: 'Retratos',
+        year: '2026',
+        location: 'Terreiro do Paço',
+        cover: _base + '1.jpg',
+        span: 'wide',
+        photos: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map(function(n){ return _base + n + '.jpg'; })
+      }
     ];
     (function buildGrid() {
       var grid = document.getElementById('col-grid');
       var counter = document.getElementById('col-count');
       if (!grid) return;
-      if (counter) counter.textContent = COLLECTIONS.length + ' coleções';
+      var label = COLLECTIONS.length === 1 ? '1 coleção' : COLLECTIONS.length + ' coleções';
+      if (counter) counter.textContent = label;
       COLLECTIONS.forEach(function(col) {
         var card = document.createElement('div');
-        card.className = 'col-card placeholder-card' + (col.span ? ' '+col.span : '');
+        card.className = 'col-card' + (col.cover ? '' : ' placeholder-card') + (col.span ? ' '+col.span : '');
+        if (col.photos && col.photos.length) {
+          card.style.cursor = 'pointer';
+          (function(c){ card.onclick = function(e){ e.stopPropagation(); openGallery(c); }; })(col);
+        }
         if (col.cover) {
-          card.classList.remove('placeholder-card');
           var img = document.createElement('img');
           img.className = 'col-cover'; img.src = col.cover; img.alt = col.title; img.loading = 'lazy';
           card.appendChild(img);
@@ -886,14 +963,102 @@
         }
         var info = document.createElement('div');
         info.className = 'col-info';
-        info.innerHTML = '<span class="col-cat">'+col.cat+'</span><p class="col-title">'+col.title+'</p><p class="col-meta">'+col.year+'</p>';
+        var meta = col.location ? col.location + ' · ' + col.year : col.year;
+        info.innerHTML = '<span class="col-cat">'+col.cat+'</span><p class="col-title">'+col.title+'</p><p class="col-meta">'+meta+'</p>';
         card.appendChild(info);
         var cta = document.createElement('span');
-        cta.className = 'col-cta'; cta.textContent = 'Ver coleção';
+        cta.className = 'col-cta';
+        cta.textContent = col.photos && col.photos.length ? col.photos.length + ' fotos' : 'Ver coleção';
         card.appendChild(cta);
         grid.appendChild(card);
       });
     })();
+
+    /* ── GALLERY (per-collection) ── */
+    var currentGalleryPhotos = [];
+    var lbIndex = 0;
+
+    function openGallery(col) {
+      var gv   = document.getElementById('gallery-view');
+      var fs   = document.getElementById('foto-scroll');
+      var tb   = document.getElementById('gallery-title-bar');
+      var meta = document.getElementById('gallery-meta');
+      var grid = document.getElementById('gallery-grid');
+      if (!gv) return;
+
+      if (tb) tb.textContent = col.cat + ' | ' + col.title;
+
+      if (meta) {
+        meta.innerHTML =
+          '<span class="gallery-meta-cat">' + col.cat + '</span>'
+          + '<span class="gallery-meta-title">' + col.title + '</span>'
+          + '<span class="gallery-meta-loc">' + (col.location ? col.location + ' · ' : '') + col.year + '</span>';
+      }
+
+      if (grid) {
+        grid.innerHTML = '';
+        currentGalleryPhotos = col.photos || [];
+        currentGalleryPhotos.forEach(function(src, i) {
+          var wrap = document.createElement('div');
+          wrap.className = 'gallery-img-wrap';
+          (function(idx){ wrap.onclick = function(){ openLightbox(currentGalleryPhotos, idx); }; })(i);
+          var img = document.createElement('img');
+          img.className = 'gallery-img'; img.src = src; img.alt = col.title + ' #'+(i+1); img.loading = 'lazy';
+          var num = document.createElement('span');
+          num.className = 'gallery-img-num'; num.textContent = i+1;
+          wrap.appendChild(img);
+          wrap.appendChild(num);
+          grid.appendChild(wrap);
+        });
+      }
+
+      if (fs) fs.style.display = 'none';
+      gv.classList.add('active');
+      var gs = gv.querySelector('.gallery-scroll');
+      if (gs) gs.scrollTop = 0;
+    }
+
+    function closeGallery() {
+      var gv = document.getElementById('gallery-view');
+      var fs = document.getElementById('foto-scroll');
+      if (gv) gv.classList.remove('active');
+      if (fs) fs.style.display = '';
+    }
+
+    /* ── LIGHTBOX ── */
+    function openLightbox(photos, index) {
+      currentGalleryPhotos = photos;
+      lbIndex = index;
+      var lb = document.getElementById('lightbox');
+      if (!lb) return;
+      lbSetImage(lbIndex);
+      lb.classList.add('open');
+      document.addEventListener('keydown', onLbKey);
+    }
+
+    function closeLightbox() {
+      var lb = document.getElementById('lightbox');
+      if (lb) lb.classList.remove('open');
+      document.removeEventListener('keydown', onLbKey);
+    }
+
+    function lbStep(dir) {
+      lbIndex = (lbIndex + dir + currentGalleryPhotos.length) % currentGalleryPhotos.length;
+      lbSetImage(lbIndex);
+    }
+
+    function lbSetImage(i) {
+      var img     = document.getElementById('lightbox-img');
+      var counter = document.getElementById('lb-counter');
+      if (img) img.src = currentGalleryPhotos[i];
+      if (counter) counter.textContent = (i+1) + ' / ' + currentGalleryPhotos.length;
+    }
+
+    function onLbKey(e) {
+      if (e.key === 'Escape')      { closeLightbox(); }
+      else if (e.key === 'ArrowLeft')  { lbStep(-1); }
+      else if (e.key === 'ArrowRight') { lbStep(1); }
+    }
 
     /* ── EXPAND / COLLAPSE ── */
     var currentPanel = null;

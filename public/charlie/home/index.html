@@ -308,6 +308,17 @@
     .film-tags { display:flex; flex-wrap:wrap; gap:.3rem; }
     .film-tag { font-size:.55rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#555; border:1px solid #ddd; padding:.2rem .55rem; border-radius:2px; }
 
+    /* ── FILM CARD WITH STILL ── */
+    .film-card.has-still { padding:0; min-height:340px; position:relative; overflow:hidden; background:#111; border-left:none; }
+    .film-card.has-still:hover { background:#111; border-left:none; }
+    .film-still { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.82; transition:transform .55s, opacity .3s; display:block; }
+    .film-card.has-still:hover .film-still { transform:scale(1.04); opacity:.72; }
+    .film-card-inner { position:absolute; inset:0; background:linear-gradient(to bottom, transparent 25%, rgba(0,0,0,.88) 75%); display:flex; flex-direction:column; justify-content:flex-end; padding:1.4rem 1.4rem 1.3rem; }
+    .film-card.has-still .film-year  { color:var(--g); }
+    .film-card.has-still .film-title { color:#fff; }
+    .film-card.has-still .film-role  { color:rgba(255,255,255,.6); }
+    .film-card.has-still .film-tag   { color:rgba(255,255,255,.55); border-color:rgba(255,255,255,.18); }
+
     /* ── PANEL: VIDEOGRAFIA ── */
     .vid-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1px; background:#e0e0e0; }
     .vid-card { background:#fff; position:relative; overflow:hidden; cursor:pointer; }
@@ -741,11 +752,14 @@
           <p class="film-role">Produtor</p>
           <div class="film-tags"><span class="film-tag">Documentário</span><span class="film-tag">Portugal</span></div>
         </div>
-        <div class="film-card">
-          <p class="film-year">2023</p>
-          <p class="film-title">Inexistente</p>
-          <p class="film-role">Realizador · Produtor</p>
-          <div class="film-tags"><span class="film-tag">Curta</span><span class="film-tag">Drama</span><span class="film-tag">Portugal</span></div>
+        <div class="film-card has-still">
+          <img class="film-still" src="/Imagenes/04%20Cinemateca/Inexistente%20-%20Still%20%231.png" alt="Inexistente" loading="lazy">
+          <div class="film-card-inner">
+            <p class="film-year">2023</p>
+            <p class="film-title">Inexistente</p>
+            <p class="film-role">Realizador · Produtor</p>
+            <div class="film-tags"><span class="film-tag">Curta</span><span class="film-tag">Drama</span><span class="film-tag">Portugal</span></div>
+          </div>
         </div>
         <div class="film-card">
           <p class="film-year">2023</p>
@@ -753,23 +767,32 @@
           <p class="film-role">Produtor</p>
           <div class="film-tags"><span class="film-tag">Curta</span><span class="film-tag">Comédia Musical</span><span class="film-tag">Portugal</span></div>
         </div>
-        <div class="film-card">
-          <p class="film-year">2024</p>
-          <p class="film-title">El Artista Comprendido</p>
-          <p class="film-role">Realizador · Produtor</p>
-          <div class="film-tags"><span class="film-tag">Curta</span><span class="film-tag">Drama</span><span class="film-tag">Portugal</span></div>
+        <div class="film-card has-still">
+          <img class="film-still" src="/Imagenes/04%20Cinemateca/El%20Artista%20Comprendido%20-%20Still%20%231.png" alt="El Artista Comprendido" loading="lazy">
+          <div class="film-card-inner">
+            <p class="film-year">2024</p>
+            <p class="film-title">El Artista Comprendido</p>
+            <p class="film-role">Realizador · Produtor</p>
+            <div class="film-tags"><span class="film-tag">Curta</span><span class="film-tag">Drama</span><span class="film-tag">Portugal</span></div>
+          </div>
         </div>
-        <div class="film-card">
-          <p class="film-year">2025</p>
-          <p class="film-title">El Profesor</p>
-          <p class="film-role">Realizador · Produtor · Montagem</p>
-          <div class="film-tags"><span class="film-tag">Documentário</span><span class="film-tag">Portugal</span></div>
+        <div class="film-card has-still">
+          <img class="film-still" src="/Imagenes/04%20Cinemateca/El%20Profesor%20-%20Still%20%231.png" alt="El Profesor" loading="lazy">
+          <div class="film-card-inner">
+            <p class="film-year">2025</p>
+            <p class="film-title">El Profesor</p>
+            <p class="film-role">Realizador · Produtor · Montagem</p>
+            <div class="film-tags"><span class="film-tag">Documentário</span><span class="film-tag">Portugal</span></div>
+          </div>
         </div>
-        <div class="film-card">
-          <p class="film-year">2025</p>
-          <p class="film-title">Jay Gupta</p>
-          <p class="film-role">Realizador · Escrita · Montagem</p>
-          <div class="film-tags"><span class="film-tag">Curta</span><span class="film-tag">Suspense</span><span class="film-tag">Co-realização</span></div>
+        <div class="film-card has-still">
+          <img class="film-still" src="/Imagenes/04%20Cinemateca/Jay%20Gupta%20-%20Still%20%231.png" alt="Jay Gupta" loading="lazy">
+          <div class="film-card-inner">
+            <p class="film-year">2025</p>
+            <p class="film-title">Jay Gupta</p>
+            <p class="film-role">Realizador · Escrita · Montagem</p>
+            <div class="film-tags"><span class="film-tag">Curta</span><span class="film-tag">Suspense</span><span class="film-tag">Co-realização</span></div>
+          </div>
         </div>
         <div class="film-card">
           <p class="film-year">2025</p>
@@ -777,11 +800,14 @@
           <p class="film-role">Operador de Câmara</p>
           <div class="film-tags"><span class="film-tag">Documentário</span><span class="film-tag">Portugal</span></div>
         </div>
-        <div class="film-card">
-          <p class="film-year">2026</p>
-          <p class="film-title">Firefly</p>
-          <p class="film-role">Produtor</p>
-          <div class="film-tags"><span class="film-tag">Curta</span><span class="film-tag">Drama</span><span class="film-tag">Portugal</span></div>
+        <div class="film-card has-still">
+          <img class="film-still" src="/Imagenes/04%20Cinemateca/Firefly%20-%20Still%20%231.png" alt="Firefly" loading="lazy">
+          <div class="film-card-inner">
+            <p class="film-year">2026</p>
+            <p class="film-title">Firefly</p>
+            <p class="film-role">Produtor</p>
+            <div class="film-tags"><span class="film-tag">Curta</span><span class="film-tag">Drama</span><span class="film-tag">Portugal</span></div>
+          </div>
         </div>
       </div>
     </div>

@@ -129,6 +129,7 @@
     .w-video     { grid-column: 9 / 11; grid-row: 3 / 5; }
     .w-blog      { grid-column: 11/ 13; grid-row: 3 / 5; }
     .w-contacto  { grid-column: 1 / 5;  grid-row: 4 / 5; }
+    .w-tv        { grid-column: 5 / 13; grid-row: 4 / 5; }
 
     /* bio card */
     .bio-photo { width:100%; aspect-ratio:16/7; object-fit:cover; object-position:center 75%; display:block; flex-shrink:0; }
@@ -425,7 +426,7 @@
       /* full-width */
       .w-bio { grid-column: 1 / 3; grid-row: auto; }
       /* 2-col auto-flow */
-      .w-filmog, .w-cineclub, .w-foto, .w-video, .w-blog, .w-contacto {
+      .w-filmog, .w-cineclub, .w-foto, .w-video, .w-blog, .w-contacto, .w-tv {
         grid-column: auto; grid-row: auto;
       }
       .col-grid { grid-template-columns: repeat(2, 1fr); }
@@ -441,7 +442,7 @@
         padding: .8rem .8rem 7rem;
       }
       .w-bio, .w-filmog, .w-cineclub, .w-foto,
-      .w-video, .w-blog, .w-contacto {
+      .w-video, .w-blog, .w-contacto, .w-tv {
         grid-column: 1; grid-row: auto;
       }
 
@@ -576,6 +577,19 @@
       <div class="win-body">
         <p class="soon-label">Em breve</p>
         <p class="soon-title">Blog</p>
+      </div>
+    </div>
+
+    <!-- TELEVISÃO -->
+    <div class="win w-tv clickable" data-section="tv" onclick="openSection(this)">
+      <div class="win-bar">
+        <span class="win-dot r"></span><span class="win-dot y"></span><span class="win-dot g"></span>
+        <span class="win-title">Produção de Televisão</span>
+      </div>
+      <div class="win-body">
+        <p class="sec-name">Produção de Televisão</p>
+        <p class="sec-desc">Televisão é um meio que me fascina pela escala e pela disciplina que exige. Aqui encontras alguns dos trabalhos que fiz para televisão. -Charlie</p>
+        <span class="sec-link">Abrir →</span>
       </div>
     </div>
 
@@ -922,6 +936,27 @@
         <p class="blog-soon-label">Em breve</p>
         <p class="blog-soon-title">Blog</p>
         <p class="blog-soon-text">Aqui vou escrever sobre cinema, sobre o processo criativo, sobre o que ando a ver, a ler e a ouvir. Ainda não está pronto, mas já está a acontecer.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TV PANEL -->
+  <div class="section-panel" id="panel-tv">
+    <div class="panel-chrome">
+      <button class="panel-close" onclick="closeSection()" title="Fechar"></button>
+      <span class="panel-dot y"></span><span class="panel-dot g"></span>
+      <span class="panel-title-bar">Produção de Televisão</span>
+    </div>
+    <div class="panel-scroll">
+      <div class="p-section-bar"><span class="p-sec-label">Televisão</span></div>
+      <div class="p-desc"><p>Televisão é um meio que me fascina pela escala e pela disciplina que exige. Aqui encontras alguns dos trabalhos que fiz para televisão. -Charlie</p></div>
+      <div class="film-grid">
+        <div class="film-card placeholder" style="opacity:.25;pointer-events:none;">
+          <p class="film-year">Em breve</p>
+          <p class="film-title">Trabalhos de TV</p>
+          <p class="film-role">A ser adicionados</p>
+          <div class="film-tags"><span class="film-tag">Televisão</span></div>
+        </div>
       </div>
     </div>
   </div>

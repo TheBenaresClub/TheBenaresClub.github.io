@@ -545,35 +545,26 @@
       max-height: 90vh;
       overflow-y: auto;
       display: grid;
-      grid-template-columns: 260px 1fr;
+      grid-template-columns: 1fr;
       position: relative;
       transform: translateY(14px) scale(0.98);
       transition: transform 0.28s ease;
     }
     .modal-backdrop.open .modal { transform: translateY(0) scale(1); }
 
-    @media (max-width: 640px) { .modal { grid-template-columns: 1fr; } }
-
     .modal-poster {
-      aspect-ratio: 2/3;
+      aspect-ratio: 16/9;
       width: 100%;
       object-fit: cover;
       display: block;
-      border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     }
     .modal-poster-placeholder {
       display: flex; align-items: center; justify-content: center;
       font-size: 5rem;
       background: linear-gradient(160deg, #141414 0%, #0a0a0a 100%);
-      border-radius: var(--radius-lg) 0 0 var(--radius-lg);
-      aspect-ratio: 2/3;
-    }
-    @media (max-width: 640px) {
-      .modal-poster, .modal-poster-placeholder {
-        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-        aspect-ratio: 16/9;
-        object-position: center top;
-      }
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      aspect-ratio: 16/9;
     }
 
     .modal-body { padding: 2.25rem 2rem; display: flex; flex-direction: column; }
@@ -1463,7 +1454,9 @@
         `${film.year} · ${film.director} · ${film.duration} · ${film.genre}`;
       document.getElementById('modal-desc').textContent = film.description;
 
-      if (film.poster) {
+      if (film.heroImage) {
+        posterWrap.innerHTML = `<img class="modal-poster" src="${film.heroImage}" alt="${film.title}">`;
+      } else if (film.poster) {
         posterWrap.innerHTML = `<img class="modal-poster" src="${film.poster}" alt="${film.title}">`;
       } else {
         posterWrap.innerHTML = `<div class="modal-poster-placeholder">${film.icon}</div>`;

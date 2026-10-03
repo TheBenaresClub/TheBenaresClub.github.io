@@ -380,28 +380,35 @@
     .lb-counter { position:absolute; bottom:1.2rem; left:50%; transform:translateX(-50%); font-size:.6rem; color:rgba(255,255,255,.45); letter-spacing:.12em; }
 
     /* ── PANEL: CLUB BENARES ── */
-    .cb-block { padding:2rem 2.2rem; border-bottom:1px solid #ebebeb; }
-    .cb-block-title { font-family:'Bebas Neue',sans-serif; font-size:1.4rem; color:var(--g); letter-spacing:.06em; margin-bottom:1.4rem; }
-    .cb-block-body { font-size:.78rem; line-height:1.85; color:#444; }
-    .cb-block-body p { margin-bottom:.8rem; }
-    .cb-block-body p:last-child { margin-bottom:0; }
+    .cb-block { padding:2.4rem 2.4rem; border-bottom:1px solid #ebebeb; }
+    .cb-block-title { font-size:.56rem; font-weight:700; letter-spacing:.28em; text-transform:uppercase; color:var(--g); margin-bottom:1.8rem; }
 
-    .cb-stats-row { display:flex; gap:2rem; margin-top:1.4rem; padding-top:1.4rem; border-top:1px solid #ebebeb; flex-wrap:wrap; }
-    .cb-stat-item strong { display:block; font-family:'Bebas Neue',sans-serif; font-size:1.8rem; line-height:1; color:var(--g); }
-    .cb-stat-item span { font-size:.54rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#bbb; display:block; margin-top:.2rem; }
+    /* Block 1 — Club Benares */
+    .cb-quote { font-size:1rem; line-height:1.75; color:#222; font-style:italic; border-left:3px solid var(--g); padding-left:1.2rem; margin-bottom:1.6rem; }
+    .cb-cite { font-size:.56rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#bbb; padding-left:1.2rem; }
+    .cb-stats-row { display:grid; grid-template-columns:repeat(3,1fr); margin-top:2rem; padding-top:1.6rem; border-top:1px solid #ebebeb; }
+    .cb-stat-item { padding-right:1.5rem; }
+    .cb-stat-item:not(:last-child) { border-right:1px solid #ebebeb; margin-right:1.5rem; }
+    .cb-stat-item strong { display:block; font-family:'Bebas Neue',sans-serif; font-size:2.4rem; line-height:1; color:var(--g); }
+    .cb-stat-item span { font-size:.52rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:#bbb; display:block; margin-top:.3rem; }
 
-    .cb-list { margin-top:1.2rem; display:flex; flex-direction:column; gap:.6rem; }
-    .cb-list-item { display:flex; align-items:baseline; gap:.8rem; }
-    .cb-list-item::before { content:''; width:4px; height:4px; border-radius:50%; background:var(--g); flex-shrink:0; margin-top:.45rem; }
-    .cb-list-item span { font-size:.76rem; color:#444; line-height:1.6; }
+    /* Block 2 — Eventos */
+    .cb-service-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem; }
+    .cb-service { border-top:2px solid var(--g); padding-top:1rem; }
+    .cb-service-num { font-size:.5rem; font-weight:700; letter-spacing:.22em; color:var(--g); display:block; margin-bottom:.6rem; }
+    .cb-service-name { font-family:'Bebas Neue',sans-serif; font-size:1.15rem; color:#111; letter-spacing:.04em; line-height:1.1; margin-bottom:.8rem; }
+    .cb-service-text { font-size:.7rem; line-height:1.75; color:#666; }
 
-    .cb-fest-rows { margin-top:1.2rem; display:flex; flex-direction:column; gap:0; }
-    .cb-fest-row { display:flex; align-items:baseline; gap:1.2rem; padding:.9rem 0; border-bottom:1px solid #f0f0f0; }
-    .cb-fest-row:last-child { border-bottom:none; padding-bottom:0; }
-    .cb-fest-row-yr { font-size:.58rem; font-weight:700; letter-spacing:.16em; color:#bbb; width:3rem; flex-shrink:0; }
-    .cb-fest-row-name { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; color:#111; letter-spacing:.04em; line-height:1; flex-shrink:0; }
-    .cb-fest-row-role { font-size:.7rem; color:#777; flex:1; }
-    .cb-fest-row-pill { font-size:.46rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; background:var(--g); color:#fff; padding:.25rem .6rem; border-radius:2px; flex-shrink:0; }
+    /* Block 3 — Festivals */
+    .cb-festival { padding:1.6rem 0; border-bottom:1px solid #ebebeb; }
+    .cb-festival:last-child { border-bottom:none; padding-bottom:0; }
+    .cb-festival-hdr { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:.5rem; }
+    .cb-festival-name { font-family:'Bebas Neue',sans-serif; font-size:2.6rem; color:#111; letter-spacing:.03em; line-height:1; }
+    .cb-festival-year { font-size:.58rem; font-weight:700; letter-spacing:.2em; color:#bbb; padding-bottom:.35rem; }
+    .cb-festival-rule { height:1px; background:#ebebeb; margin-bottom:.75rem; }
+    .cb-festival-foot { display:flex; align-items:center; justify-content:space-between; }
+    .cb-festival-role { font-size:.72rem; color:#555; letter-spacing:.02em; }
+    .cb-festival-pill { font-size:.48rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; background:var(--g); color:#fff; padding:.28rem .7rem; border-radius:2px; }
 
     /* ── PANEL: CONTACTO ── */
     .ct-heading-wrap { padding:2rem 2.5rem 1.2rem; }
@@ -868,25 +875,33 @@
       <!-- 01 CLUB BENARES -->
       <div class="cb-block">
         <p class="cb-block-title">Club Benares</p>
-        <div class="cb-block-body">
-          <p>Um dia acordei com a ideia de criar um espaço. Tinha vários objetivos e sonhos em mente, mas o fundamental foi sempre fazer filmes. Hoje esse espaço chama-se Club Benares — um coletivo de cinema independente fundado em Lisboa em 2023.</p>
-          <div class="cb-stats-row">
-            <div class="cb-stat-item"><strong>11+</strong><span>Eventos</span></div>
-            <div class="cb-stat-item"><strong>5</strong><span>Filmes</span></div>
-            <div class="cb-stat-item"><strong>∞</strong><span>Comunidade</span></div>
-          </div>
+        <p class="cb-quote">"Um dia acordei com a ideia de criar um espaço. Tinha vários objetivos e sonhos em mente, mas o fundamental foi sempre fazer filmes."</p>
+        <p class="cb-cite">— Charlie Chaves, fundador · Lisboa, 2023</p>
+        <div class="cb-stats-row">
+          <div class="cb-stat-item"><strong>11+</strong><span>Eventos</span></div>
+          <div class="cb-stat-item"><strong>5</strong><span>Filmes</span></div>
+          <div class="cb-stat-item"><strong>∞</strong><span>Comunidade</span></div>
         </div>
       </div>
 
       <!-- 02 EVENTOS CULTURAIS -->
       <div class="cb-block">
         <p class="cb-block-title">Eventos Culturais</p>
-        <div class="cb-block-body">
-          <p>Organização, curadoria e produção de eventos culturais de cinema em Lisboa. Mais de 11 eventos próprios desde 2023.</p>
-          <div class="cb-list">
-            <div class="cb-list-item"><span>Organização de eventos de cinema e cultura — da conceção ao dia do evento, incluindo logística, comunicação e gestão de público</span></div>
-            <div class="cb-list-item"><span>Curadoria e programação cinematográfica com critério editorial e atenção ao contexto cultural de cada sessão</span></div>
-            <div class="cb-list-item"><span>Coordenação e gestão de espaços culturais, negociação com parceiros e adaptação de ambientes para projeção</span></div>
+        <div class="cb-service-grid">
+          <div class="cb-service">
+            <span class="cb-service-num">01</span>
+            <p class="cb-service-name">Organização de Eventos</p>
+            <p class="cb-service-text">Da conceção ao dia do evento — logística, comunicação e gestão de público para mais de 11 eventos próprios de cinema e cultura.</p>
+          </div>
+          <div class="cb-service">
+            <span class="cb-service-num">02</span>
+            <p class="cb-service-name">Curadoria & Programação</p>
+            <p class="cb-service-text">Seleção e programação cinematográfica com critério editorial e atenção ao contexto cultural de cada sessão.</p>
+          </div>
+          <div class="cb-service">
+            <span class="cb-service-num">03</span>
+            <p class="cb-service-name">Gestão de Espaços</p>
+            <p class="cb-service-text">Coordenação de espaços culturais, negociação com parceiros e adaptação de ambientes para projeção e exibição.</p>
           </div>
         </div>
       </div>
@@ -894,19 +909,25 @@
       <!-- 03 FILM FESTIVALS -->
       <div class="cb-block">
         <p class="cb-block-title">Film Festivals</p>
-        <div class="cb-block-body">
-          <div class="cb-fest-rows">
-            <div class="cb-fest-row">
-              <span class="cb-fest-row-yr">2024</span>
-              <span class="cb-fest-row-name">FestIn</span>
-              <span class="cb-fest-row-role">Colaborador · Festival de Cinema de Lisboa</span>
-            </div>
-            <div class="cb-fest-row">
-              <span class="cb-fest-row-yr">2026</span>
-              <span class="cb-fest-row-name">DocLisboa</span>
-              <span class="cb-fest-row-role">Júri · Competição de Cinema Português</span>
-              <span class="cb-fest-row-pill">Júri</span>
-            </div>
+        <div class="cb-festival">
+          <div class="cb-festival-hdr">
+            <span class="cb-festival-name">FestIn</span>
+            <span class="cb-festival-year">2024</span>
+          </div>
+          <div class="cb-festival-rule"></div>
+          <div class="cb-festival-foot">
+            <span class="cb-festival-role">Colaborador · Festival de Cinema de Lisboa</span>
+          </div>
+        </div>
+        <div class="cb-festival">
+          <div class="cb-festival-hdr">
+            <span class="cb-festival-name">DocLisboa</span>
+            <span class="cb-festival-year">2026</span>
+          </div>
+          <div class="cb-festival-rule"></div>
+          <div class="cb-festival-foot">
+            <span class="cb-festival-role">Júri · Competição de Cinema Português</span>
+            <span class="cb-festival-pill">Júri</span>
           </div>
         </div>
       </div>

@@ -384,8 +384,13 @@
     .cb-block-title { font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:.06em; color:var(--g); margin-bottom:1.8rem; line-height:1; }
 
     /* Block 1 — Club Benares */
-    .cb-quote { font-size:1rem; line-height:1.75; color:#222; font-style:italic; border-left:3px solid var(--g); padding-left:1.2rem; margin-bottom:1.6rem; }
-    .cb-cite { font-size:.56rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#bbb; padding-left:1.2rem; }
+    .cb-intro-wrap { display:grid; grid-template-columns:1fr 190px; gap:2rem; align-items:start; }
+    .cb-description { font-size:.82rem; line-height:1.85; color:#444; margin-bottom:1.4rem; }
+    .cb-quote { font-size:.88rem; line-height:1.75; color:#222; font-style:italic; border-left:3px solid var(--g); padding-left:1.1rem; margin-bottom:.8rem; }
+    .cb-cite { font-size:.54rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#bbb; padding-left:1.1rem; display:block; margin-bottom:1.5rem; }
+    .cb-cta-btn { display:inline-flex; align-items:center; gap:.5rem; font-size:.58rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:#fff; background:var(--g); padding:.6rem 1.2rem; text-decoration:none; transition:background .15s; }
+    .cb-cta-btn:hover { background:#4a8600; }
+    .cb-intro-img { width:100%; aspect-ratio:3/4; object-fit:cover; }
     .cb-stats-row { display:grid; grid-template-columns:repeat(3,1fr); margin-top:2rem; padding-top:1.6rem; border-top:1px solid #ebebeb; }
     .cb-stat-item { padding-right:1.5rem; }
     .cb-stat-item:not(:last-child) { border-right:1px solid #ebebeb; margin-right:1.5rem; }
@@ -393,13 +398,19 @@
     .cb-stat-item span { font-size:.52rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:#bbb; display:block; margin-top:.3rem; }
 
     /* Block 2 — Eventos */
-    .cb-service-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem; }
+    .cb-photo-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:.5rem; margin-bottom:1.8rem; }
+    .cb-photo-strip img { width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .cb-service-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem; margin-bottom:1.8rem; }
     .cb-service { border-top:2px solid var(--g); padding-top:1rem; }
     .cb-service-num { font-size:.5rem; font-weight:700; letter-spacing:.22em; color:var(--g); display:block; margin-bottom:.6rem; }
     .cb-service-name { font-family:'Bebas Neue',sans-serif; font-size:1.15rem; color:#111; letter-spacing:.04em; line-height:1.1; margin-bottom:.8rem; }
     .cb-service-text { font-size:.7rem; line-height:1.75; color:#666; }
+    .cb-events-label { font-size:.52rem; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:#bbb; margin-bottom:.9rem; }
+    .cb-event-tags { display:flex; flex-wrap:wrap; gap:.45rem; }
+    .cb-event-tag { font-size:.62rem; color:#555; background:#f5f5f5; padding:.32rem .75rem; border:1px solid #ebebeb; }
 
     /* Block 3 — Festivals */
+    .cb-festival-intro { font-size:.8rem; line-height:1.85; color:#555; margin-bottom:1.8rem; }
     .cb-festival { padding:1.6rem 0; border-bottom:1px solid #ebebeb; }
     .cb-festival:last-child { border-bottom:none; padding-bottom:0; }
     .cb-festival-hdr { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:.5rem; }
@@ -875,8 +886,15 @@
       <!-- 01 CLUB BENARES -->
       <div class="cb-block">
         <p class="cb-block-title">Club Benares</p>
-        <p class="cb-quote">"Um dia acordei com a ideia de criar um espaço. Tinha vários objetivos e sonhos em mente, mas o fundamental foi sempre fazer filmes."</p>
-        <p class="cb-cite">— Charlie Chaves, fundador · Lisboa, 2023</p>
+        <div class="cb-intro-wrap">
+          <div>
+            <p class="cb-description">O Club Benares é um coletivo de cinema independente fundado em Lisboa em 2023. Fazemos filmes, organizamos eventos culturais e construímos uma comunidade à volta do cinema de autor.</p>
+            <p class="cb-quote">"Um dia acordei com a ideia de criar um espaço. Tinha vários objetivos e sonhos em mente, mas o fundamental foi sempre fazer filmes."</p>
+            <span class="cb-cite">— Charlie Chaves, fundador · Lisboa, 2023</span>
+            <a class="cb-cta-btn" href="/" target="_blank">Visitar o Club Benares ↗</a>
+          </div>
+          <img class="cb-intro-img" src="/Imagenes/03%20Fototeca/Mashup%20%234%20%20-%201%20-%2016.03.26.png" alt="Club Benares" loading="lazy">
+        </div>
         <div class="cb-stats-row">
           <div class="cb-stat-item"><strong>11+</strong><span>Eventos</span></div>
           <div class="cb-stat-item"><strong>5</strong><span>Filmes</span></div>
@@ -887,6 +905,11 @@
       <!-- 02 EVENTOS CULTURAIS -->
       <div class="cb-block">
         <p class="cb-block-title">Eventos Culturais</p>
+        <div class="cb-photo-strip">
+          <img src="/Imagenes/03%20Fototeca/Night%20Lounge%20%231%20-%201%20-%2011.12.24.jpg" alt="Night Lounge #1" loading="lazy">
+          <img src="/Imagenes/03%20Fototeca/MashUp%20%232%20-%2027.11.25%20-1.jpg" alt="MashUp #2" loading="lazy">
+          <img src="/Imagenes/03%20Fototeca/Mashup%20%235%20-%201%20-%2007.05.2026.png" alt="MashUp #5" loading="lazy">
+        </div>
         <div class="cb-service-grid">
           <div class="cb-service">
             <span class="cb-service-num">01</span>
@@ -904,11 +927,23 @@
             <p class="cb-service-text">Coordenação de espaços culturais, negociação com parceiros e adaptação de ambientes para projeção e exibição.</p>
           </div>
         </div>
+        <p class="cb-events-label">Séries de eventos</p>
+        <div class="cb-event-tags">
+          <span class="cb-event-tag">Night Lounge #1 · Dez 2024</span>
+          <span class="cb-event-tag">Night Lounge #2 · Jan 2025</span>
+          <span class="cb-event-tag">Night Lounge #3 · Abr 2025</span>
+          <span class="cb-event-tag">MashUp #1 · Out 2025</span>
+          <span class="cb-event-tag">MashUp #2 · Nov 2025</span>
+          <span class="cb-event-tag">MashUp #3 · Dez 2025</span>
+          <span class="cb-event-tag">MashUp #4 · Mar 2026</span>
+          <span class="cb-event-tag">MashUp #5 · Mai 2026</span>
+        </div>
       </div>
 
       <!-- 03 FILM FESTIVALS -->
       <div class="cb-block">
         <p class="cb-block-title">Film Festivals</p>
+        <p class="cb-festival-intro">Para além do trabalho como realizador e produtor, fui convidado a participar em festivais de cinema internacionais como colaborador e membro de júri.</p>
         <div class="cb-festival">
           <div class="cb-festival-hdr">
             <span class="cb-festival-name">FestIn</span>

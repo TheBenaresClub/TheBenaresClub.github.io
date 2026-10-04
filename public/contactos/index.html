@@ -288,13 +288,27 @@
           input.focus();
           return;
         }
-        /* Store locally — swap this for a real API call when ready */
-        var list = JSON.parse(localStorage.getItem('nl-subs') || '[]');
-        if (!list.includes(input.value)) list.push(input.value);
-        localStorage.setItem('nl-subs', JSON.stringify(list));
-
-        form.style.display = 'none';
-        ok.style.display = 'block';
+        var btn = form.querySelector('button[type=submit]');
+        btn.disabled = true;
+        fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: input.value })
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.ok) {
+            form.style.display = 'none';
+            ok.style.display = 'block';
+          } else {
+            btn.disabled = false;
+            alert(data.error || 'Erro ao subscrever. Tenta de novo.');
+          }
+        })
+        .catch(function() {
+          btn.disabled = false;
+          alert('Erro de ligação. Tenta de novo.');
+        });
       });
     })();
   </script>
